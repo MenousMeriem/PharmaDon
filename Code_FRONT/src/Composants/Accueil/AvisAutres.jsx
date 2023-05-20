@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Form_Supp() {
+function AvisAutres() {
   return (
     <div>
         
@@ -8,4 +8,4 @@ function Form_Supp() {
   )
 }
 
-export default Form_Supp
+export default AvisAutres

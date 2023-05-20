@@ -2,7 +2,6 @@ const express = require('express')
 const mongoose = require('mongoose')
 const ErrorHandler = require('./Middleware/errorHandler')
 const autehtificationRoute = require('./Routes/authenRoute')
-const categorieRoute = require('./Routes/categorieRoute')
 const annonceRoute = require('./Routes/annonceRoute')
 const utilisateurRoute = require('./Routes/utilisateurRoute')
 
@@ -13,7 +12,6 @@ index.use(express.json())
 index.use(express.urlencoded({extended: true}))
 
 index.use('/Seconnecter', autehtificationRoute)
-index.use('/Categorie', categorieRoute)
 index.use('/Annonce', annonceRoute)
 index.use('/Utilisateur', utilisateurRoute)
 
@@ -28,7 +26,7 @@ mongoose
     .connect(process.env.MONGO_URI)
     .then((res) =>{
         index.listen(process.env.PORT, () => {
-            console.log(' SERVER RUNNIGN !!! ')
+            console.log(' SERVER RUNNING !!! ')
         })
     })
     .catch((err) => console.log(err))

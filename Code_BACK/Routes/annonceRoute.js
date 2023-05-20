@@ -1,25 +1,18 @@
 const {
-    ajouterAnnoncePharm,
-    ajouterAnnonceDon,
-    modifierAnnoncePharm,
-    modifierAnnonceDon,
-    supprimerAnnoncePharm,
-    supprimerAnnonceDon,
+    ajouterAnnonce,
+    modifierAnnonce,
+    supprimerAnnonce,
     afficherAnnonce
 } = require('../Controllers/annonceController')
 
 const annonceRoute = require('express').Router()
-const {protectPharmacien} = require('../Middleware/protect')
-const {protectDonneur} = require('../Middleware/protect')
+const {protectUtilisateur} = require('../Middleware/protect')
 
 
 annonceRoute
-    .post('/AjouterAnnoncePharm', protectPharmacien, ajouterAnnoncePharm)
-    .post('/AjouterAnnonceDon', protectDonneur, ajouterAnnonceDon)
-    .put('/ModifierAnnoncePharm', protectPharmacien, modifierAnnoncePharm)
-    .put('/ModifierAnnonceDon', protectDonneur, modifierAnnonceDon)
-    .delete('/SupprimerAnnoncePharm', protectPharmacien, supprimerAnnoncePharm)    
-    .delete('/SupprimerAnnonceDon', protectDonneur, supprimerAnnonceDon)
-    .get('/AfficherAnnonce', afficherAnnonce)
+    .post('/AjouterAnnoncePharm', protectUtilisateur, ajouterAnnonce)
+    .put('/ModifierAnnoncePharm', protectUtilisateur, modifierAnnonce)
+    .delete('/SupprimerAnnoncePharm', protectUtilisateur, supprimerAnnonce)    
+    .get('/AfficherAnnonce', protectUtilisateur, afficherAnnonce)
     
 module.exports = annonceRoute

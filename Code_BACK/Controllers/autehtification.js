@@ -72,7 +72,7 @@ exports.refreshAccess = expressAsyncHandler(async (req, res) => {
                 throw new Error("No refreshToken!")
             }
 
-        const refreshExist = await RefreshTokenModel.find({ refreshToken: token })
+        const refreshExist = await refreshTokenModel.find({ refreshToken: token })
             if (refreshExist.length == 0) {
                 res.status(400)
                 throw new Error("No refreshToken!")

@@ -3,10 +3,10 @@ const {
 } = require('../Controllers/autehtification')
 
 const autehtificationRoute = require('express').Router()
-const {protectPharmacien} = require('../Middleware/protect')
+const {protectUtilisateur} = require('../Middleware/protect')
 
 autehtificationRoute
-    .post('/Seconnecter', protectPharmacien, seConnecter)
+    .post('/Seconnecter', protectUtilisateur, seConnecter)
 
 
 module.exports = autehtificationRoute
