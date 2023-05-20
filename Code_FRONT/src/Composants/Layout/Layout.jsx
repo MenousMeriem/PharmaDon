@@ -4,7 +4,7 @@ import NavBar from '../NavBar/NavBar'
 
 function Layout() {
   const locaion = useLocation()
-  if(locaion.pathname === '/Connexion') 
+  if(locaion.pathname === '/Connexion' || location.pathname==='/PageProfilPharmacien') 
   {return (
       <div>
           <main className=''>

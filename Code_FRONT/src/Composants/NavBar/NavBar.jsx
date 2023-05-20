@@ -12,7 +12,7 @@ function NavBar() {
             <div className="navbar-center hidden text-[#203374] lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li><NavLink to={'/Accueil'}>Accueil</NavLink></li>
-                    <li><NavLink to={'/NosServices'}>Nos services</NavLink></li>
+                    <li><NavLink to={'/PageProfilPharmacien'}>Nos services</NavLink></li>
                     <li><NavLink to={'/Propos'}>A propos de nous</NavLink></li>
                 </ul>
             </div>

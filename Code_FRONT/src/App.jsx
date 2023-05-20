@@ -10,6 +10,7 @@ import InformationsPharmacienPersonnelles from './Composants/Inscription/Pharmac
 import InformationsPharmacienProfesionnelles from "./Composants/Inscription/Pharmacien/InformationsPharmacienProfesionnelles"
 import InformationsPatientPersonnelles from "./Composants/Inscription/Patient/InformationsPatientPersonnelles"
 import InformationsPatientProfesionnelles from "./Composants/Inscription/Patient/InformationsPatientProfesionnelles"
+import PageProfilPharmacien from "./Pages/PageProfil/PageProfilPharmacien"
 import PlusieursPharmacies from "./Pages/Page_Pharm/PlusieursPharmacies"
 import UnePharmacie from './Pages/Page_Pharm/UnePharmacie'
 import { 
@@ -34,6 +35,7 @@ const router = createBrowserRouter (
       <Route path="/InformationsPharmacienProfesionnelles" element={<InformationsPharmacienProfesionnelles/>}/> 
       <Route path="/InformationsPatientPersonnelles" element={<InformationsPatientPersonnelles/>}/>
       <Route path="/InformationsPatientProfesionnelles" element={<InformationsPatientProfesionnelles/>}/>
+      <Route path="/PageProfilPharmacien" element={<PageProfilPharmacien/>}/>
       <Route path="/PlusieursPharmacies" element={<PlusieursPharmacies/>}/>
       <Route path="/UnePharmacie" element={<UnePharmacie/>}/>
     </Route>
