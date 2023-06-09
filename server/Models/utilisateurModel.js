@@ -29,6 +29,10 @@ const utilisateurSchema = mongoose.Schema(
             type: String,
             required: true,
         },
+        wilaya: {
+            type: String,
+            required: true,
+        },
         mail: {
             type: String,
             required: true,
@@ -52,19 +56,31 @@ const utilisateurSchema = mongoose.Schema(
 )
 
 const pharmacienSchema = mongoose.Schema(
-    {
-        fichierIDPharmacien: 
-            {
-                type:String,
-                required: true,
-            }
-        ,
-        fichierIDPharmacie: 
-            {
-                type:String,
-                required: true,
-            }
-        ,
+    {   
+        nomPharmacie:  {
+            type: String, 
+            required: true,
+        },
+        numPharmacie: {
+            type: Number, 
+            required: true,
+        },
+        wilayaPharmacie: {
+            type: String, 
+            required: true,
+        },
+        adressePharmacie: {
+            type: String, 
+            required: true,
+        },
+        fichierIDPharmacien: {
+            type:String,
+            required: true,
+        },
+        fichierIDPharmacie: {
+            type:String,
+            required: true,
+        },
         isActive: {
             type: Boolean,
             default: false,
@@ -73,23 +89,35 @@ const pharmacienSchema = mongoose.Schema(
 )
 
 const associationSchema = mongoose.Schema(
-    {
-        fichierIDPresident: [
-            {
-               type:String,
-            //    required: true,
-            }
-        ],
-        fichierIDAssociation: [
-            {
-               type:String,
-            //    required: true,
-            }
-        ], 
+    {   
         nomAsso: {
-            type: String,
+            type: String, 
             required: true,
         },
+        numAsso: {
+            type: Number, 
+            required: true,
+        },
+        wilayaAsso: {
+            type: String, 
+            required: true,
+        },
+        adresseAsso: {
+            type: String, 
+            required: true,
+        }, 
+        fichierIDPresident: [
+        {
+            type:String,
+            required: true,
+        }
+        ],
+        fichierIDAssociation: [
+        {
+            type:String,
+            required: true,
+        }
+        ], 
         isActive: {
             type: Boolean,
             default: false,

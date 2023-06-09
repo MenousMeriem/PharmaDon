@@ -2,7 +2,6 @@ const utilisateurModel = require("../Models/utilisateurModel")
 const bcrypt = require("bcrypt")
 const expressAsyncHandler = require("express-async-handler")
 const jwt = require('jsonwebtoken')
-const {mkdir} = require('fs/promises') // permet de gerer des fichiers 
 const path = require('path')
 
 //create gen access token
@@ -33,7 +32,7 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
           throw new Error('Utilisateur existe')
         }
         const newUtilisateur = await utilisateurModel.create({
-          nom, prenom, sexe, date_de_naissance, adresse, numtel, mail,role,
+          nom, prenom, sexe, date_de_naissance, adresse, numtel, mail, role,
           mot_de_passe: await bcrypt.hash(req.body.mot_de_passe, 10),
         })
           console.log(newUtilisateur)
@@ -43,16 +42,23 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
             })
       }
 
+      // Creer un pharmacien :
       else if(req.body.role=='Pharmacie') {
-        const {nom, prenom, sexe, date_de_naissance, adresse, mail, numtel, mot_de_passe, role} = req.body
-        if(
+        const {nom, prenom, sexe, date_de_naissance, adresse, mail, numtel, wilaya, nomPharmacie, numPharmacie, 
+          wilayaPharmacie, adressePharmacie, mot_de_passe, role} = req.body
+            if(
               !nom ||
               !prenom ||
               !sexe ||
-              !date_de_naissance ||  
+              !date_de_naissance ||
+              !wilaya ||  
               !adresse || 
               !mail ||
               !numtel ||
+              !nomPharmacie||
+              !numPharmacie||
+              !wilayaPharmacie ||
+              !adressePharmacie||
               !mot_de_passe ||
               !role
            ) {             
@@ -62,7 +68,8 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
               throw new Error('Utilisateur existe')
             }
             const newUtilisateur = await utilisateurModel.create({
-              nom, prenom, sexe, date_de_naissance, adresse, mail, numtel, role, fichierIDPharmacien: req.files[0].path,fichierIDPharmacie: req.files[1].path,
+              nom, prenom, sexe, date_de_naissance, wilaya, adresse, mail, numtel, nomPharmacie, numPharmacie, wilayaPharmacie, 
+              adressePharmacie, role, fichierIDPharmacien: req.files[0].path,fichierIDPharmacie: req.files[1].path,
               mot_de_passe: await bcrypt.hash(req.body.mot_de_passe, 10),
             })
         res.status(201).json({
@@ -71,18 +78,24 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
         })
         
       }
+        // Creer une association
         else if (req.body.role=='Association') {
-          const {nom, prenom, sexe, date_de_naissance, adresse ,mail, numtel, role, nomAsso, mot_de_passe} = req.body
+          const {nom, prenom, sexe, date_de_naissance, wilaya, adresse, mail, numtel, nomAsso, numAsso, wilayaAsso, adresseAsso, 
+                role, mot_de_passe} = req.body
             if(
                !nom ||
                !prenom||
                !sexe||
                !date_de_naissance||
+               !wilaya ||
                !adresse || 
                !mail ||
                !numtel ||
-               !role ||
                !nomAsso ||
+               !numAsso ||
+               !wilayaAsso ||
+               !adresseAsso ||
+               !role ||
                !mot_de_passe
               ) {
               throw new Error('Veuillez remplir tout les champs ! ')
@@ -90,8 +103,10 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
             if((await utilisateurModel.find({mail})).length > 0) {
               throw new Error('Utilisateur existe')
             }
+            console.log(req.body)
             const newUtilisateur = await utilisateurModel.create({
-              nom, prenom, sexe, date_de_naissance, adresse ,mail, numtel, role,nomAsso, fichierIDPresident: req.files[0].path, fichierIDAssociation : req.files[1].path,
+              nom, prenom, sexe, date_de_naissance, wilaya, adresse, mail, numtel, nomAsso, numAsso, wilayaAsso, adresseAsso, role,
+              fichierIDPresident: req.files[0].path, fichierIDAssociation : req.files[1].path,
               mot_de_passe: await bcrypt.hash(req.body.mot_de_passe, 10),
             })
             res.status(201).json({
@@ -99,15 +114,16 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
               accessToken: genAccessToken({_id: newUtilisateur._id,role: newUtilisateur.role}),
             })
 
-            // Patient 
+            // Creer un Patient 
           } 
             else (req.body.role=='Patient') 
-            const {nom, prenom, sexe, date_de_naissance, adresse, mail, numtel, role, mot_de_passe} = req.body
+            const {nom, prenom, sexe, date_de_naissance, wilaya, adresse, mail, numtel, role, mot_de_passe} = req.body
             if(
               !nom ||
               !prenom ||
               !sexe ||
               !date_de_naissance||
+              !wilaya ||
               !adresse || 
               !mail ||
               !numtel ||
@@ -120,7 +136,7 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
               throw new Error('Utilisateur existe')
             }
             const newUtilisateur = await utilisateurModel.create({
-              nom, prenom, sexe, date_de_naissance, adresse, mail, numtel, role,
+              nom, prenom, sexe, date_de_naissance, wilaya, adresse, mail, numtel, role,
               mot_de_passe: await bcrypt.hash(req.body.mot_de_passe, 10),
             })
             res.status(201).json({
@@ -135,8 +151,8 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
 })
 
 
-// Afficher un utilisateur
-exports.afficherUtilisateur = expressAsyncHandler(async (req, res) => {
+// Afficher tous les utilisateurs
+exports.afficherTsUtilisateurs = expressAsyncHandler(async (req, res) => {
   try {
     const user = await utilisateurModel.find()
      res.status(202).json(user)
@@ -145,6 +161,47 @@ exports.afficherUtilisateur = expressAsyncHandler(async (req, res) => {
   }
 })
 
+//Afficher l'utilisateur actuel
+exports.afficherUtilisateur = expressAsyncHandler(async (req,res) => {
+  try {
+    const {_id} = req.user
+    const user = await utilisateurModel.findById(_id)
+    res.status(200).json(user)
+  } catch (error) {
+    res.status(400)
+    throw new Error(error)
+  }
+})
+
+
+// Afficher toutes les pharmacies : 
+exports.afficherPharmacie = expressAsyncHandler(async (req, res) => {
+  try {
+    // ici je dois dire qu'il doit etre un pharmacien
+    if(role==='Pharmacie') {
+    const {_id} = req.user
+      // pour que je pourrais l'afficher pour la suite 
+      const pharmacie = await utilisateurModel.findById(_id)
+      res.status(202).json(pharmacie)
+    }
+  } catch (error) {
+    res.status(400)
+    throw new Error(error)
+  }
+})
+
+// Afficher toutes les associations : 
+exports.afficherAssociation = expressAsyncHandler(async (req, res) => {
+  try {
+    if(role==='Association') {
+      const pharmacie = await utilisateurModel.findById() 
+      res.status(202).json(pharmacie)
+    }
+  } catch (error) {
+    res.status(400)
+    throw new Error(error)
+  }
+})
 
 // Modifier un utilsateur : 
 exports.modifierUtilisateur = expressAsyncHandler(async (req, res) => {
@@ -158,7 +215,6 @@ exports.modifierUtilisateur = expressAsyncHandler(async (req, res) => {
   }
 })
 
-
 // Supprimer un utilisateur : 
 exports.supprimerUtilisateur = expressAsyncHandler(async (req, res) => {
   try {
@@ -170,7 +226,6 @@ exports.supprimerUtilisateur = expressAsyncHandler(async (req, res) => {
             throw new Error(error)
   }
 })
-
 
 // l'utilisateur supprime son compte :
 exports.autoSupression = expressAsyncHandler(async (req, res) => {

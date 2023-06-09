@@ -10,7 +10,7 @@ exports.protectUtilisateur = expressAsyncHandler(async (req, res, next) => {
         res.status (400)
         throw new Error("No token!")
       }
-      const user = jwt.verify(token, process.env.ACCESS_TOKEN)
+      const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
       const { role, _id } = user
       req.user = { _id, role }
       next()

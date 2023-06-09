@@ -4,25 +4,38 @@ import NavBar from '../NavBar/NavBar'
 import PieddePage from '../Footer/PieddePage'
 
 function Layout() {
+    
   const locaion = useLocation()
-  if(locaion.pathname === '/Connexion' || location.pathname==='/PageProfilPharmacien' || location.pathname==='/PageAnnoncesPharmacien') 
-  {return (
-      <div>
-          <main className=''>
-              <Outlet/>
-          </main>
-          <PieddePage/>
-      </div>
-    )} else { 
-    return (
-        <div>
-            <NavBar/>
-            <main className=''>
-                <Outlet/>
-            </main>
-            <PieddePage/>
-        </div>
-  )
-}}
+    if (
+        location.pathname==='/PageProfilPharmacien' || 
+        location.pathname==='/PageAnnoncesPharmacien' ||
+        locaion.pathname === '/PageProfilPatient' ||
+        location.pathname === '/PageProfilAssociation')
+        {return (
+            <div>
+                <main className=''>
+                    <Outlet/>
+                </main>
+                <PieddePage/>
+            </div>
+            )} else if(location.pathname==='/Connexion'){ 
+            return (
+                <div>
+                    <main className=''>
+                        <Outlet/>
+                    </main>
+                </div>
+             )} else {
+                return ( 
+                    <div>
+                        <NavBar/>
+                        <main className=''>
+                            <Outlet/>
+                        </main>
+                        <PieddePage/>
+                    </div>
+                )
+             }
+}
 
 export default Layout

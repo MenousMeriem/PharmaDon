@@ -1,10 +1,16 @@
 import React from 'react'
-import ProfilPharmacie from '../../Composants/Profil/ProfilPharmacien/Profil/ProfilPharmacie'
+import Informations from '../../Composants/Profil/ProfilPharmacien/Profil/Informations'
+import Navbar from '../../Composants/Profil/Navbar'
 
 function PageProfilPharmacien() {
+
+
+ 
   return (
     <div>
-        <ProfilPharmacie/>
+        <Navbar/>
+        <h1 className='text-2xl text-center font-extrabold py-5  text-[#203374] '> Mon profil </h1>
+        <Informations/>
     </div>
   ) 
 }

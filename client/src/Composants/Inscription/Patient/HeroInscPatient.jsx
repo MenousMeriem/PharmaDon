@@ -2,9 +2,9 @@ import React from 'react'
 import image from '../../../assets/heropat.png'
 
 function HeroInscPatient() { 
-  return (
-    <div>
-      <div className="hero h-96 bg-white">
+  return ( 
+    <div> 
+      <div className="hero h-48 sm:h-full lg:h-96 md:h-full bg-white">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className='sm:block hidden'>
             <img src={image} className="max-w-sm " /> 

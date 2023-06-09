@@ -5,23 +5,29 @@ const annonceModel = require('../Models/annonceModel')
 //Ajouter une annonce : 
 exports.ajouterAnnonce = expressAsyncHandler (async (req, res) => {
     try {
-        const {date, numTel, adresse, detail} = req.body
+        const { 
+          numTel, adresse, detail, titre, categorie} = req.body
+          console.log(req.body)
       if (
-        !date ||
         !numTel ||
         !adresse ||
-        !detail       
+        !detail ||
+        !titre || 
+        !categorie      
       ) {
         res.status(400)
-        throw new Error(" Remplissez vos champs SVP ")
+        throw new Error("Remplissez vos champs SVP")
       }
-            await annonceModel.create({
-                date,
-                numTel,
-                adresse,
-                detail,
-            })
-                res.status(201).json('Annonce ajoutée !!')
+        
+        await annonceModel.create({
+          idAuteur: req.user._id,
+          numTel,
+          adresse,
+          detail,
+          titre,
+          categorie,
+        })
+        res.status(201).json('Annonce ajoutée !!')
     } catch (error) {
         res.status(400)
         console.log(error)

@@ -14,7 +14,7 @@ function NosServices() {
                     <h2 className=" text-lg md:text-lg font-bold ">Trouver une pharmacie près de chez vous</h2>
                     <p className='text-sm md:text-sm'>Trouver une pharmacie près de chez vous</p>
                     <div className="card-actions justify-end"></div>
-                    <Link to={'/PlusieursPharmacies'}>
+                    <Link to={'/PagePharmacies'}>
                         <button className="btn text-sm md:text-lg border-none bg-[#203374] hover:bg-[#FFB703] text-white">Afficher plus</button>
                     </Link>
                 </div>
@@ -22,10 +22,12 @@ function NosServices() {
             <div className="card w-72 h-96 md:w-96 md:h-96 bg-base-100 shadow-xl border-t-8 border-r-8 border-[#219EBC]">
                 <figure><img src={image1} className='w-60'></img></figure>
                 <div className="card-body">
-                    <h2 className=" text-lg md:text-lg font-bold ">Trouver une ssociation près de chez vous</h2>
+                    <h2 className=" text-lg md:text-lg font-bold ">Trouver une association près de chez vous</h2>
                     <p className='text-sm md:text-sm'>Trouver une association près de chez vous</p>
                     <div className="card-actions justify-end"></div>
-                    <button className="btn text-sm md:text-lg border-none bg-[#203374] hover:bg-[#219EBC] text-white">Afficher plus</button>
+                    <Link to={'/PageAssociations'}>
+                        <button className="btn text-sm md:text-lg border-none bg-[#203374] hover:bg-[#FFB703] text-white">Afficher plus</button>
+                    </Link>                
                 </div>
             </div>
             <div className="card w-72 h-96 md:w-96 md:h-96 bg-base-100 shadow-xl border-l-8 border-b-8 border-[#ab3428]">

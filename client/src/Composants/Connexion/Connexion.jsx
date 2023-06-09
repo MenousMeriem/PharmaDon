@@ -38,26 +38,29 @@ function Connexion() {
         }
     }
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
-        <div className='hidden sm:block'>
-            <img className='w-full h-full object-cover' src={image}  />
-        </div>
-        <div className="flex flex-col justify-center">
-        <h1 className='text-5xl mb-10 text-[#203374] font-bold text-center'>Bienvenue sur PharmaDon </h1>
-            <form onSubmit={handleSubmit} className='max-w-[550px] w-full mx-auto rounded-lg p-5 px-5'>
-                <div className='flex flex-col text-[#203374] py-2 mt-5 mb-5'>
-                    <label className='text-lg'>Adresse mail</label>
-                    <input type='email' name='mail' value={form.mail} onChange={onChange} required className='py-2 px-4 placeholder-gray-400 mt-2 text-lg  border-b-2 border-[#203374]' placeholder='Entrer votre adresse mail' />
-                </div>
-                <div className='flex flex-col text-[#203374] py-2'>
-                    <label className='text-lg'>Password</label>
-                    <input type='password' name='mot_de_passe' value={form.mot_de_passe} onChange={onChange} required className='py-2 px-4 placeholder-gray-400 mt-2 text-lg  border-b-2 border-[#203374] ' placeholder='Entrer votre mot de passe' />
-                </div> 
-                <div className=' flex justify-center flex-col items-center'>
-                <button type='submit' className="btn mt-10  w-52  text-white bg-[#0DC4C7]  border-none hover:bg-indigo-50 hover:text-[#0DC4C7] mb-10 ">Se connecter</button>
-                <label className='text-[#203374] '> Vous n'avez pas de compte ?</label><Link to={'/Inscription'} className='text-red-700'> S'inscrire </Link>
-                </div>
-            </form>
+    <div>
+        <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full max-w-full'>
+            <div className='hidden sm:block'>
+                <img className='w-full h-full object-cover' src={image}  />
+            </div>
+            <div className="flex flex-col justify-center">
+                <h1 className='text-5xl mb-10 text-[#203374] font-bold text-center'>Bienvenue sur PharmaDon </h1>
+                <form onSubmit={handleSubmit} className='max-w-[550px] w-full mx-auto rounded-lg p-5 px-5'>
+                    <div className='flex flex-col text-[#203374] py-2 mt-5 mb-5'>
+                        <label className='text-lg'>Adresse mail</label>
+                        <input type='email' name='mail' value={form.mail} onChange={onChange} required className='py-2 px-4 placeholder-gray-400 mt-2 text-lg  border-b-2 border-[#203374]' placeholder='Entrer votre adresse mail' />
+                    </div>
+                    <div className='flex flex-col text-[#203374] py-2'>
+                        <label className='text-lg'>Mot de passe </label>
+                        <input type='password' name='mot_de_passe' value={form.mot_de_passe} onChange={onChange} required className='py-2 px-4 placeholder-gray-400 mt-2 text-lg  border-b-2 border-[#203374] ' placeholder='Entrer votre mot de passe' />
+                    </div> 
+                    <div className=' flex justify-center flex-col items-center'>
+                        <button type='submit' className="btn mt-10 w-52 text-white bg-[#0DC4C7] border-none hover:bg-indigo-50 hover:text-[#0DC4C7] mb-10">Se connecter</button>
+                        <label className='text-[#203374] '> Vous n'avez pas de compte ?</label><Link to={'/Inscription'} className='text-[#203374] font-black underline underline-offset-2 '> S'inscrire </Link>
+                        <Link to={'/Accueil'} className='text-[#203374] font-black underline underline-offset-2 '> Accueil </Link>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
   )

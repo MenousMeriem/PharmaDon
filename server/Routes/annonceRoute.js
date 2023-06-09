@@ -10,9 +10,9 @@ const {protectUtilisateur} = require('../Middleware/protect')
 
 
 annonceRoute
-    .post('/AjouterAnnoncePharm', protectUtilisateur, ajouterAnnonce)
-    .put('/ModifierAnnoncePharm', protectUtilisateur, modifierAnnonce)
-    .delete('/SupprimerAnnoncePharm', protectUtilisateur, supprimerAnnonce)    
-    .get('/AfficherAnnonce', protectUtilisateur, afficherAnnonce)
+    .post('/AjouterAnnonce', protectUtilisateur, ajouterAnnonce)
+    .put('/ModifierAnnonce', protectUtilisateur, modifierAnnonce)
+    .delete('/SupprimerAnnonce', protectUtilisateur, supprimerAnnonce)    
+    .get('/AfficherAnnonce', afficherAnnonce)
     
 module.exports = annonceRoute
