@@ -25,6 +25,7 @@ exports.ajouterAnnonce = expressAsyncHandler (async (req, res) => {
           detail,
           nomMedicament,
           categorie,
+          image: req.files[0].path
         })
         res.status(201).json('Annonce ajoutée !!')
     } catch (error) {
@@ -93,7 +94,7 @@ exports.afficherAnnonceUserCourant = expressAsyncHandler(async(req,res) => {
 
 // Afficher les annonces des Pharmacies : 
 exports.afficherAnnoncePharmacien = expressAsyncHandler(async(req,res) => {
-  try {
+  try {    
      const annonce = await annonceModel.find().populate('idAuteur')
      const filteredResult = annonce.filter(an => an.idAuteur.role === "Pharmacie")
      res.status(202).json(filteredResult)

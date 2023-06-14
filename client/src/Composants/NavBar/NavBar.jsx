@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink, useNavigate, Link } from 'react-router-dom'
 import avatar from '../../assets/Navbar/avatar.png'
+import img from '../../assets/logoo.png'
 
 function NavBar() {
 
@@ -50,7 +51,10 @@ function NavBar() {
                   </li>
                 </ul>
               </div>
-              <NavLink to={'/Accueil'} className="btn btn-ghost normal-case text-xl hidden lg:block">PharmaDon</NavLink>
+              <div>
+                <figure> <img src={img} className='w-20 h-16'/> </figure>
+              </div> 
+              {/* <NavLink to={'/Accueil'} className="btn btn-ghost normal-case text-xl hidden lg:block">PharmaDon</NavLink> */}
             </div>
             <div className="navbar-center hidden text-[#203374] lg:flex">
                 <ul className="menu menu-horizontal px-1">

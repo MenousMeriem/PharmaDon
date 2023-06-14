@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import image from '../../assets/Pharmacies/medicament.jpg'
 
-function CarteMedicament({element}) {
+function CarteAnnonce({element}) {
 
     useState(element.nomMedicament)
     useState(element.numTel)
@@ -12,7 +12,7 @@ function CarteMedicament({element}) {
   return (
     <div className='px-10 py-10'>
         <div className="card card-compact w-96 bg-base-100 shadow-xl p-10 text-[#203374]">
-            <figure><img src={image} /></figure>
+            <figure><img src={image}/></figure>
             <div className="card-body">
                 <h2 className="card-title"> Nom du médicament : {element.nomMedicament} </h2> 
                 <h2 className="card-title"> Numéro de télephone : {element.numTel} </h2> 
@@ -28,4 +28,4 @@ function CarteMedicament({element}) {
   )
 }
 
-export default CarteMedicament
+export default CarteAnnonce

@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import img from '../../assets/logo.png'
 
 function PieddePage() {
   return (
-        <footer className="footer p-10 bg-base-200 text-base-content">
+        <footer className="footer p-10 bg-[#219dbc19] text-base-content">
             <div>
-                
+                <figure> <img src={img} className='w-48 h-48' /> </figure>
             </div> 
             <div>
                 <span className="footer-title">Services</span> 

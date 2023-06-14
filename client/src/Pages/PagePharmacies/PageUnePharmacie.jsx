@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Breadcrumbs from '../../Composants/Pharmacies/Breadcrumbs'
 import Divider from '../../Composants/Pharmacies/Divider'
-import CarteMedicament from '../../Composants/Pharmacies/CarteMedicament'
+import CarteAnnonce from '../../Composants/Pharmacies/CarteAnnonce'
 import animation from '../../assets/Annimations/102003-medicine.json'
 import Lottie from 'lottie-react'
 import {toast} from 'react-toastify'
@@ -35,7 +35,7 @@ function UnePharmacie({fetching, setFetching}) {
         <Breadcrumbs/>
         <Divider/>
         {data.length ? data.map(element => (
-            <CarteMedicament key={element._id} fetching={fetching} setFetching={setFetching} element={element} />
+            <CarteAnnonce key={element._id} fetching={fetching} setFetching={setFetching} element={element} />
         )) : <h1> y pas </h1> } 
     </div>
   )

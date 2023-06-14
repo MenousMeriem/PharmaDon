@@ -20,7 +20,7 @@ function CartePharmacie({element}) {
             <h2>Téléphone de la pharmacie : {element.numPharmacie}</h2>
             <h2>Adresse de la pharmacie : {element.adressePharmacie}, {element.wilayaPharmacie}</h2>
             <div className="card-actions justify-end">
-              <Link to={'/UnePharmacie'}>
+              <Link to={'/PageUnePharmacie'}>
                 <button className="btn bg-[#0DC4C7] border-none">Détail</button>
               </Link>
             </div> 

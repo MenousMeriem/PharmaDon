@@ -29,6 +29,9 @@ const annonceSchema = mongoose.Schema(
             // required: true,
             enum: categorie,
         },
+        image: {
+            type:String,
+        },
         signalement: {
             type: Number,
         }

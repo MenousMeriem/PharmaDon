@@ -1,5 +1,6 @@
 import React from 'react'
 import image from '../../assets/DevenirClient/client.jpg'
+import { Link } from 'react-router-dom'
 
 function DevenirClient() {
   return (
@@ -13,7 +14,9 @@ function DevenirClient() {
             PharmaDon est conçue pour répondre à vos besoins avec 
             simplicité et efficacité. <br /> Rejoignez-nous dès maintenant et découvrez comment notre plateforme innovante peut 
             transformer votre expérience en ligne.</p>
-            <button className="btn text-sm md:text-lg border-none  text-[#203374] hover:bg-[#219EBC] bg-white">Afficher plus</button>
+            <Link to={'/Inscription'}>
+              <button className="btn text-sm md:text-lg border-none  text-[#203374] hover:bg-[#219EBC] bg-white">Afficher plus</button>
+            </Link>
           </div>
         </div>
     </div>

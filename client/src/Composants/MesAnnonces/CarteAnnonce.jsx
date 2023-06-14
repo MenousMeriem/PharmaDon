@@ -49,6 +49,7 @@ function CarteAnnonce({element}) {
         }
     }
 
+    // Supprimer une annonce :
     const onDelete = async () => {
       const confirmation = confirm('Etes vous sur de supprimer cette annonce ?')
       if(!confirmation) return
@@ -58,44 +59,60 @@ function CarteAnnonce({element}) {
           toast.success('Annonce supprimé')
     } catch (error) {
       toast.error(error.response?.data?.message || error.message)   
-    } 
+    }  
   }
   
 
   return ( 
-    <div>
-        <div className="card card-side bg-base-100 shadow-xl flex flex-wrap p-10 m-10 border-4 border-[#0DC4C7]">
-            <figure><img className='w-96 h-64' src={image}/></figure>
-            <div className="card-body bg-[#0dc4c74d] rounded-lg text-[#203374] sm:p-10 sm:leading-10 sm:text-lg sm:font-bold">
-                <h3>Nom du médicament : </h3>
-                {modifier ? <input type="text" className="input input-bordered border-[#203374]" 
-                value={nomMedicamentValue} onChange={e => setnomMedicamentValue(e.target.value)} /> : <h3> {element.nomMedicament} </h3>} 
-                <h3>Numéro de téléphone : </h3>
-                {modifier ? <input type="tel" className="input input-bordered border-[#203374]" 
-                value={numTelValue} onChange={e => setnumTelValue(e.target.value)} /> : <h3>{element.numTel} </h3>} 
-                <h3> Adresse : </h3>
-                {modifier ? <input type="text" className="input input-bordered border-[#203374]" 
-                value={adresseValue} onChange={e => setadresseValue(e.target.value)} /> : <h3>{element.adresse} </h3>} 
-                <h3> Détail de l'annonce : </h3>
-                {modifier ? <input type="text" className="input input-bordered border-[#203374]" 
-                value={detailValue} onChange={e => setdetailValue(e.target.value)} /> : <h3>{element.detail} </h3>} 
-                
-                <div className="card-actions sm:justify-end justify-center mt-5">
-                  {modifier ? <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:text-lg sm:w-40" 
-                  onClick={handleUpdate}> Confirmer </button> : <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:text-lg sm:w-40"
-                  onClick={e=> setModifier(true)}> Modifier </button>}
-                  
-                  <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:text-lg sm:w-40"
-                  onClick={e => setModifier(false)}>Annuler</button> 
-                  
-                  {supprimer ? <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:text-lg sm:w-40" 
-                  onClick={onDelete}> Confirmer </button> : <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:text-lg sm:w-40"
-                  onClick={e=> setSupprimer(true)}> Supprimer </button>}
-
+    
+      <div className='px-10 pb-9'>
+      
+        <div className="card card-side bg-base-100 shadow-xl flex flex-wrap px-2 pb-2 border-4 border-[#0DC4C7]">
+          <figure className=''><img className='w-72 h-64' src={image}/></figure>
+          <div className="card-body bg-[#0dc4c74d] rounded-lg text-[#203374] md:mt-2 ">
+              <div className='w-full lg:flex border-b border-[#0DC4C7] p-5 '>
+                <div className='lg:flex lg:items-center lg:gap-2'>
+                  <h6 className=''>Nom du médicament : </h6>
+                  {modifier ? <input type="text" className="input input-bordered border-[#203374] md:w-fit lg:w-fit" 
+                  value={nomMedicamentValue} onChange={e => setnomMedicamentValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'> {element.nomMedicament} </h3>} 
                 </div>
+              </div>
+              <div className='w-full flex border-b border-[#0DC4C7] p-5 '>
+                <div className='lg:flex lg:items-center lg:gap-2'>
+                    <h6>Numéro de téléphone : </h6>
+                    {modifier ? <input type="tel" className="input input-bordered border-[#203374] md:w-fit lg:w-fit" 
+                    value={numTelValue} onChange={e => setnumTelValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'>{element.numTel} </h3>} 
+                </div>
+              </div>
+              <div className='w-full flex border-b border-[#0DC4C7] p-5 '>
+                <div className='lg:flex lg:items-center lg:gap-2'>
+                  <h3> Adresse : </h3>
+                  {modifier ? <input type="text" className="input input-bordered border-[#203374] md:w-fit lg:w-fit" 
+                  value={adresseValue} onChange={e => setadresseValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'>{element.adresse} </h3>} 
+                </div>
+              </div>
+              <div className='w-full flex border-b border-[#0DC4C7] p-5 '>
+                <div className='lg:flex lg:items-center lg:gap-2'>
+                  <h3> Détail de l'annonce : </h3>
+                  {modifier ? <input type="text" className="input input-bordered border-[#203374] md:w-fit lg:w-fit" 
+                  value={detailValue} onChange={e => setdetailValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'> {element.detail} </h3>} 
+                </div>
+              </div>
+              <div className="card-actions justify-center">
+                {modifier ? <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:text-lg sm:w-40" 
+                onClick={handleUpdate}> Confirmer </button> : <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:text-lg sm:w-40"
+                onClick={e=> setModifier(true)}> Modifier </button>}
+                
+                {/* <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:text-lg sm:w-40"
+                onClick={e => setModifier(false)}>Annuler</button>  */}
+                
+                {supprimer ? <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:text-lg sm:w-40 " 
+                onClick={onDelete}> Confirmer </button> : <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:text-lg sm:w-40"
+                onClick={e=> setSupprimer(true)}> Supprimer </button>}
+              </div>
             </div>
         </div>
-    </div>
+      </div>
   )
 }
 

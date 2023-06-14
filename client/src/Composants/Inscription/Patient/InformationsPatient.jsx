@@ -6,7 +6,7 @@ import axios from "axios"
 
 function InformationsPatient() {
 
-    const [form, setForm] = useState({
+    const [form, setForm] = useState({ 
         nom:"", 
         prenom:"", 
         sexe:"Homme", 
