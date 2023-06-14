@@ -58,7 +58,7 @@ const utilisateurSchema = mongoose.Schema(
 const pharmacienSchema = mongoose.Schema(
     {   
         nomPharmacie:  {
-            type: String, 
+            type: String,  
             required: true,
         },
         numPharmacie: {

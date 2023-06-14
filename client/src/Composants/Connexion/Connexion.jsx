@@ -52,7 +52,7 @@ function Connexion() {
                     </div>
                     <div className='flex flex-col text-[#203374] py-2'>
                         <label className='text-lg'>Mot de passe </label>
-                        <input type='password' name='mot_de_passe' value={form.mot_de_passe} onChange={onChange} required className='py-2 px-4 placeholder-gray-400 mt-2 text-lg  border-b-2 border-[#203374] ' placeholder='Entrer votre mot de passe' />
+                        <input type='text' name='mot_de_passe' value={form.mot_de_passe} onChange={onChange} required className='py-2 px-4 placeholder-gray-400 mt-2 text-lg  border-b-2 border-[#203374] ' placeholder='Entrer votre mot de passe' />
                     </div> 
                     <div className=' flex justify-center flex-col items-center'>
                         <button type='submit' className="btn mt-10 w-52 text-white bg-[#0DC4C7] border-none hover:bg-indigo-50 hover:text-[#0DC4C7] mb-10">Se connecter</button>

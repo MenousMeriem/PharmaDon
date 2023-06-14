@@ -57,7 +57,7 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
               !numtel ||
               !nomPharmacie||
               !numPharmacie||
-              !wilayaPharmacie ||
+              !wilayaPharmacie || 
               !adressePharmacie||
               !mot_de_passe ||
               !role
@@ -159,13 +159,14 @@ exports.afficherTsUtilisateurs = expressAsyncHandler(async (req, res) => {
   } catch (error) {
     res.status(400)
   }
+  
 })
 
 //Afficher l'utilisateur actuel
 exports.afficherUtilisateur = expressAsyncHandler(async (req,res) => {
   try {
-    const {_id} = req.user
-    const user = await utilisateurModel.findById(_id)
+    const id = req.user._id
+    const user = await utilisateurModel.findById(id)
     res.status(200).json(user)
   } catch (error) {
     res.status(400)
@@ -176,14 +177,9 @@ exports.afficherUtilisateur = expressAsyncHandler(async (req,res) => {
 
 // Afficher toutes les pharmacies : 
 exports.afficherPharmacie = expressAsyncHandler(async (req, res) => {
-  try {
-    // ici je dois dire qu'il doit etre un pharmacien
-    if(role==='Pharmacie') {
-    const {_id} = req.user
-      // pour que je pourrais l'afficher pour la suite 
-      const pharmacie = await utilisateurModel.findById(_id)
-      res.status(202).json(pharmacie)
-    }
+  try { 
+      const Pharmacie = await utilisateurModel.find({role:'Pharmacie'}).select('-mot_de_passe')
+      res.status(202).json(Pharmacie) 
   } catch (error) {
     res.status(400)
     throw new Error(error)
@@ -193,10 +189,8 @@ exports.afficherPharmacie = expressAsyncHandler(async (req, res) => {
 // Afficher toutes les associations : 
 exports.afficherAssociation = expressAsyncHandler(async (req, res) => {
   try {
-    if(role==='Association') {
-      const pharmacie = await utilisateurModel.findById() 
-      res.status(202).json(pharmacie)
-    }
+      const Association = await utilisateurModel.find({role:'Association'}).select('-mot_de_passe')
+      res.status(202).json(Association)
   } catch (error) {
     res.status(400)
     throw new Error(error)
@@ -206,12 +200,12 @@ exports.afficherAssociation = expressAsyncHandler(async (req, res) => {
 // Modifier un utilsateur : 
 exports.modifierUtilisateur = expressAsyncHandler(async (req, res) => {
   try {
-        const id = req.user._id
-            await utilisateurModel.findByIdAndUpdate(id, req.body)
-            res.status(200).json("Utilisateur modifié !!")
+      const id = req.user._id
+      await utilisateurModel.findByIdAndUpdate(id, req.body)
+      res.status(200).json("Utilisateur modifié !!")
   } catch (error) {
-            res.status(400)
-            throw new Error(error)
+      res.status(400)
+      throw new Error(error)
   }
 })
 

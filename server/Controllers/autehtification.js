@@ -20,11 +20,13 @@ exports.seConnecter = expressAsyncHandler(async (req, res) => {
                 res.status(400)
                 throw new Error('Incorrect')
         }
+        
         const utilisateurExiste = await utilisateurModel.find({mail: mail})
             if(utilisateurExiste.length == 0) {
                 res.status(400)
                 throw new Error('Utilisateur n existe pas')
         }
+
         const matchPassword = await bcrypt.compare(
             mot_de_passe,
             utilisateurExiste[0].mot_de_passe

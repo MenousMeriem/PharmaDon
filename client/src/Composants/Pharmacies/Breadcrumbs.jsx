@@ -7,7 +7,7 @@ function Breadcrumbs() {
     <div>
         <div className="text-lg breadcrumbs text-[#203374] ml-14 mt-5">
             <ul>
-                <li><Link to={'/PlusieursPharmacies'}>Pharmacies</Link></li> 
+                <li><Link to={'/PagePharmacies'}>Pharmacies</Link></li> 
                 <li>Nom de la pharmacie</li> 
             </ul>
         </div>

@@ -41,11 +41,11 @@ const {
   utilisateurRoute
     .post("/AjouterUtilisateur", telecharger.array("image"), ajouterUtilisateur)
     .get("/AfficherTsUtilisateurs", afficherTsUtilisateurs)
-    .get('/AfficherUtilisateur', protectUtilisateur, afficherUtilisateur)
+    .get('/AfficherUtilisateur/:id', protectUtilisateur, afficherUtilisateur)
     .get('/AfficherPharmacie', afficherPharmacie)
     .get('/AfficherAssociation', afficherAssociation)
     .put("/ModifierUtilisateur/:id", protectUtilisateur, modifierUtilisateur)
-    .delete("/SupprimerUtilisateur/:id", protectUtilisateur, supprimerUtilisateur)
+    .delete("/SupprimerUtilisateur/:id", supprimerUtilisateur)
     .delete("/AutoSuppression", autoSupression)
   
   module.exports = utilisateurRoute

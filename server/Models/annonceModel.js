@@ -7,8 +7,8 @@ const annonceSchema = mongoose.Schema(
         idAuteur: {
             type: mongoose.SchemaTypes.ObjectId,
             ref: "Utilisateur",
-        },
-        titre: {
+        }, 
+        nomMedicament: {
             type: String, 
             required: true,     
         },
@@ -26,7 +26,7 @@ const annonceSchema = mongoose.Schema(
         },
         categorie: {
             type: String, 
-            required: true,
+            // required: true,
             enum: categorie,
         },
         signalement: {

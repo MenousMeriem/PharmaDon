@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import wilaya from '../../../assets/Data/Wilaya_Of_Algeria.json'
-import wilayas from '../../../assets/Data/Wilaya_Of_Algeria.json'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from "axios"
@@ -71,7 +70,7 @@ function InformationsPharmacien() {
                     mot_de_passe:"",
                     confirmer_mot_de_passe: ""
                 })
-                toast.success('Compte créer avec succès ')
+                toast.success('Compte créer avec succès ') 
                 navigate('/PageProfilPharmacien')
             }
         } catch (error) {
@@ -170,10 +169,10 @@ console.log(form)
                         <label className="label">
                             <span className="label-text text-[#203374] mt-5"> Wilaya de la pharmacie*</span>
                         </label>
-                        <select name='wilayaPharmacie' value={form.wilaya} required onChange={handleOnChange} className="select select-bordered border-2 border-[#0DC4C7] w-full max-w-lg mt-2 ">
-                            <option disabled hidden> Wilaya de la pharmacie </option>
-                            {wilayas.map(w => {
-                            return <option key={w.id} value={w.name}>{w.code} - {w.name}</option>
+                        <select  name='wilayaPharmacie' value={form.wilayaPharmacie} required onChange={handleOnChange} className="select select-bordered border-2 border-[#0DC4C7] w-full max-w-lg mt-2 ">
+                            <option disabled hidden> Votre wilaya </option>
+                            {wilaya.map(w => {
+                                return <option key={w.id} value={w.name}>{w.code} - {w.name}</option>
                             }) }
                         </select> 
                     </div>

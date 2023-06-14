@@ -1,3 +1,5 @@
+import { ToastContainer } from "react-toastify"
+import 'react-toastify/ReactToastify.css'
 import Layout from "./Composants/Layout/Layout"
 import Accueil from "./Pages/PageAccueil/Accueil"
 import Connexion from './Pages/PageConnex/Connexion'
@@ -12,10 +14,13 @@ import PageProfilPharmacien from './Pages/PageProfil/PageProfilPharmacien'
 import PageProfilPatient from './Pages/PageProfil/PageProfilPatient'
 import PageProfilAdmin from './Pages/PageProfil/PageProfilAdmin'
 import PageProfilAssociation from './Pages/PageProfil/PageProfilAssociation'
-import PageAnnoncesPharmacien from './Pages/PageMesAnnonces/PageAnnoncesPharmacien'
-import PagePharmacies from "./Pages/PageAnnonces/PagePharmacies"
-import PageUnePharmacie from './Pages/PageAnnonces/PageUnePharmacie'
+import PageMesAnnonces from './Pages/PageMesAnnonces/PageMesAnnonces'
+import PagePharmacies from "./Pages/PagePharmacies/PagePharmacies"
+import PageUnePharmacie from './Pages/PagePharmacies/PageUnePharmacie'
+import PageAssociations from './Pages/PageAssociation/PageAssociations'
 import NosServices from "./Pages/PageServices/NosServices"
+import Propos from "./Pages/PagePropos/Propos"
+import NotFound from "./Pages/NotFound"
  
 import { 
           Route, 
@@ -24,15 +29,14 @@ import {
           RouterProvider,
           Navigate
         } from "react-router-dom"
-import { ToastContainer } from "react-toastify"
-import 'react-toastify/ReactToastify.css'
-import NotFound from "./Pages/NotFound"
+
  
 const router = createBrowserRouter (
   createRoutesFromElements (
     <Route path="/" element={<Layout/>}>
       <Route path="/Accueil" element={<Accueil/>}/>
       <Route path='/NosServices' element={<NosServices/>}/>
+      <Route path="/AProposdeNous" element={<Propos/>}/>
       <Route path="/Connexion" element={<Connexion/>}/> 
       <Route path="/Inscription" element={<Inscription/>}/>
       <Route path="/InscriptionPharmacien" element={<InscriptionPharmacien/>}/>
@@ -41,13 +45,14 @@ const router = createBrowserRouter (
       <Route path="/InformationsAssociation" element={<InformationsAssociation/>}/>
       <Route path="/InformationsPharmacien" element={<InformationsPharmacien/>}/> 
       <Route path="/InformationsPatient" element={<InformationsPatient/>}/>
-      <Route path="/PageAnnoncesPharmacien" element={<PageAnnoncesPharmacien/>}/> 
+      <Route path="/PageMesAnnonces" element={<PageMesAnnonces/>}/> 
       <Route path="/PageProfilPharmacien" element={<PageProfilPharmacien/>}/>
       <Route path="/PageProfilAssociation" element={<PageProfilAssociation/>}/>
       <Route path="/PageProfilAdmin" element={<PageProfilAdmin/>}/>
       <Route path="/PageProfilPatient" element={<PageProfilPatient/>}/>
       <Route path="/PagePharmacies" element={<PagePharmacies/>}/>
       <Route path="/PageUnePharmacie" element={<PageUnePharmacie/>}/>
+      <Route path="/PageAssociations" element={<PageAssociations/>}/>
       <Route path="/*" element={<NotFound/>}/>
     </Route>
   )

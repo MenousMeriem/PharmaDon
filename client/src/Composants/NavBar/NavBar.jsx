@@ -5,7 +5,8 @@ import avatar from '../../assets/Navbar/avatar.png'
 function NavBar() {
 
     const navigate = useNavigate()
-    const onClick =  (e) => {
+   
+    const Deconnexion =  (e) => {
         const user = JSON.parse(localStorage.getItem('Utilisateur'))
         if(user) localStorage.removeItem('Utilisateur')
         navigate('/Connexion')
@@ -13,16 +14,15 @@ function NavBar() {
 
     const handleProfile = () => {
       const user = JSON.parse(localStorage.getItem('Utilisateur'))
-      if (user.role=== 'Pharmacie') {
-         navigate('/PageProfilPharmacien')
-      } else if (user.role=== 'Association') {
-        navigate('/PageProfilAssociation')
-      } else if (user.role === 'Patient') {
-        navigate('/PageProfilPatient')
+        if (user.role=== 'Pharmacie') {
+          navigate('/PageProfilPharmacien')
+        } else if (user.role=== 'Association') {
+          navigate('/PageProfilAssociation')
+        } else if (user.role=== 'Patient') {
+          navigate('/PageProfilPatient')
       }}
 
     const user = localStorage.getItem('Utilisateur')
-
 
   return (
     <div>
@@ -33,15 +33,15 @@ function NavBar() {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                 </label>
                 <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                  <li><Link to={'/Accueil'} > Accueil </Link></li>
-                  <li><Link to={'/NosServices'} > Nos services </Link></li>
-                  <li><NavLink to={'/Propos'}>A propos de nous</NavLink></li>
+                  <li><NavLink to={'/Accueil'} > Accueil </NavLink></li>
+                  <li><NavLink to={'/NosServices'} > Nos services </NavLink></li>
+                  <li><NavLink to={'/AProposdeNous'}>A propos de nous</NavLink></li>
                   <li><Link to={'/Connexion'} > Se connecter </Link></li>
                   <li tabIndex={0}>   
                     <Link className="justify-between">
                       S'inscrire
                       <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
-                    </Link>
+                    </Link> 
                     <ul className="p-2 bg-white text-black">
                       <li><Link to={'/InscriptionPharmacien'}>Pharmacien</Link></li>
                       <li><Link to={'/InscriptionAssociation'}>Association</Link></li>
@@ -56,7 +56,7 @@ function NavBar() {
                 <ul className="menu menu-horizontal px-1">
                     <li><NavLink to={'/Accueil'}>Accueil</NavLink></li>
                     <li><NavLink to={'/NosServices'}>Nos services</NavLink></li>
-                    <li><NavLink to={'/Propos'}>A propos de nous</NavLink></li>
+                    <li><NavLink to={'/AProposdeNous'}>A propos de nous</NavLink></li>
                 </ul>
             </div>
 
@@ -74,8 +74,8 @@ function NavBar() {
                         Profil
                       </button>
                     </li>
-                    <li><Link to={'/'}>Mes annonces</Link></li>
-                    <li><Link to={'/Connexion'} onClick={onClick}>Deconnexion</Link></li>
+                    <li><Link to={'/PageMesAnnonces'}>Mes annonces</Link></li>
+                    <li><Link to={'/Connexion'} onClick={Deconnexion}>Deconnexion</Link></li>
                   </ul>
                 </div>
               : 
