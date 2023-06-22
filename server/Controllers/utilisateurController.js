@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt")
 const expressAsyncHandler = require("express-async-handler")
 const jwt = require('jsonwebtoken')
 const path = require('path')
+const nodemailer = require('nodemailer')
 
 //create gen access token
 const genAccessToken = ({_id,role}) => {
@@ -13,7 +14,6 @@ return jwt.sign({_id, role}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "10000
 //Créer un Admin :
 exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
   try {
-    console.log(req.file)
     if(req.body.role=='Admin'){
         const {nom, prenom, sexe, date_de_naissance, adresse, numtel, mail, mot_de_passe, role} = req.body
         if(
@@ -33,12 +33,11 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
         }
         const newUtilisateur = await utilisateurModel.create({
           nom, prenom, sexe, date_de_naissance, adresse, numtel, mail, role,
-          mot_de_passe: await bcrypt.hash(req.body.mot_de_passe, 10),
+          mot_de_passe: await bcrypt.hash(mot_de_passe, 10),
         })
-          console.log(newUtilisateur)
-            res.status(201).json({
+           return res.status(201).json({
               _id: newUtilisateur._id,
-              accessToken: genAccessToken({_id: newUtilisateur._id,role: newUtilisateur.role}),
+              accessToken: genAccessToken({_id: newUtilisateur._id, role: newUtilisateur.role}),
             })
       }
 
@@ -67,14 +66,35 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
             if((await utilisateurModel.find({mail})).length > 0) {
               throw new Error('Utilisateur existe')
             }
-            const newUtilisateur = await utilisateurModel.create({
+              const newUtilisateur = await utilisateurModel.create({
               nom, prenom, sexe, date_de_naissance, wilaya, adresse, mail, numtel, nomPharmacie, numPharmacie, wilayaPharmacie, 
               adressePharmacie, role, fichierIDPharmacien: req.files[0].path,fichierIDPharmacie: req.files[1].path,
-              mot_de_passe: await bcrypt.hash(req.body.mot_de_passe, 10),
-            })
-        res.status(201).json({
+              mot_de_passe: await bcrypt.hash(mot_de_passe, 10),
+              })
+              const transporter = nodemailer.createTransport({
+              host: 'smtp.office365.com',
+              port: 587,
+              secure: false,
+              auth: {
+                  user: process.env.SMTP_Mail,
+                  pass: process.env.SMTP_Pass
+                  }
+              });
+        
+              // send mail with defined transport object
+              let info = await transporter.sendMail({
+              from: process.env.SMTP_Mail, // sender address
+              to: newUtilisateur.mail, // list of receivers
+              subject: "En attente de validation de votre compte", // Subject line
+              text: `Cher ${nom} ${prenom}, 
+              nous vous remercions d'avoir soumis votre demande de création de compte sur notre plateforme PharmaDon. Nous souhaitons vous informer que votre demande est en cours de traitement et qu'elle nécessite une validation de la part de notre administrateur. 
+              Cordialement.`, // plain text body
+             })
+
+         return res.status(201).json({
           _id: newUtilisateur._id,
           accessToken: genAccessToken({_id: newUtilisateur._id,role: newUtilisateur.role}),
+          role: "Pharmacie"
         })
         
       }
@@ -103,15 +123,36 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
             if((await utilisateurModel.find({mail})).length > 0) {
               throw new Error('Utilisateur existe')
             }
-            console.log(req.body)
             const newUtilisateur = await utilisateurModel.create({
               nom, prenom, sexe, date_de_naissance, wilaya, adresse, mail, numtel, nomAsso, numAsso, wilayaAsso, adresseAsso, role,
               fichierIDPresident: req.files[0].path, fichierIDAssociation : req.files[1].path,
-              mot_de_passe: await bcrypt.hash(req.body.mot_de_passe, 10),
+              mot_de_passe: await bcrypt.hash(mot_de_passe, 10),
             })
-            res.status(201).json({
+
+              const transporter = nodemailer.createTransport({
+              host: 'smtp.office365.com',
+              port: 587,
+              secure: false,
+              auth: {
+                  user: process.env.SMTP_Mail,
+                  pass: process.env.SMTP_Pass
+                  }
+              });
+        
+              // send mail with defined transport object
+              let info = await transporter.sendMail({
+              from: process.env.SMTP_Mail, // sender address
+              to: newUtilisateur.mail, // list of receivers
+              subject: "En attente de validation de votre compte", // Subject line
+              text: `Cher  ${"le bg"}, nous vous remercions d'avoir soumis votre demande de création de compte sur notre plateforme PharmaDon. 
+              Nous souhaitons vous informer que votre demande est en cours de traitement et qu'elle nécessite une validation de la part 
+              de notre administrateur.`, // plain text body
+             })
+
+           return res.status(201).json({
               _id: newUtilisateur._id,
               accessToken: genAccessToken({_id: newUtilisateur._id,role: newUtilisateur.role}),
+              role: "Association"
             })
 
             // Creer un Patient 
@@ -135,13 +176,35 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
             if((await utilisateurModel.find({mail})).length > 0) {
               throw new Error('Utilisateur existe')
             }
-            const newUtilisateur = await utilisateurModel.create({
+              const newUtilisateur = await utilisateurModel.create({
               nom, prenom, sexe, date_de_naissance, wilaya, adresse, mail, numtel, role,
               mot_de_passe: await bcrypt.hash(req.body.mot_de_passe, 10),
             })
-            res.status(201).json({
+
+              const transporter = nodemailer.createTransport({
+              host: 'smtp.office365.com',
+              port: 587,
+              secure: false,
+              auth: {
+                  user: process.env.SMTP_Mail,
+                  pass: process.env.SMTP_Pass
+                  }
+              });
+        
+              // send mail with defined transport object
+              let info = await transporter.sendMail({
+              from: process.env.SMTP_Mail, // sender address
+              to: newUtilisateur.mail, // list of receivers
+              subject: "En attente de validation de votre compte", // Subject line
+              text: `Cher  ${"le bg"}, nous vous remercions d'avoir soumis votre demande de création de compte sur notre plateforme PharmaDon. 
+              Nous souhaitons vous informer que votre demande est en cours de traitement et qu'elle nécessite une validation de la part 
+              de notre administrateur.`, // plain text body
+             })
+
+            return res.status(201).json({
               _id: newUtilisateur._id,
               accessToken: genAccessToken({_id: newUtilisateur._id,role: newUtilisateur.role}),
+              role: "Patient",
             })
         
     } catch (error) {

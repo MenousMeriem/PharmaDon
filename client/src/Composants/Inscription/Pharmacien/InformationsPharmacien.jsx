@@ -78,7 +78,6 @@ function InformationsPharmacien() {
             toast.error(error.response?.data?.message || error.message);
         }
     }
-console.log(form)
   return ( 
     <div className='lg:py-5 sm:p-5 flex justify-center'>
         <div className='text-[#203374] bg-white border-2 rounded-lg border-[#0DC4C7] w-screen p-5 px-10 sm:mx-auto'>

@@ -1,6 +1,7 @@
 import React from 'react'
 import Informations from '../../Composants/Profil/ProfilAssociation/Profil/Informations'
 import animation_ from '../../assets/Annimations/87945-profile-setup.json'
+import Lottie from 'lottie-react'
 
 function PageProfilAssociation() {
   return (

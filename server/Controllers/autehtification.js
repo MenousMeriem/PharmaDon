@@ -3,13 +3,16 @@ const refreshTokenModel = require('../Models/refreshTokenModel')
 const expressAsyncHandler = require('express-async-handler')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt') 
+const crypto = require('node:crypto')
+const nodemailer = require('nodemailer')
 
 
 //Sign token
 const genererToken =(data) => {
-    const token = jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "100000h"})
+    const token = jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "100000000h"})
     return token
 }
+
 
 //Login : [ACCESS TOKEN,REFRESH TOKEN]
 exports.seConnecter = expressAsyncHandler(async (req, res) => {
@@ -18,18 +21,18 @@ exports.seConnecter = expressAsyncHandler(async (req, res) => {
         const {mail, mot_de_passe} = req.body
             if (!mail || !mot_de_passe) {
                 res.status(400)
-                throw new Error('Incorrect')
+                throw new Error('Mail ou mot de passe incorrect')
         }
         
         const utilisateurExiste = await utilisateurModel.find({mail: mail})
             if(utilisateurExiste.length == 0) {
                 res.status(400)
-                throw new Error('Utilisateur n existe pas')
+                throw new Error("Mail n'éxiste pas")
         }
-
+        console.log(utilisateurExiste)
         const matchPassword = await bcrypt.compare(
             mot_de_passe,
-            utilisateurExiste[0].mot_de_passe
+            utilisateurExiste[0].mot_de_passe,
         )
             if(!matchPassword){
                 res.status(400)
@@ -105,3 +108,71 @@ exports.logout = expressAsyncHandler(async (req, res) => {
         throw new Error(error)
     }
   })
+
+
+// Mot de passe oublié : 
+exports.resetPassword = expressAsyncHandler(async (req, res) => {
+    
+        const {mail} = req.body
+        if(!mail) {
+            res.status(400).json("mail n'existe pas ! ")
+        } 
+        const userExist = await utilisateurModel.findOne({mail})
+        
+        if(!userExist) throw new Error("L'uilisateur n'éxiste pas")
+        
+        if(!userExist.resetKey) {
+            
+            const key = crypto.randomBytes(30).toString('hex')
+            await utilisateurModel.findOneAndUpdate({mail}, {resetKey: key})
+            
+            const transporter = nodemailer.createTransport({
+            host: 'smtp.office365.com',
+            port: 587,
+            secure: false,
+            auth: {
+                user: process.env.SMTP_Mail,
+                pass: process.env.SMTP_Pass
+                }
+            });
+            
+            // send mail with defined transport object
+            let info = await transporter.sendMail({
+            from: process.env.SMTP_Mail, // sender address
+            to: {mail}, // list of receivers
+            subject: "Réinitialisation du mot de passe", // Subject line
+            text: `Mail de réinitialisation de mot de passe, 
+            Cliquer sur le lien suivant: http://localhost:5173/resetPassword?key=${key}`, // plain text body
+            })
+        }
+        if(userExist.resetKey) {
+            
+            const transporter = nodemailer.createTransport({
+            host: 'smtp.office365.com',
+            port: 587,
+            secure: false,
+            auth: {
+                user: process.env.SMTP_Mail,
+                pass: process.env.SMTP_Pass
+                }
+            });
+            
+            // send mail with defined transport object
+            let info = await transporter.sendMail({
+            from: process.env.SMTP_Mail, // sender address
+            to: {mail}, // list of receivers
+            subject: "Réinitialisation du mot de passe", // Subject line
+            text: `Mail de réinitialisation de mot de passe, 
+            Cliquer sur le lien suivant: http://localhost:5173/resetPassword?key=${userExist.resetKey}`, // plain text body
+            })
+        }
+        res.status(200).json({success: true, message: "Clé de réinitialisation envoyer avec succés!"})
+
+}) 
+
+
+exports.changePassword = expressAsyncHandler(async (req, res) => {
+    const {mdp, mail} = req.body
+    await utilisateurModel.findOneAndUpdate({mail: mail}, {mot_de_passe: mdp})
+    res.status(200).json("Mot de passe modifié avec succes ! ")
+})

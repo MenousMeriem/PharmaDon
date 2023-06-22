@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const categorie = Object.freeze(["Demande","Donnation"])
+const categorie = Object.freeze(["Demande","Don"])
 
 const annonceSchema = mongoose.Schema(
     {   

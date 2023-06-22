@@ -30,23 +30,13 @@ function MesAnnonces({fetching, setFetching}) {
   useEffect(()=>{
       fetchData() 
   }, [])
-  console.log(data)
 
   if(loading) return ( <Lottie animationData={animation} /> )
   return (
     <div>      
     
       <h1 className='text-lg text-center text-[#203374] mt-5 sm:text-4xl sm:mt-14 py-10 px-20'> Ajouter une annonce </h1>
-      {/* <button className="btn" onClick={()=>my_modal_3.showModal()}>open modal</button>
-        <dialog id="my_modal_3" className="modal">
-          <form method="dialog" className="modal-box">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-            <h3 className="font-bold text-lg">Hello!</h3>
-            <p className="py-4">Press ESC key or click on ✕ button to close</p>
-          </form>
-        </dialog> */}
       <AjoutAnnonce/>
-
       <h1 className='text-lg text-center text-[#203374] mt-5 sm:text-4xl sm:mt-14 py-10 px-20'> Mes annonces </h1>
       {data.length ? data.map(element => (
         <CarteAnnonce key={element._id} fetching={fetching} setFetching={setFetching} element={element} />

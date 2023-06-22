@@ -21,6 +21,13 @@ function Accueil() {
       <NosServices/>
       <DevenirClient/>
       <Contact/>
+      <Link to={'/Mail'}>
+      <button> Envoyer </button>
+      </Link>
+      <Link to={'/ReinitialierMotdePasse'}>
+      <button> Reinitialiser mot de passe </button>
+      </Link>
+      
     </div>
   )
 }

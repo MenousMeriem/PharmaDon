@@ -11,16 +11,17 @@ function CartePharmacie({element}) {
     useState(element.adressePharmacie)
   
   return ( 
-    <div>
-      <div className='bg-[#0DC4C7] bg-opacity-25 w-full py-8 px-10 rounded-lg mt-10'> 
-        <div className="card card-side w-full px-5 ">
-          <figure><img className='w-64 h-60 rounded-lg' src={image}/></figure>
-          <div className="card-body bg-white ml-4 rounded-lg text-[#203374] text-lg font-bold">
+    <div className='p-4'>
+      <div className='bg-[#0DC4C7] bg-opacity-25 w-full rounded-lg'> 
+        <div className="card card-side flex-col md:flex-row lg:flex-row p-3">
+          <figure><img className='w-96 rounded-xl p-3' src={image}/></figure>
+          <div className="card-body bg-white rounded-lg text-[#203374] text-base m-2">
             <h2>Nom de la pharmacie : {element.nomPharmacie}</h2>
             <h2>Téléphone de la pharmacie : {element.numPharmacie}</h2>
             <h2>Adresse de la pharmacie : {element.adressePharmacie}, {element.wilayaPharmacie}</h2>
+            <h2 className="text-sm"> Mail : {element.mail} </h2>
             <div className="card-actions justify-end">
-              <Link to={'/PageUnePharmacie'}>
+              <Link to={'/PageUnePharmacie/'+element._id}>
                 <button className="btn bg-[#0DC4C7] border-none">Détail</button>
               </Link>
             </div> 

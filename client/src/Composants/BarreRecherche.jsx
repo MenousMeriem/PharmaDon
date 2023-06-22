@@ -1,6 +1,4 @@
 import React from 'react'
-import {GiMedicinePills} from 'react-icons/gi'
-import {BiCurrentLocation} from 'react-icons/bi'
 import wilaya from '../assets/Data/Wilaya_Of_Algeria.json'
 
 function BarreRecherche() {
@@ -10,11 +8,17 @@ function BarreRecherche() {
       <div className='p-10 '>
         <div className='w-full h-full bg-[#0DC4C7] py-8 px-10 rounded-xl '>
             <div className='lg:flex lg:items-center lg:justify-evenly gap-2'>
-                <GiMedicinePills className='hidden lg:block w-14 h-10 text-white'/>
-                <input type="text" placeholder="Votre médicament" className="input flex-1 input-bordered border-2 border-[#0DC4C7] w-full my-2"/>
-                <BiCurrentLocation className='hidden lg:block lg:w-14 lg:h-10 text-white'/>
+                {/* <GiMedicinePills className='hidden lg:block w-14 h-10 text-white'/> */}
+                <input type="text" placeholder="Ex: nom de la pharmacie" className="input flex-1 input-bordered border-2 border-[#0DC4C7] w-full my-2"/>
                 <select defaultValue="" className="select select-bordered border-2 max-w-sm border-[#0DC4C7] sm:w-full my-2 ">
-                  <option disabled hidden  value=""> Votre wilaya </option>
+                  <option value=""> Tous </option>
+                  <option value=""> Pharmacie </option>
+                  <option value=""> Association </option>
+                  <option value=""> Médicament </option>
+                </select>
+                {/* <BiCurrentLocation className='hidden lg:block lg:w-14 lg:h-10 text-white'/> */}
+                <select defaultValue="" className="select select-bordered border-2 max-w-sm border-[#0DC4C7] sm:w-full my-2 ">
+                  <option disabled hidden value=""> Votre wilaya </option>
                   {wilaya.map(w => {
                     return <option key={w.id} value={w.name}>{w.code} - {w.name}</option>
                   }) }
@@ -22,13 +26,6 @@ function BarreRecherche() {
                 <div className='flex items-center justify-center px-2'>
                   <button className="btn bg-white border-none text-[#203374] hover:bg-[#203374] hover:text-white my-2">Recherche</button>
                 </div>
-            </div>
-            <div className='lg:flex lg:justify-start lg:gap-10 lg:mt-5 lg:ml-16 flex flex-wrap gap-1 '>
-              <button className="btn bg-white border-none text-[#203374] hover:bg-[#203374] hover:text-white my-2">Pharmacie</button>
-              <button className="btn bg-white border-none text-[#203374] hover:bg-[#203374] hover:text-white my-2">Association</button>
-              <button className="btn bg-white border-none text-[#203374] hover:bg-[#203374] hover:text-white my-2">Médicament</button>
-              <button className="btn bg-white border-none text-[#203374] hover:bg-[#203374] hover:text-white my-2">Demande</button>
-              <button className="btn bg-white border-none text-[#203374] hover:bg-[#203374] hover:text-white my-2">Donnation</button>
             </div>
         </div>
       </div>

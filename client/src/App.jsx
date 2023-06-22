@@ -4,6 +4,8 @@ import Layout from "./Composants/Layout/Layout"
 import Accueil from "./Pages/PageAccueil/Accueil"
 import Connexion from './Pages/PageConnex/Connexion'
 import Inscription from "./Composants/Inscription/Inscription"
+import ReinitialiserMdp from "./Composants/MotDePasse/reinitialiserMdp"
+import Mail from "./Composants/MotDePasse/Mail"
 import InscriptionPharmacien from './Pages/PageInsc/InscriptionPharmacien'
 import InscriptionAssociation from "./Pages/PageInsc/InscriptionAssociation"
 import InscriptionPatient from './Pages/PageInsc/InscriptionPatient'
@@ -18,6 +20,7 @@ import PageMesAnnonces from './Pages/PageMesAnnonces/PageMesAnnonces'
 import PagePharmacies from "./Pages/PagePharmacies/PagePharmacies"
 import PageUnePharmacie from './Pages/PagePharmacies/PageUnePharmacie'
 import PageAssociations from './Pages/PageAssociation/PageAssociations'
+import PageUneAssociation from "./Pages/PageAssociation/PageUneAssociation"
 import NosServices from "./Pages/PageServices/NosServices"
 import Propos from "./Pages/PagePropos/Propos"
 import NotFound from "./Pages/NotFound"
@@ -30,6 +33,7 @@ import {
           Navigate
         } from "react-router-dom"
 
+
  
 const router = createBrowserRouter (
   createRoutesFromElements (
@@ -39,6 +43,8 @@ const router = createBrowserRouter (
       <Route path="/AProposdeNous" element={<Propos/>}/>
       <Route path="/Connexion" element={<Connexion/>}/> 
       <Route path="/Inscription" element={<Inscription/>}/>
+      <Route path="/ReinitialierMotdePasse" element={<ReinitialiserMdp/>}/>
+      <Route path="/Mail" element={<Mail/>} />
       <Route path="/InscriptionPharmacien" element={<InscriptionPharmacien/>}/>
       <Route path="/InscriptionAssociation" element={<InscriptionAssociation/>}/>
       <Route path="/InscriptionPatient" element={<InscriptionPatient/>}/>
@@ -51,8 +57,9 @@ const router = createBrowserRouter (
       <Route path="/PageProfilAdmin" element={<PageProfilAdmin/>}/>
       <Route path="/PageProfilPatient" element={<PageProfilPatient/>}/>
       <Route path="/PagePharmacies" element={<PagePharmacies/>}/>
-      <Route path="/PageUnePharmacie" element={<PageUnePharmacie/>}/>
+      <Route path="/PageUnePharmacie/:id" element={<PageUnePharmacie/>}/>
       <Route path="/PageAssociations" element={<PageAssociations/>}/>
+      <Route path="/PageUneAssociation/:id" element={<PageUneAssociation/>}/>
       <Route path="/*" element={<NotFound/>}/>
     </Route>
   )
@@ -64,7 +71,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router}/>
-     <ToastContainer/> 
+      <ToastContainer/> 
     </>
   )
 }

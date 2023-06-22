@@ -8,7 +8,7 @@ function Inscription() {
   return (
     <div className=''>
         <h1 className='text-center text-lg md:mt-5 md:text-3xl lg:text-4xl text-[#203374] py-12 underline underline-offset-8 decoration-[#0DC4C7]'> Créer votre compte ! </h1>
-        <div className='text-center flex flex-col justify-center items-center gap-4 md:grid md:grid-cols-3 md:gap-1 md:justify-items-center md:py-8 md:mb-20 text-[#203374]'>
+        <div className='text-center flex flex-wrap justify-center gap-10 text-[#203374] mb-10'>
             <div className="card w-72 h-96 md:w-96 md:h-96 bg-base-100 shadow-xl border-8 border-[#203374]">
                 <figure><img className='max-w-xs max-h-xs p-10' src={image}></img></figure>
                 <div className="card-body">

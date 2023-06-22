@@ -57,6 +57,7 @@ function Connexion() {
                     <div className=' flex justify-center flex-col items-center'>
                         <button type='submit' className="btn mt-10 w-52 text-white bg-[#0DC4C7] border-none hover:bg-indigo-50 hover:text-[#0DC4C7] mb-10">Se connecter</button>
                         <label className='text-[#203374] '> Vous n'avez pas de compte ?</label><Link to={'/Inscription'} className='text-[#203374] font-black underline underline-offset-2 '> S'inscrire </Link>
+                        <Link to={'/ReinitialierMotdePasse'} className='text-[#203374] font-black underline underline-offset-2 '> Mot de passe oublié  </Link>
                         <Link to={'/Accueil'} className='text-[#203374] font-black underline underline-offset-2 '> Accueil </Link>
                     </div>
                 </form>

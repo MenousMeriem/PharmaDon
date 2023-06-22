@@ -5,15 +5,14 @@ import animation from '../../assets/Annimations/5699-loading-26-paper-plane.json
 function Contact() {
   return (
     <div>
-        <div className="hero min-h-fit bg-[#219dbc42] my-10">
-            <div className="hero-content flex-col lg:flex-row-reverse px-10 py-10 text-[#203374]">
-                <div className="lg:text-left lg:ml-10">
-                    {/* <Lottie className='w-40 h-10' animationData={animation}/> */}
+        <div className="hero min-h-fit bg-[#219dbc42] ">
+            <div className="hero-content flex-col lg:flex-row-reverse text-[#203374] lg:p-10">
+                <div className="lg:text-left lg:w-1/2">
                     <h1 className="lg:text-5xl text-3xl font-black text-center ">Nous contacter</h1>
-                    <p className="py-6 text-xl text-center lg:leading-10">Si vous avez des questions ou des préoccupations, n'hésitez pas à nous contacter. 
+                    <p className="py-6 lg:text-xl text-center lg:leading-10">Si vous avez des questions ou des préoccupations, n'hésitez pas à nous contacter. 
                     Notre équipe se fera un plaisir de vous aider à trouver la pharmacie la plus adaptée à vos besoins.</p>
                 </div>
-                <div className="card flex-shrink-0 w-full max-w-xl shadow-2xl bg-base-100">
+                <div className="card flex-shrink-0 shadow-2xl bg-base-100 lg:w-1/2">
                     <div className="card-body">
                         <div className="form-control">
                             <label className="label">

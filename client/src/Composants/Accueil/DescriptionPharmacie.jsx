@@ -1,6 +1,8 @@
 import React from 'react'
 import image from '../../assets/Accueil/medecine.avif'
 import { Link } from 'react-router-dom'
+// import Lottie from "lottie-react"
+// import animationData from "../../assets/Annimations/22477-pharmacy-store-drug-home-building-maison-mocca-animation.json"
 
 function DescriptionPharmacie() {
   return (
@@ -15,15 +17,16 @@ function DescriptionPharmacie() {
                     et promotions. Une question ? Besoin d’un conseil ? Contactez-nous via la messagerie instantanée !
                     Notre équipe s'engage à :
                 </p>
-                <ul className='list-disc text-[#203374] text-lg'>
+                <ul className='list-disc lg:text-lg text-[#203374]'>
                     <li>Vous apporter des conseils personnalisés en Contention médicale, Diététique, Diététique sportive, Conseil dermatologique, Oncologie, Chaussures médicales... </li> 
                     <li>Vous mettre les meilleurs services à disposition : Dépistage, Maintien à domicile, Carte avantage, Informations animations, Vente et location de matériel médical, Vaccination... </li>                    
                 </ul>
-                <div className="card-actions justify-end">
-                    <Link to={'/AProposdeNous'}>
-                        <button className="btn text-sm md:text-lg border-none bg-[#203374] hover:bg-[#219EBC] text-white">Afficher plus</button>
-                    </Link>
-                </div>
+                <Link to={'/AProposdeNous'}> 
+                    <div className="card-actions justify-end">
+                        <button className="btn text-sm md:text-lg border-none  bg-[#203374] hover:bg-[#219EBC] text-white">Afficher plus</button>
+                    </div>
+                </Link>
+                
             </div>
         </div>
     </div>

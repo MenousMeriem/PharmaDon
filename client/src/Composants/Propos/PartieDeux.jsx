@@ -6,7 +6,7 @@ function PartieDeux() {
   return (
     <div>
         <div className="hero lg:min-h-fit lg:py-20 md:py-10 py-5 bg-white text-[#203374]">
-            <div className="hero-content  md:grid md:grid-cols-2 lg:grid lg:grid-cols-2 lg:gap-20">
+            <div className="hero-content md:grid md:grid-cols-2 lg:grid lg:grid-cols-2 lg:gap-20">
                 <div>
                     <Lottie className='w-[50] hidden md:block' animationData={animation}/>
                 </div>

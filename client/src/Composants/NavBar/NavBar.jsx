@@ -16,6 +16,7 @@ function NavBar() {
     const handleProfile = () => {
       const user = JSON.parse(localStorage.getItem('Utilisateur'))
         if (user.role=== 'Pharmacie') {
+          console.log("lkjlj")
           navigate('/PageProfilPharmacien')
         } else if (user.role=== 'Association') {
           navigate('/PageProfilAssociation')

@@ -1,16 +1,19 @@
 import React ,{useState, useEffect} from 'react'
-import wilayas from '../../../../assets/Data/Wilaya_Of_Algeria.json'
+import wilaya from '../../../../assets/Data/Wilaya_Of_Algeria.json'
+import Lottie from 'lottie-react'
+import animation from '../../../../assets/Annimations/5699-loading-26-paper-plane.json'
 import { toast } from 'react-toastify'
 import axios from "axios"
 
 function Informations() {
-  const currentUser = localStorage.getItem('Utilisateur')
+    const currentUser = localStorage.getItem('Utilisateur')
     const currentUserObject = JSON.parse(currentUser)
     const config = {
         headers: {
             Authorization: `Bearer ${currentUserObject.accessToken}`
         }
     } 
+
     //Loading state
     const [loading, setLoading] = useState(true)
     
@@ -30,6 +33,7 @@ function Informations() {
     const [adresseAssoValue, setadresseAssoValue] = useState('')
     const [numAssoValue, setnumAssoValue] = useState()
     const [passwordValue, setpasswordValue] = useState('')
+    const [roleValue, setRoleValue] = useState('Association')
                 
     //Pour afficher l'utilisateur actuel
     const fetchData = async () => { 
@@ -73,21 +77,22 @@ function Informations() {
                 adresse: adresseValue,
                 numtel: numtelValue, 
                 mail: mailValue, 
-                nomAsso:nomAssoValue,
+                nomAsso: nomAssoValue,
                 numAsso: numAssoValue,
                 wilayaAsso: wilayaAssoValue,
                 adresseAsso: adresseAssoValue,
-                mot_de_passe: passwordValue
+                mot_de_passe: passwordValue,
+                role: 'Association'
                 }, config)
 
             window.location.reload()
             toast.success('Informations modifiés')
         } catch (error) {
             toast.error(error.response?.data?.message || error.message)
-        }
+        } 
     }
 
-    if(loading) return <h1>Loading...</h1>
+    if(loading) return <Lottie className='w-40 h-10' animationData={animation}/>
 
     return (
         <div className='text-[#203374] bg-white border-[#0DC4C7] pb-16'>
@@ -141,7 +146,7 @@ function Informations() {
                         {modifier ? <select className="select select-bordered border-2 w-36 md:w-fit lg:w-fit border-[#0DC4C7] mt-2"
                             value={wilayaValue} onChange={e => setwilayaValue(e.target.value)} >
                             <option disabled hidden> Wilaya</option>
-                            {wilayas.map(w => {
+                            {wilaya.map(w => {
                                 return <option key={w.id} value={w.name}>{w.code} - {w.name}</option>
                             }) }
                         </select> : <h6 className="lg:tracking-widest lg:font-light">{data.wilaya}</h6>}
@@ -193,18 +198,20 @@ function Informations() {
                         value={numAssoValue} onChange={e => setnumAssoValue(e.target.value)} /> : <h6 className="lg:tracking-widest lg:font-light">{data.numAsso}</h6>} 
                     </div>
                 </div>
-                <div>
-                    <label className="label">
-                        <span className="label-text text-[#203374]"> Wilaya de l'association :</span>
-                    </label>
-                    {modifier ? <select className="select select-bordered border-2 w-36 md:w-fit lg:w-fit border-[#0DC4C7] mt-2"
-                        value={wilayaAssoValue} onChange={e => setwilayaAssoValue(e.target.value)} >
-                            <option disabled hidden> Wilaya</option>
-                            {wilayas.map(w => {
-                                return <option key={w.id} value={w.name}>{w.code} - {w.name}</option>
-                            }) }
-                    </select> : <h6 className="lg:tracking-widest lg:font-light">{data.wilayaAsso}</h6>}
-                </div> 
+                <div className='w-full flex justify-between border-b border-[#0DC4C7] p-5'>
+                    <div className='flex items-center gap-2'>
+                        <label className="label">
+                            <span className="label-text lg:text-lg font-bold text-[#203374]"> Wilaya de l'association : </span>
+                        </label>
+                        {modifier ? <select className="select select-bordered border-2  w-36 md:w-fit lg:w-fit border-[#0DC4C7] "
+                            value={wilayaAssoValue} onChange={e => setwilayaAssoValue(e.target.value)} >
+                                <option disabled hidden> Wilaya</option>
+                                {wilaya.map(w => {
+                                    return <option key={w.id} value={w.name}>{w.code} - {w.name}</option>
+                                }) }
+                        </select> : <h6 className="lg:tracking-widest lg:font-light">{data.wilayaAsso}</h6>}
+                    </div>
+                </div>
                 <div className='w-full flex border-b border-[#0DC4C7] p-5 '> 
                     <div className='flex items-center gap-2'>
                         <label className="label">

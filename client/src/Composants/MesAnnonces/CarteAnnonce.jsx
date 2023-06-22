@@ -11,7 +11,7 @@ function CarteAnnonce({element}) {
   useState(element.numTel) 
   useState(element.detail)
 
-  
+
 
   // Modifications des informations : 
   const [nomMedicamentValue, setnomMedicamentValue] = useState(element.nomMedicament)
@@ -48,7 +48,6 @@ function CarteAnnonce({element}) {
             toast.error(error.response?.data?.message || error.message)
         }
     }
-
     // Supprimer une annonce :
     const onDelete = async () => {
       const confirmation = confirm('Etes vous sur de supprimer cette annonce ?')
@@ -61,14 +60,12 @@ function CarteAnnonce({element}) {
       toast.error(error.response?.data?.message || error.message)   
     }  
   }
-  
-
   return ( 
     
       <div className='px-10 pb-9'>
       
         <div className="card card-side bg-base-100 shadow-xl flex flex-wrap px-2 pb-2 border-4 border-[#0DC4C7]">
-          <figure className=''><img className='w-72 h-64' src={image}/></figure>
+          <figure className=''><img className='w-72 h-64' src={`http://localhost:5000/images/${element.image.toString()}`}/></figure>
           <div className="card-body bg-[#0dc4c74d] rounded-lg text-[#203374] md:mt-2 ">
               <div className='w-full lg:flex border-b border-[#0DC4C7] p-5 '>
                 <div className='lg:flex lg:items-center lg:gap-2'>

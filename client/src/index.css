@@ -9,3 +9,6 @@
 *{
    font-family: 'Recursive', sans-serif; 
 }
+body {
+   overflow-x: hidden;
+}

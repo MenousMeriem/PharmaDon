@@ -43,6 +43,9 @@ const handleOnChange =(e) => {
 
 const handleSubmit = async (e) => {
     e.preventDefault();
+        if(form.mot_de_passe !== form.confirmer_mot_de_passe) {
+            return toast.warn('Vérifier votre mot de passe!')
+        }
         const formData = new FormData()
         formData.append("image", fichierOne[0])
         formData.append("image", fichierTwo[0])

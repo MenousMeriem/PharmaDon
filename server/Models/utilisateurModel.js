@@ -48,9 +48,14 @@ const utilisateurSchema = mongoose.Schema(
         },
         role: {
             type: String,
+            
             required: true,
             enum: Role,
           },
+
+          resetKey: {
+            type: String,
+        }
     },
         { timestamps: true } 
 )

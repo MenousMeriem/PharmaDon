@@ -67,24 +67,24 @@ function Informations() {
 
     // Modification des informations 
     const [modifier, setModifier] = useState(false)
+    const obj = {   
+        nom: nomValue,
+        prenom: prenomValue,
+        date_de_naissance: naissanceValue, 
+        sexe: sexeValue,
+        wilaya: wilayaValue,
+        adresse: adresseValue,
+        numtel: numtelValue, 
+        mail: mailValue, 
+        nomPharmacie: nomPharmacieValue,
+        numPharmacie: numPharmacieValue,
+        wilayaPharmacie: wilayaPharmacieValue,
+        adressePharmacie: adressePharmacieValue, 
+        mot_de_passe: passwordValue}
     const handleUpdate = async () => {
+        if(passwordValue === "") delete obj.mot_de_passe
         try {
-            await axios.put('http://localhost:5000/Utilisateur/ModifierUtilisateur/'+data._id, 
-            {
-                nom: nomValue,
-                prenom: prenomValue,
-                date_de_naissance: naissanceValue, 
-                sexe: sexeValue,
-                wilaya: wilayaValue,
-                adresse: adresseValue,
-                numtel: numtelValue, 
-                mail: mailValue, 
-                nomPharmacie: nomPharmacieValue,
-                numPharmacie: numPharmacieValue,
-                wilayaPharmacie: wilayaPharmacieValue,
-                adressePharmacie: adressePharmacieValue, 
-                mot_de_passe: passwordValue
-            }, config)
+            await axios.put('http://localhost:5000/Utilisateur/ModifierUtilisateur/'+data._id, obj  , config)
             window.location.reload()
             toast.success('Informations modifiés')
         } catch (error) {

@@ -32,16 +32,14 @@ function AjoutAnnonce() {
 
     const [image, setImage] = useState('')
 
-    const ajouterAnnonce = async () => {
+    const ajouterAnnonce = async (e) => {
         e.preventDefault();
         const formData = new FormData()
         formData.append("image", image[0])
-        const {image, ...data} = form
-        Object.entries(data).forEach(([key, value]) => {formData.append(key, value)})
+        Object.entries(input).forEach(([key, value]) => {formData.append(key, value)})
         try {
-            const reponse = await axios.post('http://localhost:5000/Annonce/AjouterAnnonce', input, config)
+            const reponse = await axios.post('http://localhost:5000/Annonce/AjouterAnnonce', formData, config)
             if(reponse.data)  {
-                localStorage.setItem('Utilisateur', JSON.stringify(reponse.data));
                 setInput({
                     nomMedicament: "",
                     adresse: "",
@@ -67,7 +65,7 @@ function AjoutAnnonce() {
                 <input type="text" className="input input-bordered border-[#203374]" placeholder='Adresse 'name='adresse' value={input.adresse} onChange={onChange} required/> 
                 <h3> Catégorie :</h3>
                 <select  className="select select-bordered border-2 border-[#0DC4C7] "name='categorie' value={input.categorie} required onChange={onChange}>
-                    <option disabled hidden> Caétogrie </option>
+                    <option disabled hidden> Catéogrie </option>
                     <option> Demande </option>
                     <option> Don </option>
                 </select> 

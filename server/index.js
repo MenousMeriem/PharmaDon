@@ -15,7 +15,7 @@ index.use(cors({
 
 index.use(express.json())
 index.use(express.urlencoded({extended: false}))
-
+index.use("/images", express.static('images'))
 index.use('/Seconnecter', autehtificationRoute)
 index.use('/Annonce', annonceRoute)
 index.use('/Utilisateur', utilisateurRoute)

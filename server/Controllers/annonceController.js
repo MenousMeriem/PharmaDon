@@ -25,7 +25,8 @@ exports.ajouterAnnonce = expressAsyncHandler (async (req, res) => {
           detail,
           nomMedicament,
           categorie,
-          image: req.files[0].path
+          image: req.files.length ? req.folder
+          +"/"+req.files[0].filename : ""
         })
         res.status(201).json('Annonce ajoutée !!')
     } catch (error) {
@@ -38,11 +39,10 @@ exports.ajouterAnnonce = expressAsyncHandler (async (req, res) => {
 // Modifier une annonce :  
 exports.modifierAnnonce = expressAsyncHandler(async (req, res) => {
   try {
-
     const id = req.user._id
     const idAnnonce = req.params.id
       await annonceModel.findOneAndUpdate({idAuteur: id,_id: idAnnonce}, req.body)
-      res.status(202).json('Annonce modifiée')    
+      res.status(201).json('Annonce modifiée')    
     } catch (error) {
       res.status(400).json({ message: "La modification de l'annonce a échoué.", error: error })
     }
@@ -53,7 +53,6 @@ exports.modifierAnnonce = expressAsyncHandler(async (req, res) => {
 exports.supprimerAnnonce = expressAsyncHandler(async (req, res) => {
   try {
     const idAnnonce = req.params.id
- 
     await annonceModel.findByIdAndDelete(idAnnonce)
     res.status(201).json("Annonce supprimé ")
   } catch (error) {
@@ -68,7 +67,7 @@ exports.afficherAnnonce = expressAsyncHandler(async(req,res) => {
   try {
       const annonce = await annonceModel.find()
       console.log(req.annonce)
-      res.status(202).json(annonce)
+      res.status(201).json(annonce)
   } catch (error) {
       res.status(400)
       console.log(error)
@@ -83,7 +82,7 @@ exports.afficherAnnonceUserCourant = expressAsyncHandler(async(req,res) => {
     console.log(id)
     const annonce = await annonceModel.find({idAuteur: id})  
     console.log(annonce)
-    res.status(202).json(annonce) 
+    res.status(201).json(annonce) 
   } catch (error) {
     res.status(400)
     console.log(error
@@ -94,8 +93,8 @@ exports.afficherAnnonceUserCourant = expressAsyncHandler(async(req,res) => {
 
 // Afficher les annonces des Pharmacies : 
 exports.afficherAnnoncePharmacien = expressAsyncHandler(async(req,res) => {
-  try {    
-     const annonce = await annonceModel.find().populate('idAuteur')
+  try {        
+     const annonce = await annonceModel.find({idAuteur: req.params.id}).populate('idAuteur')
      const filteredResult = annonce.filter(an => an.idAuteur.role === "Pharmacie")
      res.status(202).json(filteredResult)
   } catch (error) {
@@ -106,7 +105,7 @@ exports.afficherAnnoncePharmacien = expressAsyncHandler(async(req,res) => {
 // Afficher les annonces des associations : 
 exports.afficherAnnonceAssociation= expressAsyncHandler(async(req,res) => {
   try {
-     const annonce = await annonceModel.find().populate('idAuteur')
+     const annonce = await annonceModel.find({idAuteur: req.params.id}).populate('idAuteur')
      const filteredResult = annonce.filter(an => an.idAuteur.role === "Association")
      res.status(202).json(filteredResult)
   } catch (error) {
@@ -118,7 +117,7 @@ exports.afficherAnnonceAssociation= expressAsyncHandler(async(req,res) => {
 // Afficher les annonces des patients :
 exports.afficherAnnoncePatient = expressAsyncHandler(async(req,res) => {
   try {
-      const annonce = await annonceModel.find().populate('idAuteur')
+      const annonce = await annonceModel.find({idAuteur: req.params.id}).populate('idAuteur')
      const filteredResult = annonce.filter(an => an.idAuteur.role === "Patient")
      res.status(202).json(filteredResult)
   } catch (error) {

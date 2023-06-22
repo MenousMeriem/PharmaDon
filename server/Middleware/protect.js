@@ -7,7 +7,7 @@ exports.protectUtilisateur = expressAsyncHandler(async (req, res, next) => {
       const authHeader = req.headers["authorization"]
       const token = authHeader && authHeader.split(" ")[1]
       if (!token) {
-        res.status (400)
+        res.status(400)
         throw new Error("No token!")
       }
       const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)

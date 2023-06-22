@@ -34,7 +34,7 @@ function PlusieursPharmacies({fetching, setFetching}) {
         <BarreRecherche/>
         {data.length ? data.map(element => (
             <CartePharmacie key={element._id} fetching={fetching} setFetching={setFetching} element={element} />
-        )) : <h1> y pas </h1> } 
+        )) : <h1 className='text-3xl p-10 text-[#203374]'> y pas </h1> } 
         
     </div>
   )

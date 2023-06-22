@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import wilaya from '../../../../assets/Data/Wilaya_Of_Algeria.json'
+import Lottie from 'lottie-react'
+import animation from '../../../../assets/Annimations/5699-loading-26-paper-plane.json'
+
 
 function Informations() {
     const currentUser = localStorage.getItem('Utilisateur')
@@ -27,7 +30,8 @@ function Informations() {
     const [wilayaValue, setwilayaValue] = useState("")
     const [numtelValue, setnumtelValue] = useState("")
     const [mailValue, setmailValue] = useState("")
-    const [passwordValue, setpasswordValue] = useState('')
+    const [roleValue, setRoleValue] = useState('')
+    const [passwordValue, setpasswordValue] = useState()
     
 
     // Pour afficher l'utiliasteur actuel : 
@@ -70,7 +74,8 @@ function Informations() {
                 adresse: adresseValue, 
                 numtel: numtelValue, 
                 mail: mailValue, 
-                mot_de_passe: passwordValue
+                mot_de_passe: passwordValue,
+                role: roleValue
             }, config)
             window.location.reload()
             toast.success('Informations modifiés ')
@@ -79,7 +84,7 @@ function Informations() {
         }
     } 
     
-    if(loading) return <h1> Loading ... </h1>
+    if(loading) return <Lottie className='w-40 h-10' animationData={animation}/>
     
 return (
     <div className='text-[#203374] bg-white border-[#0DC4C7] pb-16'>

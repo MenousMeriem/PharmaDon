@@ -8,6 +8,8 @@ const {
     afficherAnnonceAssociation,
     afficherAnnoncePatient
 } = require('../Controllers/annonceController')
+const {mkdir} = require('fs/promises')
+const path = require('path')
 
 const annonceRoute = require('express').Router()
 const {protectUtilisateur} = require('../Middleware/protect')
@@ -20,13 +22,13 @@ const telecharger = multer({
           const folderName = `${Date.now()}`
           req.folderName = folderName
           await mkdir(path.join(__dirname, "../images", folderName))
+          req.folder = folderName
           callback(null ,path.join(__dirname, '../images', folderName))
       },
       filename: function (req, file, callback) {
         const extArr = file.mimetype.split('/')
         const extenstion = extArr[extArr.length -1]
           let filename = `${Date.now()}.${extenstion}`;
-          console.log(filename)
           callback(null, filename); 
         } 
   }),
@@ -38,7 +40,7 @@ annonceRoute
     .delete('/SupprimerAnnonce/:id', protectUtilisateur, supprimerAnnonce)    
     .get('/AfficherAnnonce', afficherAnnonce)
     .get('/AfficherAnnonceUserCourant', protectUtilisateur, afficherAnnonceUserCourant)
-    .get('/AfficherAnnoncePharmacien', afficherAnnoncePharmacien)
-    .get('/AfficherAnnonceAssociation', afficherAnnonceAssociation)
-    .get('/AfficherAnnoncePatient', afficherAnnoncePatient)
+    .get('/AfficherAnnoncePharmacien/:id', afficherAnnoncePharmacien)
+    .get('/AfficherAnnonceAssociation/:id', afficherAnnonceAssociation)
+    .get('/AfficherAnnoncePatient/:id', afficherAnnoncePatient)
 module.exports = annonceRoute
