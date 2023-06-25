@@ -288,6 +288,7 @@ exports.supprimerUtilisateur = expressAsyncHandler(async (req, res) => {
 exports.autoSupression = expressAsyncHandler(async (req, res) => {
   try {
         const id = req.user._id
+        
         await utilisateurModel.findByIdAndDelete(id)
         res.status(202).json("Compte supprimé !")
   } catch (error) {
