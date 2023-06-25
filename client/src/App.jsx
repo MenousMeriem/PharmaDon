@@ -4,14 +4,11 @@ import Layout from "./Composants/Layout/Layout"
 import Accueil from "./Pages/PageAccueil/Accueil"
 import Connexion from './Pages/PageConnex/Connexion'
 import Inscription from "./Composants/Inscription/Inscription"
-import ReinitialiserMdp from "./Composants/MotDePasse/reinitialiserMdp"
+import ReinitialiserMdp from "./Composants/MotDePasse/ReinitialiserMdp"
 import Mail from "./Composants/MotDePasse/Mail"
 import InscriptionPharmacien from './Pages/PageInsc/InscriptionPharmacien'
 import InscriptionAssociation from "./Pages/PageInsc/InscriptionAssociation"
 import InscriptionPatient from './Pages/PageInsc/InscriptionPatient'
-import InformationsAssociation from "./Composants/Inscription/Association/InformationsAssociation"
-import InformationsPharmacien from './Composants/Inscription/Pharmacien/InformationsPharmacien'
-import InformationsPatient from "./Composants/Inscription/Patient/InformationsPatient"
 import PageProfilPharmacien from './Pages/PageProfil/PageProfilPharmacien'
 import PageProfilPatient from './Pages/PageProfil/PageProfilPatient'
 import PageProfilAdmin from './Pages/PageProfil/PageProfilAdmin'
@@ -43,14 +40,11 @@ const router = createBrowserRouter (
       <Route path="/AProposdeNous" element={<Propos/>}/>
       <Route path="/Connexion" element={<Connexion/>}/> 
       <Route path="/Inscription" element={<Inscription/>}/>
-      <Route path="/ReinitialierMotdePasse" element={<ReinitialiserMdp/>}/>
+      <Route path="/resetPassword" element={<ReinitialiserMdp/>}/>
       <Route path="/Mail" element={<Mail/>} />
       <Route path="/InscriptionPharmacien" element={<InscriptionPharmacien/>}/>
       <Route path="/InscriptionAssociation" element={<InscriptionAssociation/>}/>
       <Route path="/InscriptionPatient" element={<InscriptionPatient/>}/>
-      <Route path="/InformationsAssociation" element={<InformationsAssociation/>}/>
-      <Route path="/InformationsPharmacien" element={<InformationsPharmacien/>}/> 
-      <Route path="/InformationsPatient" element={<InformationsPatient/>}/>
       <Route path="/PageMesAnnonces" element={<PageMesAnnonces/>}/> 
       <Route path="/PageProfilPharmacien" element={<PageProfilPharmacien/>}/>
       <Route path="/PageProfilAssociation" element={<PageProfilAssociation/>}/>

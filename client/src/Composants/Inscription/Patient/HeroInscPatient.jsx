@@ -1,5 +1,5 @@
 import React from 'react'
-import image from '../../../assets/heropat.png'
+import image from '../../../assets/INSC_CONNEX/heropat.png'
 
 function HeroInscPatient() { 
   return ( 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import image from '../../assets/login.jpg'
+import image from '../../assets/INSC_CONNEX/login.jpg'
 import { Link, useNavigate } from 'react-router-dom'
 import {toast} from 'react-toastify'
 import axios from 'axios'
@@ -52,12 +52,12 @@ function Connexion() {
                     </div>
                     <div className='flex flex-col text-[#203374] py-2'>
                         <label className='text-lg'>Mot de passe </label>
-                        <input type='text' name='mot_de_passe' value={form.mot_de_passe} onChange={onChange} required className='py-2 px-4 placeholder-gray-400 mt-2 text-lg  border-b-2 border-[#203374] ' placeholder='Entrer votre mot de passe' />
+                        <input type='password' name='mot_de_passe' value={form.mot_de_passe} onChange={onChange} required className='py-2 px-4 placeholder-gray-400 mt-2 text-lg  border-b-2 border-[#203374] ' placeholder='Entrer votre mot de passe' />
                     </div> 
                     <div className=' flex justify-center flex-col items-center'>
                         <button type='submit' className="btn mt-10 w-52 text-white bg-[#0DC4C7] border-none hover:bg-indigo-50 hover:text-[#0DC4C7] mb-10">Se connecter</button>
                         <label className='text-[#203374] '> Vous n'avez pas de compte ?</label><Link to={'/Inscription'} className='text-[#203374] font-black underline underline-offset-2 '> S'inscrire </Link>
-                        <Link to={'/ReinitialierMotdePasse'} className='text-[#203374] font-black underline underline-offset-2 '> Mot de passe oublié  </Link>
+                        <Link to={'/Mail'} className='text-[#203374] font-black underline underline-offset-2 '> Mot de passe oublié  </Link>
                         <Link to={'/Accueil'} className='text-[#203374] font-black underline underline-offset-2 '> Accueil </Link>
                     </div>
                 </form>

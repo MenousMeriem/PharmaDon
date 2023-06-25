@@ -55,7 +55,7 @@ function AjoutAnnonce() {
 
   return (
     <div className='pb-10'>        
-        <section className='bg-[#0dc4c734] rounded-2xl mx-auto border-4 lg:w-3/5 w-5/6 border-[#0DC4C7] py-4 lg:px-5 shadow-gray-600 shadow-lg'>   
+        <section className='bg-white rounded-2xl mx-auto border-4 lg:w-4/5 w-5/6 border-[#203374] py-4 lg:px-5 shadow-gray-600 shadow-lg'>   
             <form onSubmit={ajouterAnnonce} className="card-body rounded-lg text-[#203374]">
                 <h3>Nom du médicament : </h3>
                 <input type="text" className="input input-bordered border-[#203374]" placeholder='Nom du médicament ' name='nomMedicament' value={input.nomMedicament} onChange={onChange} required /> 
@@ -64,7 +64,7 @@ function AjoutAnnonce() {
                 <h3> Adresse : </h3>
                 <input type="text" className="input input-bordered border-[#203374]" placeholder='Adresse 'name='adresse' value={input.adresse} onChange={onChange} required/> 
                 <h3> Catégorie :</h3>
-                <select  className="select select-bordered border-2 border-[#0DC4C7] "name='categorie' value={input.categorie} required onChange={onChange}>
+                <select  className="select select-bordered border-2 border-[#203374] "name='categorie' value={input.categorie} required onChange={onChange}>
                     <option disabled hidden> Catéogrie </option>
                     <option> Demande </option>
                     <option> Don </option>

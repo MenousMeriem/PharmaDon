@@ -62,36 +62,38 @@ function CarteAnnonce({element}) {
   }
   return ( 
     
-      <div className='px-10 pb-9'>
-      
-        <div className="card card-side bg-base-100 shadow-xl flex flex-wrap px-2 pb-2 border-4 border-[#0DC4C7]">
-          <figure className=''><img className='w-72 h-64' src={`http://localhost:5000/images/${element.image.toString()}`}/></figure>
-          <div className="card-body bg-[#0dc4c74d] rounded-lg text-[#203374] md:mt-2 ">
-              <div className='w-full lg:flex border-b border-[#0DC4C7] p-5 '>
+      <div className='p-2'>
+        <div className="card card-side bg-base-100 shadow-xl flex flex-wrap border-4 border-[#0DC4C7] p-2">
+          <section className=' mx-auto text-[#203374] py-4 lg:px-5'>
+            <figure className='border-4 rounded-lg w-96 h-80'><img src={`http://localhost:5000/images/${element.image.toString()}`}/></figure>
+          </section>
+          <section className='bg-[#0dc4c72c] rounded-lg mx-auto border-4 text-[#203374]'>   
+            <div className="card-body">
+              <div className='flex border-b border-[#0DC4C7] '>
                 <div className='lg:flex lg:items-center lg:gap-2'>
                   <h6 className=''>Nom du médicament : </h6>
-                  {modifier ? <input type="text" className="input input-bordered border-[#203374] md:w-fit lg:w-fit" 
+                  {modifier ? <input type="text" className="input input-bordered border-[#203374] w-full" 
                   value={nomMedicamentValue} onChange={e => setnomMedicamentValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'> {element.nomMedicament} </h3>} 
                 </div>
               </div>
-              <div className='w-full flex border-b border-[#0DC4C7] p-5 '>
+              <div className='flex border-b border-[#0DC4C7]'>
                 <div className='lg:flex lg:items-center lg:gap-2'>
                     <h6>Numéro de téléphone : </h6>
-                    {modifier ? <input type="tel" className="input input-bordered border-[#203374] md:w-fit lg:w-fit" 
+                    {modifier ? <input type="tel" className="input input-bordered border-[#203374] w-full" 
                     value={numTelValue} onChange={e => setnumTelValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'>{element.numTel} </h3>} 
                 </div>
               </div>
-              <div className='w-full flex border-b border-[#0DC4C7] p-5 '>
+              <div className='flex border-b border-[#0DC4C7]'>
                 <div className='lg:flex lg:items-center lg:gap-2'>
                   <h3> Adresse : </h3>
-                  {modifier ? <input type="text" className="input input-bordered border-[#203374] md:w-fit lg:w-fit" 
+                  {modifier ? <input type="text" className="input input-bordered border-[#203374] w-full" 
                   value={adresseValue} onChange={e => setadresseValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'>{element.adresse} </h3>} 
                 </div>
               </div>
-              <div className='w-full flex border-b border-[#0DC4C7] p-5 '>
+              <div className='flex border-b border-[#0DC4C7]'>
                 <div className='lg:flex lg:items-center lg:gap-2'>
                   <h3> Détail de l'annonce : </h3>
-                  {modifier ? <input type="text" className="input input-bordered border-[#203374] md:w-fit lg:w-fit" 
+                  {modifier ? <input type="text" className="input input-bordered border-[#203374] w-full" 
                   value={detailValue} onChange={e => setdetailValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'> {element.detail} </h3>} 
                 </div>
               </div>
@@ -108,6 +110,7 @@ function CarteAnnonce({element}) {
                 onClick={e=> setSupprimer(true)}> Supprimer </button>}
               </div>
             </div>
+          </section>
         </div>
       </div>
   )

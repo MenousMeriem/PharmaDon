@@ -144,9 +144,9 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
               from: process.env.SMTP_Mail, // sender address
               to: newUtilisateur.mail, // list of receivers
               subject: "En attente de validation de votre compte", // Subject line
-              text: `Cher  ${"le bg"}, nous vous remercions d'avoir soumis votre demande de création de compte sur notre plateforme PharmaDon. 
-              Nous souhaitons vous informer que votre demande est en cours de traitement et qu'elle nécessite une validation de la part 
-              de notre administrateur.`, // plain text body
+              text: `Cher ${nom} ${prenom}, 
+              nous vous remercions d'avoir soumis votre demande de création de compte sur notre plateforme PharmaDon. Nous souhaitons vous informer que votre demande est en cours de traitement et qu'elle nécessite une validation de la part de notre administrateur. 
+              Cordialement.`, // plain text body
              })
 
            return res.status(201).json({
@@ -196,9 +196,9 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
               from: process.env.SMTP_Mail, // sender address
               to: newUtilisateur.mail, // list of receivers
               subject: "En attente de validation de votre compte", // Subject line
-              text: `Cher  ${"le bg"}, nous vous remercions d'avoir soumis votre demande de création de compte sur notre plateforme PharmaDon. 
-              Nous souhaitons vous informer que votre demande est en cours de traitement et qu'elle nécessite une validation de la part 
-              de notre administrateur.`, // plain text body
+              text: `Cher ${nom} ${prenom}, 
+              nous vous remercions d'avoir soumis votre demande de création de compte sur notre plateforme PharmaDon. Nous souhaitons vous informer que votre demande est en cours de traitement et qu'elle nécessite une validation de la part de notre administrateur. 
+              Cordialement.`, // plain text body
              })
 
             return res.status(201).json({

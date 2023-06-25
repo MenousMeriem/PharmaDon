@@ -110,19 +110,40 @@ exports.logout = expressAsyncHandler(async (req, res) => {
   })
 
 
-// Mot de passe oublié : 
-exports.resetPassword = expressAsyncHandler(async (req, res) => {
-    
+    // Mot de passe oublié : 
+    exports.resetPassword = expressAsyncHandler(async (req, res) => {
         const {mail} = req.body
+
         if(!mail) {
             res.status(400).json("mail n'existe pas ! ")
         } 
+
         const userExist = await utilisateurModel.findOne({mail})
+        console.log(userExist)
+        if(userExist==null) throw new Error("L'uilisateur n'éxiste pas")
         
-        if(!userExist) throw new Error("L'uilisateur n'éxiste pas")
-        
-        if(!userExist.resetKey) {
+        if(userExist.resetKey) {   
+            const transporter = nodemailer.createTransport({
+            host: 'smtp.office365.com',
+            port: 587,
+            secure: false,
+            auth: {
+                user: process.env.SMTP_Mail,
+                pass: process.env.SMTP_Pass
+                }
+            });
             
+            // send mail with defined transport object
+            let info = await transporter.sendMail({
+            from: process.env.SMTP_Mail, // sender address
+            to: mail.toString(), // list of receivers
+            subject: "Réinitialisation du mot de passe", // Subject line
+            text: `Mail de réinitialisation de mot de passe, 
+            Cliquer sur le lien suivant: http://localhost:5173/resetPassword?key=${userExist.resetKey}`, // plain text body
+            })
+        }
+
+        if(!userExist.resetKey) {
             const key = crypto.randomBytes(30).toString('hex')
             await utilisateurModel.findOneAndUpdate({mail}, {resetKey: key})
             
@@ -139,40 +160,27 @@ exports.resetPassword = expressAsyncHandler(async (req, res) => {
             // send mail with defined transport object
             let info = await transporter.sendMail({
             from: process.env.SMTP_Mail, // sender address
-            to: {mail}, // list of receivers
+            to: mail.toString(), // list of receivers
             subject: "Réinitialisation du mot de passe", // Subject line
             text: `Mail de réinitialisation de mot de passe, 
             Cliquer sur le lien suivant: http://localhost:5173/resetPassword?key=${key}`, // plain text body
             })
         }
-        if(userExist.resetKey) {
-            
-            const transporter = nodemailer.createTransport({
-            host: 'smtp.office365.com',
-            port: 587,
-            secure: false,
-            auth: {
-                user: process.env.SMTP_Mail,
-                pass: process.env.SMTP_Pass
-                }
-            });
-            
-            // send mail with defined transport object
-            let info = await transporter.sendMail({
-            from: process.env.SMTP_Mail, // sender address
-            to: {mail}, // list of receivers
-            subject: "Réinitialisation du mot de passe", // Subject line
-            text: `Mail de réinitialisation de mot de passe, 
-            Cliquer sur le lien suivant: http://localhost:5173/resetPassword?key=${userExist.resetKey}`, // plain text body
-            })
-        }
+        
         res.status(200).json({success: true, message: "Clé de réinitialisation envoyer avec succés!"})
 
 }) 
 
+exports.verifierCle = expressAsyncHandler(async (req, res) => {
+    const {key} = req.query //get dans route qui n'a pas de body mm delete que post et put 
+    const user = await utilisateurModel.findOne({resetKey: key})
+    if (!user) return res.status(200).json({success: false, mail: null})
+    res.status(200).json({success: true, mail: user.mail})
+})
 
 exports.changePassword = expressAsyncHandler(async (req, res) => {
     const {mdp, mail} = req.body
-    await utilisateurModel.findOneAndUpdate({mail: mail}, {mot_de_passe: mdp})
+    await utilisateurModel.findOneAndUpdate({mail}, {mot_de_passe: await bcrypt.hash(mdp, 10)})
     res.status(200).json("Mot de passe modifié avec succes ! ")
 })
+

@@ -88,7 +88,7 @@ function Informations() {
     
 return (
     <div className='text-[#203374] bg-white border-[#0DC4C7] pb-16'>
-        <section className='bg-[#0dc4c734] rounded-2xl mx-auto border-4 lg:w-3/5 w-5/6 border-[#0DC4C7] py-4 lg:px-5  shadow-gray-600 shadow-lg '>
+        <section className='bg-white rounded-2xl mx-auto border-4 lg:w-4/5 w-5/6 border-[#203374] py-4 lg:px-5  shadow-gray-600 shadow-lg '>
             
             <div className='w-full flex border-b border-[#0DC4C7] p-5 '>
                 <div className='flex items-center gap-2'>
