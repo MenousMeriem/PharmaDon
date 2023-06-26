@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const categorie = Object.freeze(["Demande","Don"])
+const raison = Object.freeze(["raison1", "raison2", "raison3"])
 
 const annonceSchema = mongoose.Schema(
     {   
@@ -32,9 +33,11 @@ const annonceSchema = mongoose.Schema(
         image: {
             type:String,
         },
-        signalement: {
-            type: Number,
-        }
+        signalement: [{
+            type: String,
+            enum: raison  
+        }]
+        
     }, 
     {timestamps: true}
 )

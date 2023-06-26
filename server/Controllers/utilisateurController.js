@@ -4,6 +4,7 @@ const expressAsyncHandler = require("express-async-handler")
 const jwt = require('jsonwebtoken')
 const path = require('path')
 const nodemailer = require('nodemailer')
+const annonceModel = require("../Models/annonceModel")
 
 //create gen access token
 const genAccessToken = ({_id,role}) => {
@@ -15,13 +16,14 @@ return jwt.sign({_id, role}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "10000
 exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
   try {
     if(req.body.role=='Admin'){
-        const {nom, prenom, sexe, date_de_naissance, adresse, numtel, mail, mot_de_passe, role} = req.body
+        const {nom, prenom, sexe, date_de_naissance, wilaya, adresse, numtel, mail, mot_de_passe, role} = req.body
         if(
           !nom ||
           !prenom ||
           !sexe ||
           !date_de_naissance||
           !adresse ||
+          !wilaya ||
           !numtel|| 
           !mail ||
           !mot_de_passe
@@ -32,7 +34,7 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
           throw new Error('Utilisateur existe')
         }
         const newUtilisateur = await utilisateurModel.create({
-          nom, prenom, sexe, date_de_naissance, adresse, numtel, mail, role,
+          nom, prenom, sexe, date_de_naissance, wilaya, adresse, numtel, mail, role,
           mot_de_passe: await bcrypt.hash(mot_de_passe, 10),
         })
            return res.status(201).json({
@@ -214,17 +216,6 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
 })
 
 
-// Afficher tous les utilisateurs
-exports.afficherTsUtilisateurs = expressAsyncHandler(async (req, res) => {
-  try {
-    const user = await utilisateurModel.find()
-     res.status(202).json(user)
-  } catch (error) {
-    res.status(400)
-  }
-  
-})
-
 //Afficher l'utilisateur actuel
 exports.afficherUtilisateur = expressAsyncHandler(async (req,res) => {
   try {
@@ -272,11 +263,39 @@ exports.modifierUtilisateur = expressAsyncHandler(async (req, res) => {
   }
 })
 
-// Supprimer un utilisateur : 
+
+// l'utilisateur supprime son compte :
+exports.autoSupression = expressAsyncHandler(async (req, res) => {
+  try {
+        const id = req.user._id
+        // DESACTIVER LE COMPTE  
+        await utilisateurModel.findByIdAndDelete(id)
+        res.status(202).json("Compte supprimé !")
+    } catch (error) {
+        res.status(400)
+        throw new Error(error)
+  }
+})
+
+
+// Affichage des utilisateurs pour l'admin :
+exports.afficherTsUtilisateurs = expressAsyncHandler(async (req, res) => {
+  try {
+    const user = await utilisateurModel.find({role:{$ne:'Admin'}})
+     res.status(202).json(user)
+  } catch (error) {
+    res.status(400)
+  }
+})
+
+
+// Suppression d'un utilisateur par l'admin : 
 exports.supprimerUtilisateur = expressAsyncHandler(async (req, res) => {
   try {
         const { id } = req.params
-            await utilisateurModel.findByIdAndDelete(id)
+          // supprime toutes les annonces de cet utilisateur
+           await utilisateurModel.findByIdAndDelete(id)
+           await annonceModel.deleteMany({idAuteur: id})
             res.status(202).json("Utilisateur supprimé !! ")
     } catch (error) {
             res.status(400)
@@ -284,15 +303,3 @@ exports.supprimerUtilisateur = expressAsyncHandler(async (req, res) => {
   }
 })
 
-// l'utilisateur supprime son compte :
-exports.autoSupression = expressAsyncHandler(async (req, res) => {
-  try {
-        const id = req.user._id
-        
-        await utilisateurModel.findByIdAndDelete(id)
-        res.status(202).json("Compte supprimé !")
-  } catch (error) {
-        res.status(400)
-        throw new Error(error)
-  }
-})

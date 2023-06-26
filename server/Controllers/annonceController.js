@@ -49,7 +49,7 @@ exports.modifierAnnonce = expressAsyncHandler(async (req, res) => {
 })
 
 
-// Supprimer une annonce :
+// Supprimer sa propre annonce :
 exports.supprimerAnnonce = expressAsyncHandler(async (req, res) => {
   try {
     const idAnnonce = req.params.id
@@ -61,8 +61,17 @@ exports.supprimerAnnonce = expressAsyncHandler(async (req, res) => {
   }
 })
 
+// Supprimer une annonce par l'admin : 
 
-// Afficher toutes les annonces : 
+
+
+
+
+
+
+
+
+// Afficher toutes les annonces : //Admin 
 exports.afficherAnnonce = expressAsyncHandler(async(req,res) => {
   try {
       const annonce = await annonceModel.find()
@@ -85,8 +94,7 @@ exports.afficherAnnonceUserCourant = expressAsyncHandler(async(req,res) => {
     res.status(201).json(annonce) 
   } catch (error) {
     res.status(400)
-    console.log(error
-      )
+    console.log(error)
   }
 })
 
@@ -98,7 +106,8 @@ exports.afficherAnnoncePharmacien = expressAsyncHandler(async(req,res) => {
      const filteredResult = annonce.filter(an => an.idAuteur.role === "Pharmacie")
      res.status(202).json(filteredResult)
   } catch (error) {
-    
+    res.status(400)
+
   }
 })
 
@@ -109,7 +118,7 @@ exports.afficherAnnonceAssociation= expressAsyncHandler(async(req,res) => {
      const filteredResult = annonce.filter(an => an.idAuteur.role === "Association")
      res.status(202).json(filteredResult)
   } catch (error) {
-    
+      res.status(400)
   }
 })
 
@@ -118,9 +127,20 @@ exports.afficherAnnonceAssociation= expressAsyncHandler(async(req,res) => {
 exports.afficherAnnoncePatient = expressAsyncHandler(async(req,res) => {
   try {
       const annonce = await annonceModel.find({idAuteur: req.params.id}).populate('idAuteur')
-     const filteredResult = annonce.filter(an => an.idAuteur.role === "Patient")
-     res.status(202).json(filteredResult)
+      const filteredResult = annonce.filter(an => an.idAuteur.role === "Patient")
+      res.status(202).json(filteredResult)
   } catch (error) {
-    
+      res.status(400)
+  }
+})
+
+
+// Signalement 
+exports.signalerAnnonce = expressAsyncHandler(async(req, res) => {
+  try {
+    const {id, raison} = req.body
+    await annonceModel.findByIdAndUpdate(id,{$push: {signalement: raison}} )
+  } catch (error) {
+    res.status(400)
   }
 })

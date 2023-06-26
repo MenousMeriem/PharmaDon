@@ -6,8 +6,10 @@ const {
     afficherAnnonceUserCourant,
     afficherAnnoncePharmacien,
     afficherAnnonceAssociation,
-    afficherAnnoncePatient
+    afficherAnnoncePatient,
+    signalerAnnonce
 } = require('../Controllers/annonceController')
+
 const {mkdir} = require('fs/promises')
 const path = require('path')
 
@@ -43,4 +45,5 @@ annonceRoute
     .get('/AfficherAnnoncePharmacien/:id', afficherAnnoncePharmacien)
     .get('/AfficherAnnonceAssociation/:id', afficherAnnonceAssociation)
     .get('/AfficherAnnoncePatient/:id', afficherAnnoncePatient)
+    .put('/Signalement', protectUtilisateur, signalerAnnonce)
 module.exports = annonceRoute

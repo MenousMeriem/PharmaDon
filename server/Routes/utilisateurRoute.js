@@ -1,4 +1,9 @@
-const {
+  const path = require('node:path')
+  const {mkdir} = require('fs/promises')
+  const utilisateurRoute = require("express").Router() 
+  const multer = require('multer')
+  
+ const {
     ajouterUtilisateur,
     afficherTsUtilisateurs,
     afficherUtilisateur,
@@ -8,17 +13,12 @@ const {
     supprimerUtilisateur,
     autoSupression,
   } = require("../Controllers/utilisateurController")
-  const path = require('node:path')
-  const {mkdir} = require('fs/promises')
 
   const {   
-      protectUtilisateur, 
+      protectUtilisateur,
+      protectAdmin 
         } = require("../Middleware/protect")
   
-  const utilisateurRoute = require("express").Router()
-  
-  const multer = require('multer')
-
   const telecharger = multer({
     storage: multer.diskStorage({
         destination: async function(req, file, callback) {
@@ -40,12 +40,12 @@ const {
 
   utilisateurRoute
     .post("/AjouterUtilisateur", telecharger.array("image"), ajouterUtilisateur)
-    .get("/AfficherTsUtilisateurs", afficherTsUtilisateurs)
+    .get("/AfficherTsUtilisateurs", protectAdmin, afficherTsUtilisateurs)
     .get('/AfficherUtilisateur/:id', protectUtilisateur, afficherUtilisateur)
     .get('/AfficherPharmacie', afficherPharmacie)
     .get('/AfficherAssociation', afficherAssociation)
     .put("/ModifierUtilisateur/:id", protectUtilisateur, modifierUtilisateur)
-    .delete("/SupprimerUtilisateur/:id", supprimerUtilisateur)
+    .delete("/SupprimerUtilisateur/:id",protectAdmin, supprimerUtilisateur)
     .delete("/AutoSuppression", autoSupression)
   
   module.exports = utilisateurRoute
