@@ -101,14 +101,11 @@ exports.afficherAnnonceUserCourant = expressAsyncHandler(async(req,res) => {
 
 // Afficher les annonces des Pharmacies : 
 exports.afficherAnnoncePharmacien = expressAsyncHandler(async(req,res) => {
-  try {        
+   
      const annonce = await annonceModel.find({idAuteur: req.params.id}).populate('idAuteur')
      const filteredResult = annonce.filter(an => an.idAuteur.role === "Pharmacie")
      res.status(202).json(filteredResult)
-  } catch (error) {
-    res.status(400)
 
-  }
 })
 
 // Afficher les annonces des associations : 
@@ -138,8 +135,10 @@ exports.afficherAnnoncePatient = expressAsyncHandler(async(req,res) => {
 // Signalement 
 exports.signalerAnnonce = expressAsyncHandler(async(req, res) => {
   try {
-    const {id, raison} = req.body
+    const {id} = req.params
+    const { raison} = req.body
     await annonceModel.findByIdAndUpdate(id,{$push: {signalement: raison}} )
+    res.status(200).json(`Annonce [${id}] signaler avec succes`)
   } catch (error) {
     res.status(400)
   }

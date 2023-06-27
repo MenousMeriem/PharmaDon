@@ -38,7 +38,7 @@ function Informations() {
     //Pour afficher l'utilisateur actuel
     const fetchData = async () => {
       try {
-        const reponse = await axios.get('http://localhost:5000/Utilisateur/afficherUtilisateur/'+currentUser._id, config)
+        const reponse = await axios.get('http://localhost:5000/Utilisateur/afficherUtilisateur', config)
         if(reponse.data) {
             setData(reponse.data)
             setnomValue(reponse.data.nom)

@@ -39,14 +39,14 @@
   }) 
 
   utilisateurRoute
-    .post("/AjouterUtilisateur", telecharger.array("image"), ajouterUtilisateur)
     .get("/AfficherTsUtilisateurs", protectAdmin, afficherTsUtilisateurs)
-    .get('/AfficherUtilisateur/:id', protectUtilisateur, afficherUtilisateur)
+    .delete("/SupprimerUtilisateur/:id",protectAdmin, supprimerUtilisateur)
+    .post("/AjouterUtilisateur", telecharger.array("image"), ajouterUtilisateur)
+    .get('/AfficherUtilisateur', protectUtilisateur, afficherUtilisateur)
+    .put("/ModifierUtilisateur/:id", protectUtilisateur, modifierUtilisateur)
+    .delete("/AutoSuppression", protectUtilisateur, autoSupression)
     .get('/AfficherPharmacie', afficherPharmacie)
     .get('/AfficherAssociation', afficherAssociation)
-    .put("/ModifierUtilisateur/:id", protectUtilisateur, modifierUtilisateur)
-    .delete("/SupprimerUtilisateur/:id",protectAdmin, supprimerUtilisateur)
-    .delete("/AutoSuppression", autoSupression)
   
   module.exports = utilisateurRoute
 

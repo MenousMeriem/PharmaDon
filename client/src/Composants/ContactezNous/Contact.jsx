@@ -4,7 +4,7 @@ import animation from '../../assets/Annimations/5699-loading-26-paper-plane.json
 
 function Contact() {
   return (
-    <div>
+    <div className='mb-10'>
         <div className="hero min-h-fit bg-[#219dbc42] ">
             <div className="hero-content flex-col lg:flex-row-reverse text-[#203374] lg:p-10">
                 <div className="lg:text-left lg:w-1/2">

@@ -17,9 +17,6 @@ function Informations() {
     //Loading state
     const [loading, setLoading] = useState(true)
     
-    const [data, setData] = useState()
-    const [modifier, setModifier] = useState(false)
-    
     const [nomValue, setnomValue] = useState('')
     const [prenomValue, setprenomValue] = useState('')
     const [sexeValue, setsexeValue] = useState('')
@@ -64,7 +61,10 @@ function Informations() {
     useEffect( () => {
         fetchData()
       }, [])
- 
+      
+    // Modifier les informations d'un utilisateur :
+    const [data, setData] = useState()
+    const [modifier, setModifier] = useState(false)
     const handleUpdate = async () => {
         try {
             await axios.put('http://localhost:5000/Utilisateur/ModifierUtilisateur/'+data._id, 
