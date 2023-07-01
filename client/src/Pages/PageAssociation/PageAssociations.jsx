@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import BarreRecherche from '../../Composants/BarreRecherche'
 import HeroAssociation from '../../Composants/Associations/HeroAssociation'
-import {toast} from 'react-toastify'
-import axios from 'axios'
 import CarteAssociation from '../../Composants/Associations/CarteAssociation'
 import animation from '../../assets/Annimations/102003-medicine.json'
+import {toast} from 'react-toastify'
+import axios from 'axios'
 import Lottie from 'lottie-react'
 
 function PageAssociations({fetching, setFetching}) {

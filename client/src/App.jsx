@@ -2,10 +2,9 @@ import { ToastContainer } from "react-toastify"
 import 'react-toastify/ReactToastify.css'
 import Layout from "./Composants/Layout/Layout"
 import Accueil from "./Pages/PageAccueil/Accueil"
+import NosServices from "./Pages/PageServices/NosServices"
+import Propos from "./Pages/PagePropos/Propos"
 import Connexion from './Pages/PageConnex/Connexion'
-import Inscription from "./Composants/Inscription/Inscription"
-import ReinitialiserMdp from "./Composants/MotDePasse/ReinitialiserMdp"
-import Mail from "./Composants/MotDePasse/Mail"
 import InscriptionPharmacien from './Pages/PageInsc/InscriptionPharmacien'
 import InscriptionAssociation from "./Pages/PageInsc/InscriptionAssociation"
 import InscriptionPatient from './Pages/PageInsc/InscriptionPatient'
@@ -13,13 +12,15 @@ import PageProfilPharmacien from './Pages/PageProfil/PageProfilPharmacien'
 import PageProfilPatient from './Pages/PageProfil/PageProfilPatient'
 import PageProfilAdmin from './Pages/PageProfil/PageProfilAdmin'
 import PageProfilAssociation from './Pages/PageProfil/PageProfilAssociation'
+import Inscription from "./Composants/Inscription/Inscription"
+import ReinitialiserMdp from "./Composants/MotDePasse/ReinitialiserMdp"
+import Mail from "./Composants/MotDePasse/Mail"
 import PageMesAnnonces from './Pages/PageMesAnnonces/PageMesAnnonces'
 import PagePharmacies from "./Pages/PagePharmacies/PagePharmacies"
 import PageUnePharmacie from './Pages/PagePharmacies/PageUnePharmacie'
 import PageAssociations from './Pages/PageAssociation/PageAssociations'
 import PageUneAssociation from "./Pages/PageAssociation/PageUneAssociation"
-import NosServices from "./Pages/PageServices/NosServices"
-import Propos from "./Pages/PagePropos/Propos"
+import Medicaments from "./Pages/PageMedicament/Medicaments"
 import NotFound from "./Pages/NotFound"
  
 import { 
@@ -54,6 +55,7 @@ const router = createBrowserRouter (
       <Route path="/PageUnePharmacie/:id" element={<PageUnePharmacie/>}/>
       <Route path="/PageAssociations" element={<PageAssociations/>}/>
       <Route path="/PageUneAssociation/:id" element={<PageUneAssociation/>}/>
+      <Route path="/Medicaments" element={<Medicaments/>}/>
       <Route path="/*" element={<NotFound/>}/>
     </Route>
   )

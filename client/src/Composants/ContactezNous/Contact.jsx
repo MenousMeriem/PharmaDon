@@ -1,6 +1,4 @@
 import React from 'react'
-import Lottie from 'lottie-react'
-import animation from '../../assets/Annimations/5699-loading-26-paper-plane.json'
 
 function Contact() {
   return (

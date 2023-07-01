@@ -6,7 +6,16 @@ import { toast } from 'react-toastify'
 import axios from "axios"
 
 function InformationsAssociation() {
-  const [form, setForm] = useState({
+    
+    // Si l'utilsateur est déja connecté 
+    const navigate = useNavigate()
+    const utilisateur = localStorage.getItem('Utilisateur') || null 
+    useEffect(() => {
+        if (utilisateur) navigate('/Accueil');
+    }, []);
+
+
+    const [form, setForm] = useState({
     nom:"", 
     prenom:"", 
     sexe:"Homme", 
@@ -27,59 +36,52 @@ function InformationsAssociation() {
     const [fichierOne, setFichierOne] = useState('')
     const [fichierTwo, setFichierTwo] = useState('')
 
-    const utilisateur = localStorage.getItem('Utilisateur') || null 
-    useEffect(() => {
-        if (utilisateur) navigate('/Accueil');
-    }, []);
-
-const navigate = useNavigate()
-
-const handleOnChange =(e) => {
-    setForm((previousState) => ({
-        ...previousState,
-        [e.target.name]: e.target.value,
-    }));
-}
-
-const handleSubmit = async (e) => {
-    e.preventDefault();
-        if(form.mot_de_passe !== form.confirmer_mot_de_passe) {
-            return toast.warn('Vérifier votre mot de passe!')
-        }
-        const formData = new FormData()
-        formData.append("image", fichierOne[0])
-        formData.append("image", fichierTwo[0])
-        const {fichiero, fichiert, ...data} = form
-        Object.entries(data).forEach(([key, value]) => {formData.append(key, value)})
-    try {
-        const reponse = await axios.post('http://localhost:5000/Utilisateur/AjouterUtilisateur', formData)
-        if(reponse.data)  {
-            localStorage.setItem('Utilisateur', JSON.stringify(reponse.data));
-            setForm({ 
-                nom:"", 
-                prenom:"", 
-                sexe:"Homme", 
-                date_de_naissance:"",
-                wilaya:"",
-                adresse:"",
-                mail:"",
-                numtel:"",
-                nomAsso:"",
-                numAsso:"",
-                wilayaAsso:"",
-                adresseAsso:"",
-                role:"Association",
-                mot_de_passe:"",
-                confirmer_mot_de_passe:""
-            })
-            toast.success('Compte créer avec succès ')
-            navigate('/PageProfilAssociation')
-        }
-    } catch (error) {
-        console.log(error)
-        toast.error(error.response?.data?.message || error.message);
+    const handleOnChange =(e) => {
+        setForm((previousState) => ({
+            ...previousState,
+            [e.target.name]: e.target.value,
+        }));
     }
-}
+    // la fonction d'inscription : 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+            if(form.mot_de_passe !== form.confirmer_mot_de_passe) {
+                return toast.warn('Vérifier votre mot de passe!')
+            }
+            const formData = new FormData()
+            formData.append("image", fichierOne[0])
+            formData.append("image", fichierTwo[0])
+            const {fichiero, fichiert, ...data} = form
+            Object.entries(data).forEach(([key, value]) => {formData.append(key, value)})
+        try {
+            const reponse = await axios.post('http://localhost:5000/Utilisateur/AjouterUtilisateur', formData)
+            if(reponse.data)  {
+                localStorage.setItem('Utilisateur', JSON.stringify(reponse.data));
+                setForm({ 
+                    nom:"", 
+                    prenom:"", 
+                    sexe:"Homme", 
+                    date_de_naissance:"",
+                    wilaya:"",
+                    adresse:"",
+                    mail:"",
+                    numtel:"",
+                    nomAsso:"",
+                    numAsso:"",
+                    wilayaAsso:"",
+                    adresseAsso:"",
+                    role:"Association",
+                    mot_de_passe:"",
+                    confirmer_mot_de_passe:""
+                })
+                toast.success('Compte créer avec succès ')
+                navigate('/PageProfilAssociation')
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error(error.response?.data?.message || error.message);
+        }
+    }
 
   return (
     <div className='lg:py-5 sm:p-5 flex justify-center'>

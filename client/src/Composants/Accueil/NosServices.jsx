@@ -37,7 +37,9 @@ function NosServices() {
                     <h2 className="text-lg md:text-xl font-bold"> </h2>
                     <p className='text-sm md:text-xl'>Trouver vos médicaments</p>
                     <div className="card-actions justify-end"></div>
-                    <button className="btn text-sm md:text-lg border-none bg-[#203374] hover:bg-[#ab3428] text-white">Afficher plus</button>
+                    <Link to={'/Medicaments'}>
+                        <button className="btn text-sm md:text-lg border-none bg-[#203374] hover:bg-[#ab3428] text-white">Afficher plus</button>
+                    </Link>
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import image from '../../../assets/heroAss.png'
+import image from '../../../assets/INSC_CONNEX/heroAss.png'
 
 function HeroInscAssociation() {
   return (

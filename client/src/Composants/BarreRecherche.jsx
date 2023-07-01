@@ -9,7 +9,7 @@ function BarreRecherche() {
         <div className='w-full h-full bg-[#0DC4C7] py-8 px-10 rounded-xl '>
             <div className='lg:flex lg:items-center lg:justify-evenly gap-2'>
                 {/* <GiMedicinePills className='hidden lg:block w-14 h-10 text-white'/> */}
-                <input type="text" placeholder="Ex: nom du médicament" className="input flex-1 input-bordered border-2 border-[#0DC4C7] w-full my-2"/>
+                <input type="text" placeholder="Ex: nom du médicament" className="input flex-1 input-bordered border-2 border-[#0DC4C7] max-w-sm my-2"/>
                 <select defaultValue="" className="select select-bordered border-2 max-w-sm border-[#0DC4C7] sm:w-full my-2 ">
                   <option value=""> Tous </option>
                   <option value=""> Pharmacie </option>

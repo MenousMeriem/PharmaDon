@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import img from '../../assets/logo.png'
+import img from '../../assets/Footer/logo.png'
 
 function PieddePage() {
   return (

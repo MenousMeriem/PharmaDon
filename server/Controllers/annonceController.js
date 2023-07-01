@@ -75,7 +75,7 @@ exports.supprimerAnnonce = expressAsyncHandler(async (req, res) => {
 exports.afficherAnnonce = expressAsyncHandler(async(req,res) => {
   try {
       const annonce = await annonceModel.find()
-      console.log(req.annonce)
+      // console.log(req.annonce)
       res.status(201).json(annonce)
   } catch (error) {
       res.status(400)

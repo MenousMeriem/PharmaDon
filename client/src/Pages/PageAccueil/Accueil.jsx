@@ -8,6 +8,7 @@ import Contact from '../../Composants/ContactezNous/Contact'
 import {BsFillChatDotsFill} from "react-icons/bs"
 import { Link } from 'react-router-dom'
 import Divider from '../../Composants/Accueil/Divider'
+import AvisAutres from '../../Composants/Accueil/AvisAutres'
 
 
 function Accueil() {
@@ -20,6 +21,7 @@ function Accueil() {
       <Divider/>
       <NosServices/>
       <DevenirClient/>
+      <AvisAutres/>
       <Contact/>
     </div>
   )

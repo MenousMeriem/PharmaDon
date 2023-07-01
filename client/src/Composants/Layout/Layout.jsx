@@ -6,9 +6,11 @@ import PieddePage from '../Footer/PieddePage'
 function Layout() {
     
   const location = useLocation() 
+
     if (location.pathname==='/Connexion' || 
-        location.pathname==='/ReinitialierMotdePasse' || 
-        location.pathname==='/Mail'){ 
+        location.pathname==='/resetPassword' || 
+        location.pathname==='/Mail' ||
+        location.pathname==='/*'){ 
         return (
             <div>
                 <main className=''>

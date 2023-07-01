@@ -13,9 +13,9 @@ const transporter = nodemailer.createTransport({
     
     // send mail with defined transport object
     let info = await transporter.sendMail({
-    from: process.env.SMTP_Mail, // sender address
-    to: mail.toString(), // list of receivers
-    subject: "Réclamation", // Subject line
-    text: ``, // plain text body
+    from: mail.toString(), // sender address
+    to: process.env.SMTP_Mail, // list of receivers
+    subject:"Réclamation", // Subject line
+    text:``, // plain text body
     })
 

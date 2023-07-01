@@ -8,6 +8,7 @@ function Connexion() {
 
     const utilisateur = localStorage.getItem('utilisateur')
     const navigate = useNavigate('/Accueil')
+    
     useEffect(() => {
         if(utilisateur) navigate('/Accueil')
     }, [])
@@ -39,9 +40,9 @@ function Connexion() {
     }
   return (
     <div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full max-w-full'>
-            <div className='hidden sm:block'>
-                <img className='w-full h-full object-cover' src={image}  />
+        <div className='grid lg:grid-cols-2 h-screen w-full max-w-full'>
+            <div className='hidden lg:block'>
+                <img className='w-fit h-full object-cover' src={image}  />
             </div>
             <div className="flex flex-col justify-center">
                 <h1 className='text-5xl mb-10 text-[#203374] font-bold text-center'>Bienvenue sur PharmaDon </h1>
