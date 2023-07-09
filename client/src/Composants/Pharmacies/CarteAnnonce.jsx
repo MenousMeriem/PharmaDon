@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
 import image from '../../assets/Pharmacies/medicament.jpg'
-import axios from 'axios'
-import { toast } from 'react-toastify'
+
 
 function CarteAnnonce({element}) { 
 
@@ -20,6 +18,7 @@ function CarteAnnonce({element}) {
   //     toast.error(error.response?.data?.message || message.error)
   //   }
   // }
+  console.log(element)
 
   return (
     <div className='p-10 '>
@@ -32,13 +31,13 @@ function CarteAnnonce({element}) {
             
             <figure><img className='w-60' src={image}/></figure>
             <div className="card-body m-5">
-                <h2 className="text-sm"> Nom du médicament : {element.nomMedicament} </h2> 
+                <h2 className="text-sm"> Nom du médicament : {element.idMedicament[0].nomMedicament} </h2> 
                 <h2 className="text-sm"> Numéro de télephone : {element.numTel} </h2> 
                 <h2 className="text-sm"> Adresse de récupération : {element.adresse} </h2> 
                 <h2 className="text-sm"> Détail : {element.detail} </h2> 
                 <h2 className="text-sm"> Type : {element.categorie} </h2> 
                 <div className="card-actions justify-end">
-                  <button className="border-b-2 border-black"> Signaler l'annonce</button>
+                  <button className="border-b-2 border-black"> Signaler l'annonce </button>
                 </div>
             </div>
         </div>

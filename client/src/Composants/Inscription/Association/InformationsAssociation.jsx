@@ -14,7 +14,6 @@ function InformationsAssociation() {
         if (utilisateur) navigate('/Accueil');
     }, []);
 
-
     const [form, setForm] = useState({
     nom:"", 
     prenom:"", 
@@ -36,20 +35,14 @@ function InformationsAssociation() {
     const [fichierOne, setFichierOne] = useState('')
     const [fichierTwo, setFichierTwo] = useState('')
 
-    const handleOnChange =(e) => {
-        setForm((previousState) => ({
-            ...previousState,
-            [e.target.name]: e.target.value,
-        }));
-    }
     // la fonction d'inscription : 
     const handleSubmit = async (e) => {
         e.preventDefault();
-            if(form.mot_de_passe !== form.confirmer_mot_de_passe) {
-                return toast.warn('Vérifier votre mot de passe!')
-            }
-            const formData = new FormData()
-            formData.append("image", fichierOne[0])
+        if(form.mot_de_passe !== form.confirmer_mot_de_passe) {
+            return toast.warn('Vérifier votre mot de passe!')
+        }
+        const formData = new FormData()
+        formData.append("image", fichierOne[0])
             formData.append("image", fichierTwo[0])
             const {fichiero, fichiert, ...data} = form
             Object.entries(data).forEach(([key, value]) => {formData.append(key, value)})
@@ -82,9 +75,16 @@ function InformationsAssociation() {
             toast.error(error.response?.data?.message || error.message);
         }
     }
-
-  return (
-    <div className='lg:py-5 sm:p-5 flex justify-center'>
+    
+    const handleOnChange =(e) => {
+        setForm((previousState) => ({
+            ...previousState,
+            [e.target.name]: e.target.value,
+        }));
+    }
+    
+    return (
+        <div className='lg:py-5 sm:p-5 flex justify-center'>
         <div className='text-[#203374] bg-white border-2 rounded-lg border-[#0DC4C7] w-screen p-5 px-10 sm:mx-auto'>
             <form onSubmit={handleSubmit} encType='multipart/form-data'>
                 <div className='sm:grid sm:grid-cols-2 gap-2'>

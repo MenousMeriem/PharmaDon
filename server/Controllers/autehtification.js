@@ -29,7 +29,7 @@ exports.seConnecter = expressAsyncHandler(async (req, res) => {
                 res.status(400)
                 throw new Error("Mail n'éxiste pas")
         }
-        console.log(utilisateurExiste)
+    
         const matchPassword = await bcrypt.compare(
             mot_de_passe,
             utilisateurExiste[0].mot_de_passe,
@@ -38,7 +38,9 @@ exports.seConnecter = expressAsyncHandler(async (req, res) => {
                 res.status(400)
                 throw new Error('Mot de passe incorrect')
             }
-
+            if(!utilisateurExiste[0].isActive) {
+                res.status(200).json({isActive: false,_id:utilisateurExiste[0]._id})
+            }
         const accessToken = genererToken({
             _id: utilisateurExiste[0]._id,
             role: utilisateurExiste[0].role,
@@ -65,6 +67,21 @@ exports.seConnecter = expressAsyncHandler(async (req, res) => {
     }
 })
 
+//Reactiver un compte
+exports.reactiverController = expressAsyncHandler(async (req,res) => {
+    const {id} = req.params
+    const user = await utilisateurModel.findByIdAndUpdate(id,{isActive: true})
+    const accessToken = genererToken({_id: user._id, role: user.role})
+    const refreshToken = jwt.sign(
+        { 
+        _id: user._id, 
+        role: user.role
+        },
+        process.env.REFRESH_TOKEN_SECRET
+    )
+        await refreshTokenModel.create({ utilisateurId: user._id, refreshToken})
+    res.status(200).json({accessToken, refreshToken})
+})
 //Refresh access token
 // exports.refreshAccess = expressAsyncHandler(async (req, res) => {
 //     try {

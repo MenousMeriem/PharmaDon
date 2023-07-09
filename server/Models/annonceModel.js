@@ -9,10 +9,11 @@ const annonceSchema = mongoose.Schema(
             type: mongoose.SchemaTypes.ObjectId,
             ref: "Utilisateur",
         }, 
-        nomMedicament: {
-            type: String, 
+        idMedicament:[{
+            type: mongoose.SchemaTypes.ObjectId, 
             required: true,     
-        },
+            ref: "Medicaments"
+        }],
         detail: {
             type: String, 
             required: true,

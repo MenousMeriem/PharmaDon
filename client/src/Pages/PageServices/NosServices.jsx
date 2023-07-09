@@ -10,7 +10,7 @@ function NosServices() {
         <HeroServices/>
         <Services/>
         <Processus/>
-        <AvisAutres/>
+        {/* <AvisAutres/> */}
     </div>
   )
 }

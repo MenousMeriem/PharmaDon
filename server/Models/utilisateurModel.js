@@ -54,6 +54,10 @@ const utilisateurSchema = mongoose.Schema(
 
         resetKey: {
             type: String,
+        }, 
+        isActive: {
+            type: Boolean,
+            default: false,
         }
         
 
@@ -87,10 +91,6 @@ const pharmacienSchema = mongoose.Schema(
             type:String,
             required: true,
         },
-        isActive: {
-            type: Boolean,
-            default: false,
-        }
     }
 )
 
@@ -124,10 +124,7 @@ const associationSchema = mongoose.Schema(
             required: true,
         }
         ], 
-        isActive: {
-            type: Boolean,
-            default: false,
-        }
+
     }
 )
 

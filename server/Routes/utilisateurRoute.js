@@ -43,7 +43,7 @@
     .delete("/SupprimerUtilisateur/:id",protectAdmin, supprimerUtilisateur)
     .post("/AjouterUtilisateur", telecharger.array("image"), ajouterUtilisateur)
     .get('/AfficherUtilisateur', protectUtilisateur, afficherUtilisateur)
-    .put("/ModifierUtilisateur/:id", protectUtilisateur, modifierUtilisateur)
+    .put("/ModifierUtilisateur", protectUtilisateur, modifierUtilisateur)
     .delete("/AutoSuppression", protectUtilisateur, autoSupression)
     .get('/AfficherPharmacie', afficherPharmacie)
     .get('/AfficherAssociation', afficherAssociation)

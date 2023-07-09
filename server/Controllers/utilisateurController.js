@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt")
 const expressAsyncHandler = require("express-async-handler")
 const jwt = require('jsonwebtoken')
 const path = require('path')
+const {Types} = require('mongoose')
 const nodemailer = require('nodemailer')
 const annonceModel = require("../Models/annonceModel")
 
@@ -255,7 +256,9 @@ exports.afficherAssociation = expressAsyncHandler(async (req, res) => {
 exports.modifierUtilisateur = expressAsyncHandler(async (req, res) => {
   try {
       const id = req.user._id
-      await utilisateurModel.findByIdAndUpdate(id, req.body)
+      const role = req.user.role
+      const _id = new Types.ObjectId(id)
+      await utilisateurModel.findOneAndUpdate({_id, role}, req.body)
       res.status(200).json("Utilisateur modifié !!")
   } catch (error) {
       res.status(400)
@@ -264,13 +267,12 @@ exports.modifierUtilisateur = expressAsyncHandler(async (req, res) => {
 })
 
 
-// l'utilisateur supprime son compte :
+// l'utilisateur désactive son compte :
 exports.autoSupression = expressAsyncHandler(async (req, res) => {
   try {
         const id = req.user._id
-        // DESACTIVER LE COMPTE  
-        await utilisateurModel.findByIdAndDelete(id)
-        res.status(202).json("Compte supprimé !")
+        await utilisateurModel.findOneAndUpdate(id, {isActive: false})
+        res.status(202).json("Compte désactivé !")
     } catch (error) {
         res.status(400)
         throw new Error(error)

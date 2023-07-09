@@ -24,7 +24,6 @@ function PlusieursPharmacies({fetching, setFetching}) {
     useEffect(()=>{
         fetchData() 
     }, [])
-    console.log(data)
 
     if(loading) return ( <Lottie animationData={animation} /> )
   return (

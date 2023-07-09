@@ -4,8 +4,8 @@ const ErrorHandler = require('./Middleware/errorHandler')
 const autehtificationRoute = require('./Routes/authenRoute')
 const annonceRoute = require('./Routes/annonceRoute')
 const utilisateurRoute = require('./Routes/utilisateurRoute')
+const {envoyerReclamation} = require('./Controllers/messagerieController')
 const cors = require('cors')
-
 require('dotenv').config()
 
 const index = express()
@@ -19,7 +19,7 @@ index.use("/images", express.static('images'))
 index.use('/Seconnecter', autehtificationRoute)
 index.use('/Annonce', annonceRoute)
 index.use('/Utilisateur', utilisateurRoute)
-
+index.use("/Messagerie",envoyerReclamation )
 
 index.use('/*', (req,res) => {
     res.status(404).json(' NOT FOUND !!!! ')

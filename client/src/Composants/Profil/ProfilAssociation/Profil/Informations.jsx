@@ -1,4 +1,4 @@
-import React ,{useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import wilaya from '../../../../assets/Data/Wilaya_Of_Algeria.json'
 import Lottie from 'lottie-react'
 import animation from '../../../../assets/Annimations/5699-loading-26-paper-plane.json'
@@ -30,12 +30,12 @@ function Informations() {
     const [adresseAssoValue, setadresseAssoValue] = useState('')
     const [numAssoValue, setnumAssoValue] = useState()
     const [passwordValue, setpasswordValue] = useState('')
-    const [roleValue, setRoleValue] = useState('Association')
                 
     //Pour afficher l'utilisateur actuel
+    const [data, setData] = useState()
     const fetchData = async () => { 
       try {
-        const reponse = await axios.get('http://localhost:5000/Utilisateur/afficherUtilisateur/'+currentUser._id, config)
+        const reponse = await axios.get('http://localhost:5000/Utilisateur/afficherUtilisateur/', config)
         if(reponse.data) {
             setData(reponse.data)
             setnomValue(reponse.data.nom)
@@ -57,36 +57,35 @@ function Informations() {
         setLoading(false)
       }
     }
+    const [modifier, setModifier] = useState(false)
 
     useEffect( () => {
         fetchData()
-      }, [])
+      }, [modifier])
       
     // Modifier les informations d'un utilisateur :
-    const [data, setData] = useState()
-    const [modifier, setModifier] = useState(false)
+    const {role} = JSON.parse(localStorage.getItem('Utilisateur'))
+    const obj = {   
+        nom: nomValue,
+        prenom: prenomValue,
+        date_de_naissance: naissanceValue, 
+        sexe: sexeValue,
+        wilaya: wilayaValue,
+        adresse: adresseValue,
+        numtel: numtelValue, 
+        mail: mailValue, 
+        nomAsso: nomAssoValue,
+        numAsso: numAssoValue,
+        wilayaAsso: wilayaAssoValue,
+        adresseAsso: adresseAssoValue, 
+        mot_de_passe: passwordValue,
+        role: role
+    }
     const handleUpdate = async () => {
         try {
-            await axios.put('http://localhost:5000/Utilisateur/ModifierUtilisateur/'+data._id, 
-            {
-                nom: nomValue,
-                prenom: prenomValue,
-                date_de_naissance: naissanceValue, 
-                sexe: sexeValue,
-                wilaya: wilayaValue,
-                adresse: adresseValue,
-                numtel: numtelValue, 
-                mail: mailValue, 
-                nomAsso: nomAssoValue,
-                numAsso: numAssoValue,
-                wilayaAsso: wilayaAssoValue,
-                adresseAsso: adresseAssoValue,
-                mot_de_passe: passwordValue,
-                role: 'Association'
-                }, config)
-
-            window.location.reload()
+            await axios.put('http://localhost:5000/Utilisateur/ModifierUtilisateur/', obj, config)
             toast.success('Informations modifiés')
+            setModifier(false)
         } catch (error) {
             toast.error(error.response?.data?.message || error.message)
         } 
@@ -183,7 +182,7 @@ function Informations() {
                 <div className='w-full flex border-b border-[#0DC4C7] p-5 '> 
                     <div className='flex items-center gap-2'>
                         <label className="label">
-                            <span className="label-text text-lg font-bold text-[#203374]">Nom de l'association </span>
+                            <span className="label-text text-lg font-bold text-[#203374]">Nom de l association </span>
                         </label>
                         {modifier ? <input type="text" className="input input-bordered  w-36 md:w-fit lg:w-fit border-[#203374]"  
                         value={nomAssoValue} onChange={e => setnomAssoValue(e.target.value)} /> : <h6 className="lg:tracking-widest lg:font-light">{data.nomAsso}</h6>} 
@@ -192,7 +191,7 @@ function Informations() {
                 <div className='w-full flex border-b border-[#0DC4C7] p-5 '> 
                     <div className='flex items-center gap-2'>
                         <label className="label">
-                            <span className="label-text text-lg font-bold text-[#203374]">Numéro de téléphone de l'association</span>
+                            <span className="label-text text-lg font-bold text-[#203374]">Numéro de téléphone de l association</span>
                         </label>
                         {modifier ? <input type="tel" className="input input-bordered  w-36 md:w-fit lg:w-fit border-[#203374]"  
                         value={numAssoValue} onChange={e => setnumAssoValue(e.target.value)} /> : <h6 className="lg:tracking-widest lg:font-light">{data.numAsso}</h6>} 
@@ -201,7 +200,7 @@ function Informations() {
                 <div className='w-full flex justify-between border-b border-[#0DC4C7] p-5'>
                     <div className='flex items-center gap-2'>
                         <label className="label">
-                            <span className="label-text lg:text-lg font-bold text-[#203374]"> Wilaya de l'association : </span>
+                            <span className="label-text lg:text-lg font-bold text-[#203374]"> Wilaya de l association : </span>
                         </label>
                         {modifier ? <select className="select select-bordered border-2  w-36 md:w-fit lg:w-fit border-[#0DC4C7] "
                             value={wilayaAssoValue} onChange={e => setwilayaAssoValue(e.target.value)} >
@@ -215,7 +214,7 @@ function Informations() {
                 <div className='w-full flex border-b border-[#0DC4C7] p-5 '> 
                     <div className='flex items-center gap-2'>
                         <label className="label">
-                            <span className="label-text text-lg font-bold text-[#203374]"> Adresse de l'association :</span>
+                            <span className="label-text text-lg font-bold text-[#203374]"> Adresse de l association :</span>
                         </label>
                         {modifier ? <input type="text" className="input input-bordered  w-36 md:w-fit lg:w-fit border-[#203374]"
                         value={adresseAssoValue} onChange={e => setadresseAssoValue(e.target.value)} /> : <h6 className="lg:tracking-widest lg:font-light">{data.adresseAsso}</h6>}
@@ -235,9 +234,9 @@ function Informations() {
                 <div className='grid grid-cols-2 justify-center justify-items-center'>
                     {modifier ? <button className="btn bg-[#0DC4C7]  border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-lg sm:w-40" 
                     onClick={handleUpdate}> Confirmer </button> : <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-lg sm:w-40"
-                    onClick={e=> setModifier(true)}> Modifier </button>}
+                    onClick={()=> setModifier(true)}> Modifier </button>}
                     <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-lg sm:w-40" 
-                    onClick={e => setModifier(false)}>Annuler</button> 
+                    onClick={() => setModifier(false)}>Annuler</button> 
                 </div>
         </section>
     </div>

@@ -1,6 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 
 function Contact() {
+    const [loading, setLoading] = useState(false)
+    const [form, setForm] = useState({
+        mail: "", 
+        text: "",
+        nom: ""
+    })
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            setLoading(true)
+            await axios.post('http://localhost:5000/Messagerie/envoyerReclamation',form)
+            setForm({
+                mail:"",
+                text:"",
+                nom:""
+            })
+            toast.success('Message de réclamation envoyé avec succes ')
+        } catch (error) {
+            toast.error(error.message)
+        } finally {setLoading(false)}
+    }
+    const handleOnChange =(e) => {
+        setForm((previousState) => ({
+            ...previousState,
+            [e.target.name]: e.target.value,
+        }));
+    }
+
   return (
     <div className='mb-10'>
         <div className="hero min-h-fit bg-[#219dbc42] ">
@@ -12,27 +42,29 @@ function Contact() {
                 </div>
                 <div className="card flex-shrink-0 shadow-2xl bg-base-100 lg:w-1/2">
                     <div className="card-body">
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Email</span>
-                            </label>
-                            <input type="text" placeholder="Votre email" className="input input-bordered" />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Nom d'utilisateur </span>
-                            </label>
-                            <input type="text" placeholder="Nom d'utilisateur" className="input input-bordered" />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Votre message </span>
-                            </label>
-                            <textarea type="text" placeholder="Message ..." className="textarea textarea-bordered textarea-lg " />
-                        </div>
-                        <div className="form-control mt-6">
-                            <button className="btn text-sm md:text-sm border-none bg-[#203374] hover:bg-[#219EBC] text-white float-right">Envoyer</button>
-                        </div>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Email</span>
+                                </label>
+                                <input type="email" name='mail' value={form.mail} onChange={handleOnChange} required placeholder="Votre email" className="input input-bordered" />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Nom d'utilisateur </span>
+                                </label>
+                                <input type="text" name='nom' value={form.nom} onChange={handleOnChange} required placeholder="Nom d'utilisateur" className="input input-bordered" />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Votre message </span>
+                                </label>
+                                <textarea type="text" name='text' value={form.text} onChange={handleOnChange} required placeholder="Message ..." className="textarea textarea-bordered textarea-lg " />
+                            </div>
+                            <div className="form-control mt-6">
+                                <button type='submit' disabled={loading} className="btn text-sm md:text-sm border-none bg-[#203374] hover:bg-[#219EBC] text-white float-right">Envoyer</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

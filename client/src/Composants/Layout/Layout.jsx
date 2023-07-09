@@ -10,7 +10,8 @@ function Layout() {
     if (location.pathname==='/Connexion' || 
         location.pathname==='/resetPassword' || 
         location.pathname==='/Mail' ||
-        location.pathname==='/*'){ 
+        location.pathname==='/*' ||
+        location.pathname==='/Reactivation'){ 
         return (
             <div>
                 <main className=''>

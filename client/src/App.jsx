@@ -1,5 +1,6 @@
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/ReactToastify.css'
+import React from "react"
 import Layout from "./Composants/Layout/Layout"
 import Accueil from "./Pages/PageAccueil/Accueil"
 import NosServices from "./Pages/PageServices/NosServices"
@@ -15,6 +16,7 @@ import PageProfilAssociation from './Pages/PageProfil/PageProfilAssociation'
 import Inscription from "./Composants/Inscription/Inscription"
 import ReinitialiserMdp from "./Composants/MotDePasse/ReinitialiserMdp"
 import Mail from "./Composants/MotDePasse/Mail"
+import Reactivation from "./Pages/PageConnex/Reactivation"
 import PageMesAnnonces from './Pages/PageMesAnnonces/PageMesAnnonces'
 import PagePharmacies from "./Pages/PagePharmacies/PagePharmacies"
 import PageUnePharmacie from './Pages/PagePharmacies/PageUnePharmacie'
@@ -42,6 +44,7 @@ const router = createBrowserRouter (
       <Route path="/Connexion" element={<Connexion/>}/> 
       <Route path="/Inscription" element={<Inscription/>}/>
       <Route path="/resetPassword" element={<ReinitialiserMdp/>}/>
+      <Route path="/Reactivation" element={<Reactivation/>}/>
       <Route path="/Mail" element={<Mail/>} />
       <Route path="/InscriptionPharmacien" element={<InscriptionPharmacien/>}/>
       <Route path="/InscriptionAssociation" element={<InscriptionAssociation/>}/>
@@ -65,10 +68,10 @@ const router = createBrowserRouter (
 function App() {
 
   return (
-    <>
+    <React.Fragment>
       <RouterProvider router={router}/>
       <ToastContainer/> 
-    </>
+    </React.Fragment>
   )
 }
 

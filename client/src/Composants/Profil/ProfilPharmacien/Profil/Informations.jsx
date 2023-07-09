@@ -1,4 +1,4 @@
-import React ,{useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import { toast } from 'react-toastify'
 import axios from "axios"
 import wilayas from '../../../../assets/Data/Wilaya_Of_Algeria.json'
@@ -19,7 +19,6 @@ function Informations() {
     }
     
     const [data, setData] = useState()
-    
     const [nomValue, setnomValue] = useState("")
     const [prenomValue, setprenomValue] = useState('')
     const [sexeValue, setsexeValue] = useState("")
@@ -33,8 +32,7 @@ function Informations() {
     const [wilayaPharmacieValue, setwilayaPharmacieValue] = useState('')
     const [adressePharmacieValue, setadressePharmacieValue] = useState('')
     const [passwordValue, setpasswordValue] = useState('')
-
-
+ 
     //Pour afficher l'utilisateur actuel
     const fetchData = async () => {
       try {
@@ -44,7 +42,7 @@ function Informations() {
             setnomValue(reponse.data.nom)
             setprenomValue(reponse.data.prenom)
             setsexeValue(reponse.data.sexe)
-            setnaissanceValue(reponse.data.naissance)
+            setnaissanceValue(reponse.data.date_de_naissance)
             setwilayaValue(reponse.data.wilaya)
             setadresseValue(reponse.data.adresse)
             setnumtelValue(reponse.data.numtel)
@@ -67,6 +65,7 @@ function Informations() {
 
     // Modification des informations 
     const [modifier, setModifier] = useState(false)
+    const {role} = JSON.parse(localStorage.getItem('Utilisateur'))
     const obj = {   
         nom: nomValue,
         prenom: prenomValue,
@@ -80,13 +79,15 @@ function Informations() {
         numPharmacie: numPharmacieValue,
         wilayaPharmacie: wilayaPharmacieValue,
         adressePharmacie: adressePharmacieValue, 
-        mot_de_passe: passwordValue}
+        mot_de_passe: passwordValue,
+        role: role
+    }
 
-        const handleUpdate = async () => {
+    const handleUpdate = async (e) => {
+        e.preventDefault()
         if(passwordValue === "") delete obj.mot_de_passe
         try {
-            await axios.put('http://localhost:5000/Utilisateur/ModifierUtilisateur/'+data._id, obj  , config)
-            window.location.reload()
+            await axios.put('http://localhost:5000/Utilisateur/ModifierUtilisateur', obj, config)
             toast.success('Informations modifiés')
         } catch (error) {
             toast.error(error.response?.data?.message || error.message)
@@ -237,9 +238,9 @@ function Informations() {
             <div className='grid grid-cols-2 justify-center justify-items-center'>
                 {modifier ? <button className="btn bg-[#0DC4C7]  border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-lg sm:w-40" 
                 onClick={handleUpdate}> Confirmer </button> : <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-lg sm:w-40"
-                onClick={e=> setModifier(true)}> Modifier </button>}
+                onClick={()=> setModifier(true)}> Modifier </button>}
                 <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-lg sm:w-40" 
-                onClick={e => setModifier(false)}>Annuler</button> 
+                onClick={() => setModifier(false)}>Annuler</button> 
             </div>
         </section>
     </div>

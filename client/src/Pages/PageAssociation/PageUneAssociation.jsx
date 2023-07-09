@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import CarteAnnonce from '../../Composants/Associations/CarteAnnonce'
 import Breadcrumbs from '../../Composants/Associations/Breadcrumbs'
 import Divider from '../../Composants/Pharmacies/Divider'

@@ -1,20 +1,19 @@
-import React, {useState} from 'react'
-import image from '../../assets/NosServices/medic.png'
+import { useState } from 'react'
 import axios from 'axios'
 import {toast} from 'react-toastify'
 
 function CarteAnnonce({element}) {
 
-  // Affichage des informations : 
-  useState(element.nomMedicament)
-  useState(element.adresse) 
-  useState(element.numTel) 
-  useState(element.detail)
+  // // Affichage des informations : 
+  // useState(element.nomMedicament)
+  // useState(element.adresse) 
+  // useState(element.numTel) 
+  // useState(element.detail)
 
 
 
   // Modifications des informations : 
-  const [nomMedicamentValue, setnomMedicamentValue] = useState(element.nomMedicament)
+  const [nomMedicamentValue, setnomMedicamentValue] = useState(element.idMedicament[0].nomMedicament)
   const [adresseValue, setadresseValue] = useState(element.adresse)
   const [numTelValue, setnumTelValue] = useState(element.numTel)
   const [detailValue, setdetailValue] = useState(element.detail)
@@ -36,13 +35,14 @@ function CarteAnnonce({element}) {
         await axios.put('http://localhost:5000/Annonce/ModifierAnnonce/'+element._id, 
         {
             nomMedicament: nomMedicamentValue,
+            idMedicament: element.idMedicament[0]._id,
             adresse: adresseValue,
             numTel: numTelValue, 
             detail: detailValue,
             // wilaya: wilayaValue,
         }, config)
-            window.location.reload()
             toast.success('Informations modifiés')
+            setModifier(false)
         } catch (error) {
             console.log(error)
             toast.error(error.response?.data?.message || error.message)
@@ -63,9 +63,9 @@ function CarteAnnonce({element}) {
   return ( 
     
       <div className='p-2'>
-        <div className="card card-side bg-base-100 shadow-xl flex flex-wrap border-4 border-[#0DC4C7] p-2">
-          <section className=' mx-auto text-[#203374] py-4 lg:px-5'>
-            <figure className='border-4 rounded-lg w-96 h-80'><img src={`http://localhost:5000/images/${element.image.toString()}`}/></figure>
+        <div className="card card-side lg:max-w-fit lg:flex lg:justify-center bg-base-100 shadow-xl flex flex-wrap justify-between border-4 border-[#0DC4C7] p-2">
+          <section className='mx-auto text-[#203374] py-4 lg:px-5'>
+            <figure className='border-4 rounded-lg w-auto h-80'><img src={`http://localhost:5000/images/${element.image.toString()}`}/></figure>
           </section>
           <section className='bg-[#0dc4c72c] rounded-lg mx-auto border-4 text-[#203374]'>   
             <div className="card-body">
@@ -73,7 +73,7 @@ function CarteAnnonce({element}) {
                 <div className='lg:flex lg:items-center lg:gap-2'>
                   <h6 className=''>Nom du médicament : </h6>
                   {modifier ? <input type="text" className="input input-bordered border-[#203374] w-full" 
-                  value={nomMedicamentValue} onChange={e => setnomMedicamentValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'> {element.nomMedicament} </h3>} 
+                  value={nomMedicamentValue} onChange={e => setnomMedicamentValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'> {nomMedicamentValue} </h3>} 
                 </div>
               </div>
               <div className='flex border-b border-[#0DC4C7]'>
@@ -100,14 +100,14 @@ function CarteAnnonce({element}) {
               <div className="card-actions justify-center">
                 {modifier ? <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:text-lg sm:w-40" 
                 onClick={handleUpdate}> Confirmer </button> : <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:text-lg sm:w-40"
-                onClick={e=> setModifier(true)}> Modifier </button>}
+                onClick={()=> setModifier(true)}> Modifier </button>}
                 
                 {/* <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:text-lg sm:w-40"
                 onClick={e => setModifier(false)}>Annuler</button>  */}
                 
                 {supprimer ? <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:text-lg sm:w-40 " 
                 onClick={onDelete}> Confirmer </button> : <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:text-lg sm:w-40"
-                onClick={e=> setSupprimer(true)}> Supprimer </button>}
+                onClick={()=> setSupprimer(true)}> Supprimer </button>}
               </div>
             </div>
           </section>

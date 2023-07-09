@@ -29,6 +29,7 @@ function Connexion() {
         e.preventDefault();
         try {
             const reponse = await axios.post('http://localhost:5000/Seconnecter/seConnecter', form)
+            if(reponse.data && reponse.data.isActive == false) {return navigate('/Reactivation?id='+reponse.data._id)}
             if(reponse.data) {
                 localStorage.setItem('Utilisateur', JSON.stringify(reponse.data))
                 navigate('/Accueil')
