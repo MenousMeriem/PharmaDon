@@ -18,7 +18,7 @@ const annonceSchema = mongoose.Schema(
             type: String, 
             required: true,
         },
-        adresse: {
+        wilaya: {
             type: String, 
             required: true, 
         },
@@ -31,9 +31,9 @@ const annonceSchema = mongoose.Schema(
             required: true,
             enum: categorie,
         },
-        image: {
-            type:String,
-        },
+        // image: {
+        //     type:String,
+        // },
         signalement: [{
             type: String,
             enum: raison  

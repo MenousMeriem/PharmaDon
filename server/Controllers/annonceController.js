@@ -7,10 +7,10 @@ const medicamentModel = require('../Models/medicamentModel')
 exports.ajouterAnnonce = expressAsyncHandler (async (req, res) => {
     try {
         const { 
-          numTel, adresse, detail,nomMedicament, categorie} = req.body
+          numTel, wilaya, detail,nomMedicament, categorie} = req.body
       if (
         !numTel ||
-        !adresse ||
+        !wilaya ||
         !detail || 
         !categorie ||
         !nomMedicament
@@ -18,16 +18,16 @@ exports.ajouterAnnonce = expressAsyncHandler (async (req, res) => {
         res.status(400)
         throw new Error("Remplissez vos champs SVP")
       }
-      const med = await medicamentModel.create({nomMedicament, proprietaire: req.user._id})
+      const med = await medicamentModel.create({nomMedicament, proprietaire: req.user._id, image: req.files.length ? req.folder +"/"+req.files[0].filename : ""})
         await annonceModel.create({
           idAuteur: req.user._id,
           numTel,
-          adresse,
+          wilaya,
           detail,
           idMedicament: med._id,
           categorie,
-          image: req.files.length ? req.folder
-          +"/"+req.files[0].filename : ""
+          // image: req.files.length ? req.folder
+          // +"/"+req.files[0].filename : ""
         })
         res.status(201).json('Annonce ajoutée !!')
     } catch (error) {
@@ -85,15 +85,16 @@ exports.afficherAnnonce = expressAsyncHandler(async(req,res) => {
       let page = req.query.page
       const recherche = req.query.search
       if(recherche === '' || recherche === undefined){ 
-      const skip = (parseInt(page) -1) * 1
+      const skip = (parseInt(page) -1) * 6
       const documentCount = await medicamentModel.countDocuments()
-      const pages = Math.ceil(documentCount / 1)
-      const annonce = await medicamentModel.find().skip(skip).limit(1).populate('proprietaire')
+      const pages = Math.ceil(documentCount / 6)
+      const annonce = await medicamentModel.find().skip(skip).limit(6).populate('proprietaire')
+      console.log(annonce)
       res.status(201).json({pages,annonce})
     } else {
-      const skip = (parseInt(page) -1) * 1
+      const skip = (parseInt(page) -1) * 6
       const documentCount = await medicamentModel.find({nomMedicament: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).countDocuments()
-      const pages = Math.ceil(documentCount / 1)
+      const pages = Math.ceil(documentCount / 6)
       const annonce = await medicamentModel.find({nomMedicament: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).skip(skip).limit(1).populate('proprietaire')
       res.status(201).json({pages,annonce})
     }

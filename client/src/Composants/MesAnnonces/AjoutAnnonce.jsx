@@ -1,7 +1,8 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import {useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import wilaya from '../../assets/Data/Wilaya_Of_Algeria.json'
 
 function AjoutAnnonce({refetch, setRefetch}) {
     const currentUser = localStorage.getItem('Utilisateur')
@@ -16,7 +17,7 @@ function AjoutAnnonce({refetch, setRefetch}) {
 
     const [input, setInput] = useState ({
         nomMedicament: "",
-        adresse: "",
+        wilaya: "",
         numTel: "", 
         categorie:"",
         detail: "",
@@ -37,14 +38,13 @@ function AjoutAnnonce({refetch, setRefetch}) {
         const formData = new FormData()
         
         formData.append("image", image[0])
-        // const {image, ...data} = form
         Object.entries(input).forEach(([key, value]) => {formData.append(key, value)})
         try {
             const reponse = await axios.post('http://localhost:5000/Annonce/AjouterAnnonce', formData, config)
             if(reponse.data)  {
                 setInput({
                     nomMedicament: "",
-                    adresse: "",
+                    wilaya: "",
                     numTel: "", 
                     categorie:"",
                     detail: "",})
@@ -67,14 +67,19 @@ function AjoutAnnonce({refetch, setRefetch}) {
                 <h3>Numéro de téléphone : </h3>
                 <input type="tel" className="input input-bordered border-[#203374]" placeholder='Numéro de téléphone ' name='numTel' value={input.numTel} onChange={onChange} required/> 
                 
-                <h3> Adresse : </h3>
-                <input type="text" className="input input-bordered border-[#203374]" placeholder='Adresse 'name='adresse' value={input.adresse} onChange={onChange} required/> 
-                
+                <h3> Adresse : </h3> 
+                <select  name='wilaya' value={input.wilaya} onChange={onChange} required className="select select-bordered border-2 border-[#0DC4C7] w-full max-w-lg mt-2 ">
+                    <option disabled hidden> Votre wilaya </option>
+                    {wilaya.map(w => {
+                        return <option key={w.id} value={w.name}>{w.code} - {w.name}</option>
+                    }) }
+                </select> 
+
                 <h3> Catégorie :</h3>
                 <select  className="select select-bordered border-2 border-[#203374]"  name='categorie' value={input.categorie} required onChange={onChange}>
                     <option disabled hidden value={""}> Categorie </option>
-                    <option> Demande </option>
-                    <option> Don </option>
+                    <option value={"Demande"}> Demande </option>
+                    <option value={"Don"}> Don </option>
                 </select> 
                 
                 <h3> Détail de l'annonce : </h3>
@@ -87,11 +92,11 @@ function AjoutAnnonce({refetch, setRefetch}) {
                         Ajouter une annonce 
                     </button>  
                     <div className='flex justify-center'>
-                    <label htmlFor='ci' >
-                        <span className="label-text  text-white btn bg-[#0DC4C7] border-none hover:bg-white hover:text-[#0DC4C7] hover:border-none w-full max-w-lg "> Ajouter photo(s)</span>
-                    </label>
-                    <input type="file" id='ci' name='image' onChange={e => setImage(e.target.files)} className="input hidden input-bordered border-[#203374] w-full max-w-lg mt-2" />
-                </div>   
+                        <label htmlFor='ci' >
+                            <span className="label-text  text-white btn bg-[#0DC4C7] border-none hover:bg-white hover:text-[#0DC4C7] hover:border-none w-full max-w-lg "> Ajouter photo(s)</span>
+                        </label>
+                        <input type="file" id='ci' name='image' onChange={e => setImage(e.target.files)} className="input hidden input-bordered border-[#203374] w-full max-w-lg mt-2" />
+                    </div>   
                 </div>      
             </form>
         </section>

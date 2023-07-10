@@ -10,6 +10,9 @@ const medicamenSchema = new Schema({
         required: true,
         ref: "Utilisateur"
     },
+    image: {
+        type:String,
+    },
 })
 
 module.exports = model("Medicaments",medicamenSchema)

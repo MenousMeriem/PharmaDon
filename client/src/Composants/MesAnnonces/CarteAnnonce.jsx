@@ -1,20 +1,13 @@
 import { useState } from 'react'
 import axios from 'axios'
 import {toast} from 'react-toastify'
+import  defualtImage from "../../assets/Pharmacies/image1.jpg"
 
 function CarteAnnonce({element}) {
 
-  // // Affichage des informations : 
-  // useState(element.nomMedicament)
-  // useState(element.adresse) 
-  // useState(element.numTel) 
-  // useState(element.detail)
-
-
-
   // Modifications des informations : 
   const [nomMedicamentValue, setnomMedicamentValue] = useState(element.idMedicament[0].nomMedicament)
-  const [adresseValue, setadresseValue] = useState(element.adresse)
+  const [adresseValue, setadresseValue] = useState(element.wilaya)
   const [numTelValue, setnumTelValue] = useState(element.numTel)
   const [detailValue, setdetailValue] = useState(element.detail)
     // const [wilayaValue, setwilayaValue] = useState('')
@@ -62,10 +55,10 @@ function CarteAnnonce({element}) {
   }
   return ( 
     
-      <div className='p-2'>
+      <div className='p-2 flex justify-center'>
         <div className="card card-side lg:max-w-fit lg:flex lg:justify-center bg-base-100 shadow-xl flex flex-wrap justify-between border-4 border-[#0DC4C7] p-2">
           <section className='mx-auto text-[#203374] py-4 lg:px-5'>
-            <figure className='border-4 rounded-lg w-auto h-80'><img src={`http://localhost:5000/images/${element.image.toString()}`}/></figure>
+            <figure className='border-4 rounded-lg w-full h-full'><img className='object-center object-cover' src={element.image ? `http://localhost:5000/images/${element.image.toString()}`: defualtImage}/></figure>
           </section>
           <section className='bg-[#0dc4c72c] rounded-lg mx-auto border-4 text-[#203374]'>   
             <div className="card-body">
@@ -87,7 +80,7 @@ function CarteAnnonce({element}) {
                 <div className='lg:flex lg:items-center lg:gap-2'>
                   <h3> Adresse : </h3>
                   {modifier ? <input type="text" className="input input-bordered border-[#203374] w-full" 
-                  value={adresseValue} onChange={e => setadresseValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'>{element.adresse} </h3>} 
+                  value={adresseValue} onChange={e => setadresseValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'>{element.wilaya} </h3>} 
                 </div>
               </div>
               <div className='flex border-b border-[#0DC4C7]'>
