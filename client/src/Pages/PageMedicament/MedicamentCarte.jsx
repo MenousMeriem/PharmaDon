@@ -1,14 +1,13 @@
 import React from 'react'
 
 function MedicamentCarte({element}) {
-console.log(element)
   return (
     <div className='p-10 '>
         <div className="card card-compact bg-base-100 shadow-xl w-80 lg:w-96 lg:h-full text-[#203374]">
             {element.categorie ==='Demande' ? (
-            <span className="indicator-item badge badge-primary w-full h-10 bg-[#203374] rounded-md">Demande</span> 
+              <span className="indicator-item badge badge-primary w-full h-10 bg-[#203374] rounded-md">Demande</span> 
             ):( 
-            <span className="indicator-item badge badge-primary w-full h-10 bg-[#e3582a] border-none rounded-md">Don</span> 
+              <span className="indicator-item badge badge-primary w-full h-10 bg-[#e3582a] border-none rounded-md">Don</span> 
             )}
             <figure><img src={`http://localhost:5000/images/${element.image}`}/></figure>
             <div className="card-body m-5">

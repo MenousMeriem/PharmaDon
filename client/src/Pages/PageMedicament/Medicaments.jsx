@@ -13,10 +13,10 @@ function Medicaments({fetching, setFetching}) {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(0)
     const [search, setSearch] = useState("")
+
     const fetchData = async() => {
         try {
             const reponse = await axios.get(`http://localhost:5000/Annonce/AfficherAnnonce?page=${currentPage}`)
-        
             setData(reponse.data)
             setTotalPages(reponse.data.pages)
         } catch (error) {
@@ -26,10 +26,9 @@ function Medicaments({fetching, setFetching}) {
             setLoading(false)
         }
     }
-    const  searchData = async() => {
+    const searchData = async() => {
         try {
             const reponse = await axios.get(`http://localhost:5000/Annonce/AfficherAnnonce?page=${currentPage}&search=${search}`)
-            
             setData(reponse.data)
             setTotalPages(reponse.data.pages)
 
@@ -43,14 +42,17 @@ function Medicaments({fetching, setFetching}) {
     useEffect(()=>{
         fetchData() 
     }, [currentPage])
+
     if(loading) return ( <Lottie animationData={animation} /> )
+    
     const pages = []
+
     const handleOnPageChange = (e) => {
         setCurrentPage(e.target.textContent)
     }
-    console.log(data)
+    // console.log(data)
     for(let i =1; i<= totalPages; i++) {
-        pages.push(<button onClick={handleOnPageChange} className={currentPage === i ? "join-item btn btn-active":"join-item btn"} key={i}>{i}</button>)
+        pages.push(<button onClick={handleOnPageChange} className={currentPage === i ? "join-item btn btn-active bg-[#219EBC] border-none":"join-item btn border-none bg-[#203374]"} key={i}>{i}</button>)
     }
   return (
     <div>

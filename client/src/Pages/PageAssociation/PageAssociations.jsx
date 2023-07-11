@@ -30,7 +30,7 @@ function PageAssociations({fetching, setFetching}) {
   return (
     <div>
         <HeroAssociation/>
-        <BarreRecherche/>
+        {/* <BarreRecherche/> */}
         {data.length ? data.map(element => (
             <CarteAssociation key={element._id} fetching={fetching} setFetching={setFetching} element={element} />
         )) : <h1 className='text-3xl p-10 text-[#203374]'> Aucune association n'est disponible ! </h1> } 

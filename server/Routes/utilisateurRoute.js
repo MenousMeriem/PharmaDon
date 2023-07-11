@@ -40,7 +40,7 @@
 
   utilisateurRoute
     .get("/AfficherTsUtilisateurs", protectAdmin, afficherTsUtilisateurs)
-    .delete("/SupprimerUtilisateur/:id",protectAdmin, supprimerUtilisateur)
+    .delete("/SupprimerUtilisateur/:id", protectAdmin, supprimerUtilisateur)
     .post("/AjouterUtilisateur", telecharger.array("image"), ajouterUtilisateur)
     .get('/AfficherUtilisateur', protectUtilisateur, afficherUtilisateur)
     .put("/ModifierUtilisateur", protectUtilisateur, modifierUtilisateur)

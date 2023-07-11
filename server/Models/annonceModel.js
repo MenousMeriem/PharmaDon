@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const categorie = Object.freeze(["Demande","Don"])
-const raison = Object.freeze(["raison1", "raison2", "raison3"])
+const raison = Object.freeze(["raison1", "raison2", "raison3"]) 
 
 const annonceSchema = mongoose.Schema(
     {   
