@@ -24,6 +24,10 @@ import PageAssociations from './Pages/PageAssociation/PageAssociations'
 import PageUneAssociation from "./Pages/PageAssociation/PageUneAssociation"
 import Medicaments from "./Pages/PageMedicament/Medicaments"
 import NotFound from "./Pages/NotFound"
+import PageDashboard from "./Pages/PageDashboard/PageDashboard"
+import Chart from "./Composants/Dashboard/Chart"
+import ProfilAdmin from "./Composants/Dashboard/ProfilAdmin"
+
  
 import { 
           Route, 
@@ -33,12 +37,11 @@ import {
           Navigate
         } from "react-router-dom"
 
-
  
 const router = createBrowserRouter (
   createRoutesFromElements (
     <Route path="/" element={<Layout/>}>
-      <Route path="/Accueil" element={<Accueil/>}/>
+      <Route index element={<Accueil/>}/>
       <Route path='/NosServices' element={<NosServices/>}/>
       <Route path="/AProposdeNous" element={<Propos/>}/>
       <Route path="/Connexion" element={<Connexion/>}/> 
@@ -59,6 +62,9 @@ const router = createBrowserRouter (
       <Route path="/PageAssociations" element={<PageAssociations/>}/>
       <Route path="/PageUneAssociation/:id" element={<PageUneAssociation/>}/>
       <Route path="/Medicaments" element={<Medicaments/>}/>
+      <Route path="/Dashboard" element={<PageDashboard/>}/>
+      <Route path="/Chart" element={<Chart/>}/>
+      <Route path="/Profil" element={<ProfilAdmin/>}/>
       <Route path="/*" element={<NotFound/>}/>
     </Route>
   )

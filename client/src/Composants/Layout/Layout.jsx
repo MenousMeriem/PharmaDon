@@ -11,6 +11,7 @@ function Layout() {
         location.pathname==='/resetPassword' || 
         location.pathname==='/Mail' ||
         location.pathname==='/*' ||
+        location.pathname==='/Dashboard' ||
         location.pathname==='/Reactivation'){ 
         return (
             <div>
@@ -29,6 +30,15 @@ function Layout() {
                 </div>
             )
         }
+        // if(location.pathname==='/Dashboard') {
+        //     return(
+        //         <div>
+        //             <main>
+        //                 <Outlet/>
+        //             </main>
+        //         </div>
+        //     )
+        // }
 }
 
 export default Layout

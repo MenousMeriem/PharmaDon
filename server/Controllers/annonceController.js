@@ -89,7 +89,6 @@ exports.afficherAnnonce = expressAsyncHandler(async(req,res) => {
       const documentCount = await medicamentModel.countDocuments()
       const pages = Math.ceil(documentCount / 6)
       const annonce = await medicamentModel.find().skip(skip).limit(6).populate('proprietaire')
-      console.log(annonce)
       res.status(201).json({pages,annonce})
     } else {
       const skip = (parseInt(page) -1) * 6
@@ -103,6 +102,7 @@ exports.afficherAnnonce = expressAsyncHandler(async(req,res) => {
       console.log(error)
   } 
 })
+
 
 
 // Afficher les annonces de l'utilisateur courant : 
@@ -120,11 +120,14 @@ exports.afficherAnnonceUserCourant = expressAsyncHandler(async(req,res) => {
 
 // Afficher les annonces des Pharmacies : 
 exports.afficherAnnoncePharmacien = expressAsyncHandler(async(req,res) => {
-   
-     const annonce = await annonceModel.find({idAuteur: req.params.id}).populate('idAuteur idMedicament')
-     const filteredResult = annonce.filter(an => an.idAuteur.role === "Pharmacie")
-     res.status(202).json(filteredResult)
-
+    const {page,id} = req.query
+    const skip = (parseInt(page) -1) * 6     
+     const medicaments = await medicamentModel.find({proprietaire: id}).skip(skip).limit(6)
+     const pages = Math.ceil(await medicamentModel.find({proprietaire: id}).countDocuments() / 6)
+     res.status(202).json({
+      pages,
+      medicaments
+     })
 })
 
 // Afficher les annonces des associations : 
@@ -149,7 +152,6 @@ exports.afficherAnnoncePatient = expressAsyncHandler(async(req,res) => {
       res.status(400)
   }
 })
-
 
 // Signalement 
 exports.signalerAnnonce = expressAsyncHandler(async(req, res) => {

@@ -43,7 +43,7 @@ annonceRoute
     .delete('/SupprimerAnnonce/:id', protectUtilisateur, supprimerAnnonce)    
     .get('/AfficherAnnonce', afficherAnnonce)
     .get('/AfficherAnnonceUserCourant', protectUtilisateur, afficherAnnonceUserCourant)
-    .get('/AfficherAnnoncePharmacien/:id', afficherAnnoncePharmacien)
+    .get('/AfficherAnnoncePharmacien', afficherAnnoncePharmacien)
     .get('/AfficherAnnonceAssociation/:id', afficherAnnonceAssociation)
     .get('/AfficherAnnoncePatient/:id', afficherAnnoncePatient)
     .get('/pagination',pagination)
