@@ -9,26 +9,30 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
 function UnePharmacie({fetching, setFetching}) {
+
   const {id} = useParams()
   const [data, setData] = useState([])  
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
   const [loading, setLoading ] = useState(true)
+ 
   const fetchData = async() => {
-        try {
-            const reponse = await axios.get(`http://localhost:5000/Annonce/afficherAnnoncePharmacien?page=${currentPage}&id=${id}`)
-            setData(reponse.data)
-            setTotalPages(reponse.data.pages)
-        } catch (error) {
-          toast.error(error.message)            
-        }
-        finally {
-          setLoading(false)
-        }
+    try {
+      const reponse = await axios.get(`http://localhost:5000/Annonce/afficherAnnoncePharmacien?page=${currentPage}&id=${id}`)
+      setData(reponse.data)
+      setTotalPages(reponse.data.pages)
+    } catch (error) {
+      toast.error(error.message)            
     }
-    useEffect(()=>{
-        fetchData() 
-    }, [currentPage])
+    finally {
+      setLoading(false)
+    }
+  }
+  
+  useEffect(()=>{
+      fetchData() 
+  }, [currentPage])
+    
     if(loading) return ( <Lottie animationData={animation} /> )
     
     const pages = []
@@ -39,7 +43,7 @@ function UnePharmacie({fetching, setFetching}) {
     for(let i =1; i<= totalPages; i++) {
         pages.push(<button onClick={handleOnPageChange} className={currentPage === i ? "join-item btn btn-active bg-[#219EBC] border-none":"join-item btn border-none bg-[#203374]"} key={i}>{i}</button>)
     }
-console.log(data.medicaments)
+// console.log(data.medicaments)
   return ( 
     <div>
         {/* <Breadcrumbs/> */}

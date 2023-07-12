@@ -18,7 +18,7 @@ function CarteAnnonce({element}) {
   //     toast.error(error.response?.data?.message || message.error)
   //   }
   // }
-  console.log(element)
+  // console.log(element)
 
   return (
     <div className='p-10 '>

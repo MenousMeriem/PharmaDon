@@ -13,7 +13,7 @@ function Layout() {
         location.pathname==='/*' ||
         location.pathname==='/Dashboard' ||
         location.pathname==='/Dashboard/Profil' ||
-        location.pathname==='/Dashboard/ListUsers' ||
+        location.pathname==='/Dashboard/Utilisateurs' ||
         location.pathname==='/Reactivation'){ 
         return (
             <div>

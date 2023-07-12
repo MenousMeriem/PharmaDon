@@ -10,7 +10,7 @@ function Sidebar() {
               {/* Sidebar content here */}
               <li><Link to={'/Dashboard'}>Statistiques</Link></li>
               <li><Link to={'/Dashboard/Profil'}>Profil</Link></li>
-              <li><Link to={'/Dashboard/ListUsers'}>Liste des utilisateurs</Link></li>
+              <li><Link to={'/Dashboard/Utilisateurs'}>Liste des utilisateurs</Link></li>
               <li><Link to={'/'}>Liste des signalements</Link></li>
               {/* <li><Link to={'/'}>Liste des signalements</Link></li> */}
           </ul>
