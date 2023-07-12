@@ -30,7 +30,7 @@ function ProfilAdmin() {
     const [wilayaValue, setwilayaValue] = useState("")
     const [numtelValue, setnumtelValue] = useState("")
     const [mailValue, setmailValue] = useState("")
-    const [roleValue, setRoleValue] = useState('')
+    // const [roleValue, setRoleValue] = useState('')
     const [passwordValue, setpasswordValue] = useState()
     
   
@@ -90,7 +90,7 @@ function ProfilAdmin() {
   return (
   
   <div className='w-full'>
-    <h1 className='p-10 text-white font-bold text-lg bg-cyan-700 '>Mon profil </h1>
+    <h1 className='p-10 text-white font-bold text-lg bg-[#203374] '>Mon profil </h1>
     
     <div className='text-[#203374] bg-white border-[#0DC4C7]'>
           <section className='bg-white mx-auto lg:w-full w-5/6 py-4 lg:px-5 shadow-gray-600 shadow-lg '>   
@@ -186,10 +186,10 @@ function ProfilAdmin() {
                   </div>  
               </div>    
               <div className='grid grid-cols-2 justify-center justify-items-center'>
-                  {modifier ? <button className="btn bg-[#0DC4C7]  border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-base sm:w-40" 
-                  onClick={handleUpdate}> Confirmer </button> : <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-base sm:w-40"
+                  {modifier ? <button className="btn bg-[#203374] border-none hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-base sm:w-40" 
+                  onClick={handleUpdate}> Confirmer </button> : <button className="btn bg-[#203374] border-none hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-base sm:w-40"
                   onClick={e=> setModifier(true)}> Modifier </button>}
-                  <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-base sm:w-40" 
+                  <button className="btn bg-[#203374] border-none hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-base sm:w-40" 
                   onClick={e => setModifier(false)}>Annuler</button> 
               </div>
           </section>
