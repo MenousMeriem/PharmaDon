@@ -24,10 +24,10 @@ import PageAssociations from './Pages/PageAssociation/PageAssociations'
 import PageUneAssociation from "./Pages/PageAssociation/PageUneAssociation"
 import Medicaments from "./Pages/PageMedicament/Medicaments"
 import NotFound from "./Pages/NotFound"
-import PageDashboard from "./Pages/PageDashboard/PageDashboard"
+import LayoutDashboard from "./Composants/Dashboard/LayoutDashboard"
 import Chart from "./Composants/Dashboard/Chart"
 import ProfilAdmin from "./Composants/Dashboard/ProfilAdmin"
-
+import ListUsers from "./Composants/Dashboard/ListUsers"
  
 import { 
           Route, 
@@ -62,9 +62,13 @@ const router = createBrowserRouter (
       <Route path="/PageAssociations" element={<PageAssociations/>}/>
       <Route path="/PageUneAssociation/:id" element={<PageUneAssociation/>}/>
       <Route path="/Medicaments" element={<Medicaments/>}/>
-      <Route path="/Dashboard" element={<PageDashboard/>}/>
-      <Route path="/Chart" element={<Chart/>}/>
-      <Route path="/Profil" element={<ProfilAdmin/>}/>
+      <Route path="/Dashboard" element={<LayoutDashboard/>}>
+        <Route index  element={<Chart/>}/>
+        <Route path="Profil" element={<ProfilAdmin/>}/>
+        <Route path="ListUsers" element={<ListUsers/>}/>
+
+      </Route>
+
       <Route path="/*" element={<NotFound/>}/>
     </Route>
   )
