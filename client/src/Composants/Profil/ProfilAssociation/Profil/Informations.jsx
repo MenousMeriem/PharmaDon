@@ -33,6 +33,7 @@ function Informations() {
                 
     //Pour afficher l'utilisateur actuel
     const [data, setData] = useState()
+    
     const fetchData = async () => { 
       try {
         const reponse = await axios.get('http://localhost:5000/Utilisateur/afficherUtilisateur/', config)

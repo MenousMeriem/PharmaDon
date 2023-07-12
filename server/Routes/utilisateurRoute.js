@@ -12,6 +12,8 @@
     modifierUtilisateur,
     supprimerUtilisateur,
     autoSupression,
+    afficherAdmin,
+    modifierAdmin,
   } = require("../Controllers/utilisateurController")
 
   const {   
@@ -47,6 +49,9 @@
     .delete("/AutoSuppression", protectUtilisateur, autoSupression)
     .get('/AfficherPharmacie', afficherPharmacie)
     .get('/AfficherAssociation', afficherAssociation)
+    .get('/AfficherAdmin', protectAdmin, afficherAdmin)
+    .put("/ModifierAdmin", protectAdmin, modifierAdmin)
+  
   
   module.exports = utilisateurRoute
 

@@ -38,10 +38,12 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
           nom, prenom, sexe, date_de_naissance, wilaya, adresse, numtel, mail, role,
           mot_de_passe: await bcrypt.hash(mot_de_passe, 10),
         })
-           return res.status(201).json({
+          return res.status(201).json({
               _id: newUtilisateur._id,
               accessToken: genAccessToken({_id: newUtilisateur._id, role: newUtilisateur.role}),
-            })
+              role: "Admin"
+          })
+         
       }
 
       // Creer un pharmacien :
@@ -229,6 +231,31 @@ exports.afficherUtilisateur = expressAsyncHandler(async (req,res) => {
   }
 })
 
+//Afficher l'admin 
+exports.afficherAdmin = expressAsyncHandler(async (req,res) => {
+  try {
+    const id = req.user._id
+    const user = await utilisateurModel.findById(id)
+    res.status(200).json(user)
+  } catch (error) {
+    res.status(400)
+    throw new Error(error)
+  }
+})
+
+// Modifier les informations de l'admin : 
+exports.modifierAdmin = expressAsyncHandler(async (req, res) => {
+  try {
+      const id = req.user._id
+      const role = req.user.role
+      const _id = new Types.ObjectId(id)
+      await utilisateurModel.findOneAndUpdate({_id, role}, req.body)
+      res.status(200).json("Utilisateur modifié !!")
+  } catch (error) {
+      res.status(400)
+      throw new Error(error)
+  }
+})
 
 // Afficher toutes les pharmacies : 
 exports.afficherPharmacie = expressAsyncHandler(async (req, res) => {
