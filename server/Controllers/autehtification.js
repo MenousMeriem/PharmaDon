@@ -67,6 +67,22 @@ exports.seConnecter = expressAsyncHandler(async (req, res) => {
     }
 })
 
+//Logout
+exports.logout = expressAsyncHandler(async (req, res) => {
+    try {
+        const { token } = req.body
+            if (!token) {
+                res.status(400)
+                throw new Error("No token!")
+            }
+            await refreshTokenModel.findOneAndDelete({ refreshToken: token })
+                res.status(200).json('Vous vous etes deconnctés ! ')
+    }catch (error) {
+        throw new Error(error)
+    }
+})
+
+
 //Reactiver un compte
 exports.reactiverController = expressAsyncHandler(async (req,res) => {
     const {id} = req.params
@@ -82,49 +98,6 @@ exports.reactiverController = expressAsyncHandler(async (req,res) => {
         await refreshTokenModel.create({ utilisateurId: user._id, refreshToken})
     res.status(200).json({accessToken, refreshToken})
 })
-//Refresh access token
-// exports.refreshAccess = expressAsyncHandler(async (req, res) => {
-//     try {
-//         const { token } = req.body
-//             if (!token) {
-//                 res.status(400)
-//                 throw new Error("No refreshToken!")
-//             }
-
-//         const refreshExist = await refreshTokenModel.find({ refreshToken: token })
-//             if (refreshExist.length == 0) {
-//                 res.status(400)
-//                 throw new Error("No refreshToken!")
-//             }
-
-//         const userData = jwt.verify(token, process.env.REFRESH_TOKEN)
-        
-//         const {iat, ...data} = userData
-        
-//         const accessToken = genererToken(data)
-//             res.status(200).json({ token: accessToken })
-
-//     }catch (error) {
-//             res.status(400)
-//             throw new Error(error)
-//         }
-//   })
-
-
-//Logout
-exports.logout = expressAsyncHandler(async (req, res) => {
-    try {
-        const { token } = req.body
-            if (!token) {
-                res.status(400)
-                throw new Error("No token!")
-            }
-            await refreshTokenModel.findOneAndDelete({ refreshToken: token })
-                res.status(200).json('Vous vous etes deconnctés ! ')
-    }catch (error) {
-        throw new Error(error)
-    }
-  })
 
 
 // Mot de passe oublié : 
@@ -201,3 +174,31 @@ exports.changePassword = expressAsyncHandler(async (req, res) => {
     res.status(200).json("Mot de passe modifié avec succes ! ")
 })
 
+
+//Refresh access token
+// exports.refreshAccess = expressAsyncHandler(async (req, res) => {
+//     try {
+//         const { token } = req.body
+//             if (!token) {
+//                 res.status(400)
+//                 throw new Error("No refreshToken!")
+//             }
+
+//         const refreshExist = await refreshTokenModel.find({ refreshToken: token })
+//             if (refreshExist.length == 0) {
+//                 res.status(400)
+//                 throw new Error("No refreshToken!")
+//             }
+
+//         const userData = jwt.verify(token, process.env.REFRESH_TOKEN)
+        
+//         const {iat, ...data} = userData
+        
+//         const accessToken = genererToken(data)
+//             res.status(200).json({ token: accessToken })
+
+//     }catch (error) {
+//             res.status(400)
+//             throw new Error(error)
+//         }
+//   })

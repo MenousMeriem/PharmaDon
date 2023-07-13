@@ -41,16 +41,16 @@
   }) 
 
   utilisateurRoute
-    .get("/AfficherTsUtilisateurs", protectAdmin, afficherTsUtilisateurs)
-    .delete("/SupprimerUtilisateur/:id", protectAdmin, supprimerUtilisateur)
-    .post("/AjouterUtilisateur", telecharger.array("image"), ajouterUtilisateur)
-    .get('/AfficherUtilisateur', protectUtilisateur, afficherUtilisateur)
-    .put("/ModifierUtilisateur", protectUtilisateur, modifierUtilisateur)
-    .delete("/AutoSuppression", protectUtilisateur, autoSupression)
-    .get('/AfficherPharmacie', afficherPharmacie)
-    .get('/AfficherAssociation', afficherAssociation)
-    .get('/AfficherAdmin', protectAdmin, afficherAdmin)
-    .put("/ModifierAdmin", protectAdmin, modifierAdmin)
+  .post("/AjouterUtilisateur", telecharger.array("image"), ajouterUtilisateur)
+  .get('/AfficherUtilisateur', protectUtilisateur, afficherUtilisateur)
+  .put("/ModifierUtilisateur", protectUtilisateur, modifierUtilisateur)
+  .delete("/AutoSuppression", protectUtilisateur, autoSupression)
+  .get('/AfficherPharmacie', afficherPharmacie)
+  .get('/AfficherAssociation', afficherAssociation)
+  .get("/AfficherTsUtilisateurs", protectAdmin, afficherTsUtilisateurs)
+  .delete("/SupprimerUtilisateur/:id", protectAdmin, supprimerUtilisateur)
+  .get('/AfficherAdmin', protectAdmin, afficherAdmin)
+  .put("/ModifierAdmin", protectAdmin, modifierAdmin)
   
   
   module.exports = utilisateurRoute

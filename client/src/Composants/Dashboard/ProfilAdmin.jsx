@@ -7,21 +7,22 @@ import animation from '../../assets/Annimations/5699-loading-26-paper-plane.json
 
 function ProfilAdmin() {
   
-  const currentUser = localStorage.getItem('Utilisateur')
-  const currentUserObject = JSON.parse(currentUser)
-  const config = {
-    headers: {
-          Authorization: `Bearer ${currentUserObject.accessToken}`
-      }
-  }
+    // Récupération du token : 
+    const currentUser = localStorage.getItem('Utilisateur')
+    const currentUserObject = JSON.parse(currentUser)
+    const config = {
+        headers: {
+            Authorization: `Bearer ${currentUserObject.accessToken}`
+        }
+    }
   
     //Loading 
     const [loading, setLoading] = useState(true)
-    
+
     const [data, setData] = useState()
-    
+
     const [modifier, setModifier] = useState(false)
-    
+
     const [nomValue, setnomValue] = useState("")
     const [prenomValue, setprenomValue] = useState('')
     const [sexeValue, setsexeValue] = useState("")
@@ -30,11 +31,10 @@ function ProfilAdmin() {
     const [wilayaValue, setwilayaValue] = useState("")
     const [numtelValue, setnumtelValue] = useState("")
     const [mailValue, setmailValue] = useState("")
-    // const [roleValue, setRoleValue] = useState('')
     const [passwordValue, setpasswordValue] = useState()
-    
-  
-    // Pour afficher l'utiliasteur actuel : 
+
+
+    // Affichage des informations de l'admin : 
     const fetchData = async() => {
       try {
         const reponse = await axios.get('http://localhost:5000/Utilisateur/AfficherAdmin/', config)
@@ -56,25 +56,22 @@ function ProfilAdmin() {
         }
     }
   
-    useEffect( () => {
-      fetchData()
-    }, [modifier])
   
-  
-    // Pour modifier les informations de l'utilisateur : 
-      const {role} = JSON.parse(localStorage.getItem('Utilisateur'))
-      const obj = {   
-          nom: nomValue,
-          prenom: prenomValue,
-          date_de_naissance: naissanceValue, 
-          sexe: sexeValue,
-          wilaya: wilayaValue,
-          adresse: adresseValue,
-          numtel: numtelValue, 
-          mail: mailValue, 
-          mot_de_passe: passwordValue,
-          role: role
-      }
+    // Modification des informations de l'admin  : 
+    const {role} = JSON.parse(localStorage.getItem('Utilisateur'))
+    const obj = {   
+        nom: nomValue,
+        prenom: prenomValue,
+        date_de_naissance: naissanceValue, 
+        sexe: sexeValue,
+        wilaya: wilayaValue,
+        adresse: adresseValue,
+        numtel: numtelValue, 
+        mail: mailValue, 
+        mot_de_passe: passwordValue,
+        role: role
+    }
+
     const handleUpdate = async () => {
         try {
           await axios.put('http://localhost:5000/Utilisateur/ModifierAdmin/',obj, config)
@@ -83,11 +80,18 @@ function ProfilAdmin() {
         } catch (error) {
           toast.error(error.reponse?.data?.message || error.message)
         }
-      } 
-      
-  if(loading) return <Lottie className='w-40 h-10' animationData={animation}/>
+    } 
+
+    // 
+    useEffect( () => {
+        fetchData()
+      }, [modifier])
+
+     
+    // Chargement : 
+    if(loading) return <Lottie className='w-40 h-10' animationData={animation}/>
  
-  return (
+return (
   
   <div className='w-full'>
     <h1 className='p-10 text-white font-bold text-lg bg-[#203374] '>Mon profil </h1>

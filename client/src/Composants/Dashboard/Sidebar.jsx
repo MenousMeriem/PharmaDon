@@ -7,6 +7,15 @@ import {FaList} from 'react-icons/fa'
 import {IoIosWarning} from 'react-icons/io'
 
 function Sidebar() {
+  
+  // Deconnecter : 
+  const Deconnexion =  (e) => {
+    const user = JSON.parse(localStorage.getItem('Utilisateur'))
+    if(user) localStorage.removeItem('Utilisateur')
+    navigate('/Connexion')
+  }
+
+
   return (
     <div className='bg-[#0dc4c71f]'>
       <div className="drawer-side">
@@ -23,6 +32,7 @@ function Sidebar() {
                 <li><Link to={'/Dashboard/Profil'}> <CgProfile className=''/> Profil</Link></li>
                 <li><Link to={'/Dashboard/Utilisateurs'}> <FaList/> Liste des utilisateurs</Link></li>
                 <li><Link to={'/Dashboard/Signalements'}> <IoIosWarning/> Liste des signalements</Link></li>
+                <li><Link to={'/Connexion'} onClick={Deconnexion}>Deconnexion</Link></li>
                 {/* <li><Link to={'/'}>Liste des signalements</Link></li> */}
               </div>
           </ul>

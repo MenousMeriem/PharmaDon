@@ -2,17 +2,47 @@ import React from 'react'
 import { NavLink, useNavigate, Link } from 'react-router-dom'
 import avatar from '../../assets/Navbar/avatar.png'
 import img from '../../assets/Navbar/logoo.png'
+import {toast} from 'react-toastify'
+import axios from 'axios'
 
 function NavBar() {
-
+  
     const navigate = useNavigate()
-   
-    const Deconnexion =  (e) => {
-        const user = JSON.parse(localStorage.getItem('Utilisateur'))
-        if(user) localStorage.removeItem('Utilisateur')
-        navigate('/Connexion')
-      }
+    
+    // Recuperation de l'utilisateur : 
+    const user = localStorage.getItem('Utilisateur')
 
+    // Recuperation du token :
+    const currentUser = localStorage.getItem('Utilisateur')
+    const currentUserObject = JSON.parse(currentUser)
+    const config = {
+        headers: {
+            Authorization: `Bearer ${currentUserObject.accessToken}`
+        }
+    }
+
+    // Desactiver son compte : 
+    const Autosuppression  = async (e) => {
+      e.preventDefault();
+      try {
+        if(user) {
+          await axios.delete('http://localhost:5000/Utilisateur/AutoSuppression/', config)
+          navigate('/Connexion')
+        }
+      } catch (error) {
+          const errorMessage = error && error.request && error.request.responseText ? JSON.parse(error.request?.responseText).message : error.message
+          toast.error(errorMessage)
+      }
+    }
+
+    // Deconnecter : 
+    const Deconnexion =  (e) => {
+      const user = JSON.parse(localStorage.getItem('Utilisateur'))
+      if(user) localStorage.removeItem('Utilisateur')
+      navigate('/Connexion')
+    }
+
+    // Lien de profil apres la connexion :
     const handleProfile = () => {
       const user = JSON.parse(localStorage.getItem('Utilisateur'))
         if (user.role=== 'Pharmacie') {
@@ -21,10 +51,10 @@ function NavBar() {
           navigate('/PageProfilAssociation')
         } else if (user.role=== 'Patient') {
           navigate('/PageProfilPatient')
-      }}
+      }
+    }
 
-    const user = localStorage.getItem('Utilisateur')
-      
+
   return (
     <div>
         <div className="navbar bg-base-100 p-5">
@@ -84,6 +114,7 @@ function NavBar() {
                     </li>
                     <li><Link to={'/PageMesAnnonces'}>Mes annonces</Link></li>
                     <li><Link to={'/Connexion'} onClick={Deconnexion}>Deconnexion</Link></li>
+                    <li><Link to={'/Connexion'} onClick={Autosuppression}> Quitter </Link></li>
                   </ul>
                 </div>
                 : 
