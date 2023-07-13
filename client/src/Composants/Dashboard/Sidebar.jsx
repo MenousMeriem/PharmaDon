@@ -5,6 +5,8 @@ import {CgProfile} from 'react-icons/cg'
 import {BsBarChartLineFill} from 'react-icons/bs'
 import {FaList} from 'react-icons/fa'
 import {IoIosWarning} from 'react-icons/io'
+import {TbLogout} from 'react-icons/tb'
+import {IoMdNotifications} from 'react-icons/io'
 
 function Sidebar() {
   
@@ -31,8 +33,9 @@ function Sidebar() {
                 <li><Link to={'/Dashboard'}> <BsBarChartLineFill/> Statistiques</Link></li>
                 <li><Link to={'/Dashboard/Profil'}> <CgProfile className=''/> Profil</Link></li>
                 <li><Link to={'/Dashboard/Utilisateurs'}> <FaList/> Liste des utilisateurs</Link></li>
+                <li><Link to={'/Dashboard/Attente'}> <IoMdNotifications/> Liste d'attente</Link></li>
                 <li><Link to={'/Dashboard/Signalements'}> <IoIosWarning/> Liste des signalements</Link></li>
-                <li><Link to={'/Connexion'} onClick={Deconnexion}>Deconnexion</Link></li>
+                <li><Link to={'/Connexion'} onClick={Deconnexion}> <TbLogout/> Deconnexion</Link></li>
                 {/* <li><Link to={'/'}>Liste des signalements</Link></li> */}
               </div>
           </ul>

@@ -21,9 +21,7 @@ function Mail() {
             const reponse = await axios.post('http://localhost:5000/Seconnecter/reinitialiserMdp', {mail})
             console.log(reponse.data)
                 toast.success('Votre mail a bien été envoyé')
-            
         } catch (error) {
-            
             const errorMessage = error && error.request && error.request.responseText ? JSON.parse(error.request?.responseText).message : error.message
             toast.error(errorMessage)
         } finally {
@@ -34,7 +32,6 @@ function Mail() {
   return (
 
     <div>
-        
         <div className="hero min-h-screen bg-[#9fdff490]">
             <h1 className="lg:text-4xl text-3xl font-black text-center absolute top-16  text-[#203374]">Réinitialisation de mot de passe</h1>
             <div className="hero-content flex-col lg:flex-row-reverse text-[#203374] py-32 lg:p-10">

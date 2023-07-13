@@ -1,4 +1,7 @@
 import React from 'react'
+import {toast} from 'react-toastify'
+import axios from 'axios'
+
 
 function ListUsers({element}) {
 
@@ -11,6 +14,20 @@ function ListUsers({element}) {
         }
     }
 
+    // l'admin supprime un utilisateur : 
+    const onDelete  = async (e) => {
+        e.preventDefault();
+        try {
+          if(user) {
+            await axios.delete('http://localhost:5000/Utilisateur/SupprimerUtilisateur/'+id, config)
+            toast.success('utilisateur supprimé!! ')
+          }
+        } catch (error) {
+            const errorMessage = error && error.request && error.request.responseText ? JSON.parse(error.request?.responseText).message : error.message
+            toast.error(errorMessage)
+        }
+      }
+
   return (
     <tr>
         <th>1</th>
@@ -21,7 +38,7 @@ function ListUsers({element}) {
         <td>{element.role}</td>
     {/* <td><button className="btn bg-green-500 text-white border-none">Activer</button></td> */}   
         <td><button className="btn bg-orange-400 text-white border-none">Désactiver</button></td>
-        <td><button className='btn bg-red-700 text-white border-none'> Supprimer </button></td>
+        <td><button className='btn bg-red-700 text-white border-none' onClick={onDelete}> Supprimer </button></td>
     </tr>    
                 
   )

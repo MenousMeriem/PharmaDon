@@ -29,6 +29,7 @@ import Chart from "./Composants/Dashboard/Chart"
 import ProfilAdmin from "./Composants/Dashboard/ProfilAdmin"
 import Utilisateurs from "./Pages/PageDashboard/Utilisateurs"
 import Signalements from './Composants/Dashboard/Signalements'
+import ListeAttente from "./Composants/Dashboard/ListeAttente"
  
 import { 
           Route, 
@@ -68,6 +69,7 @@ const router = createBrowserRouter (
         <Route path="Profil" element={<ProfilAdmin/>}/>
         <Route path="Utilisateurs" element={<Utilisateurs/>}/>
         <Route path="Signalements" element={<Signalements/>} />
+        <Route path="Attente" element={<ListeAttente/>} />
       </Route>
 
       <Route path="/*" element={<NotFound/>}/>

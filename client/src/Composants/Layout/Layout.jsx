@@ -14,6 +14,7 @@ function Layout() {
         location.pathname==='/Dashboard' ||
         location.pathname==='/Dashboard/Profil' ||
         location.pathname==='/Dashboard/Utilisateurs' ||
+        location.pathname==='/Dashboard/Attente' ||
         location.pathname==='/Dashboard/Signalements' ||
         location.pathname==='/Reactivation'){ 
         return (
