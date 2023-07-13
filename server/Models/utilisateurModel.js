@@ -1,5 +1,6 @@
 const mongoose = require("mongoose") 
- 
+  
+
 // Roles : 
 const Role = Object.freeze(["Admin","Pharmacie","Association","Patient"])
 
@@ -57,9 +58,12 @@ const utilisateurSchema = mongoose.Schema(
         }, 
         isActive: {
             type: Boolean,
+            default: true,
+        },    
+        isLegit: {
+            type: Boolean,
             default: false,
         }
-        
 
     },
         { timestamps: true } 

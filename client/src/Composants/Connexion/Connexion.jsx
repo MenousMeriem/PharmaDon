@@ -30,8 +30,9 @@ function Connexion() {
         try {
             const reponse = await axios.post('http://localhost:5000/Seconnecter/seConnecter', form)
             if(reponse.data && reponse.data.isActive == false) {return navigate('/Reactivation?id='+reponse.data._id)}
+            console.log(reponse.data)
             if(reponse.data) {
-                console.log(reponse.data)
+                if((reponse.data.role==='Pharmacie'|| reponse.data.role==='Association') && reponse.data.isLegit===false) return toast.warning("votre compte .....")
                 localStorage.setItem('Utilisateur', JSON.stringify(reponse.data))
                 navigate('/Accueil')
             }

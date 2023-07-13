@@ -58,6 +58,7 @@ exports.seConnecter = expressAsyncHandler(async (req, res) => {
                 _id: utilisateurExiste[0]._id,
                 mail: utilisateurExiste[0].mail,
                 role: utilisateurExiste[0].role,
+                isLegit: utilisateurExiste[0].isLegit,
                 accessToken,
                 refreshToken,
             })

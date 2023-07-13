@@ -17,7 +17,7 @@ function NavBar() {
     const currentUserObject = JSON.parse(currentUser)
     const config = {
         headers: {
-            Authorization: `Bearer ${currentUserObject.accessToken}`
+            Authorization: `Bearer ${currentUserObject && currentUserObject.accessToken}`
         }
     }
 

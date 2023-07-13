@@ -243,6 +243,7 @@ exports.afficherPharmacie = expressAsyncHandler(async (req, res) => {
   }
 })
 
+
 // Afficher toutes les associations : 
 exports.afficherAssociation = expressAsyncHandler(async (req, res) => {
   try {
@@ -253,6 +254,7 @@ exports.afficherAssociation = expressAsyncHandler(async (req, res) => {
     throw new Error(error)
   }
 })
+
 
 // Modifier les informations de l utilsateur : 
 exports.modifierUtilisateur = expressAsyncHandler(async (req, res) => {
@@ -293,6 +295,13 @@ exports.afficherTsUtilisateurs = expressAsyncHandler(async (req, res) => {
 })
 
 
+// Affichage du détail des utilisateurs pour l'admin : 
+exports.afficherDetailUsers = expressAsyncHandler(async (req, res) => {
+  const users = await utilisateurModel.find({isLegit: false})
+  res.status(200).json(users)
+})
+
+
 // Suppression d'un utilisateur par l'admin : 
 exports.supprimerUtilisateur = expressAsyncHandler(async (req, res) => {
   try {
@@ -307,6 +316,7 @@ exports.supprimerUtilisateur = expressAsyncHandler(async (req, res) => {
   }
 })
 
+
 //Afficher les informations de l'admin 
 exports.afficherAdmin = expressAsyncHandler(async (req,res) => {
   try {
@@ -318,6 +328,7 @@ exports.afficherAdmin = expressAsyncHandler(async (req,res) => {
     throw new Error(error)
   }
 })
+
 
 // Modifier les informations de l'admin : 
 exports.modifierAdmin = expressAsyncHandler(async (req, res) => {

@@ -49,7 +49,6 @@ function InformationsAssociation() {
         try {
             const reponse = await axios.post('http://localhost:5000/Utilisateur/AjouterUtilisateur', formData)
             if(reponse.data)  {
-                localStorage.setItem('Utilisateur', JSON.stringify(reponse.data));
                 setForm({ 
                     nom:"", 
                     prenom:"", 
@@ -67,8 +66,8 @@ function InformationsAssociation() {
                     mot_de_passe:"",
                     confirmer_mot_de_passe:""
                 })
-                toast.success('Compte créer avec succès ')
-                navigate('/PageProfilAssociation')
+                toast.success('Compte créer avec succès')
+                navigate('/Connexion')
             }
         } catch (error) {
             console.log(error)

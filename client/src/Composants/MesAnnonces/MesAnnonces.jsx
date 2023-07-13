@@ -28,22 +28,25 @@ function MesAnnonces({fetching, setFetching}) {
         setLoading(false)
       }
   }
+
   useEffect(()=>{
       fetchData() 
   }, [refetch])
+
   if(loading) return ( <Lottie animationData={animation} /> )
+
   return (
-  <div>
-    <label htmlFor="my_modal_7" className="btn bg-[#203374] text-white text-base text-center font-black lg:text-base items-center">Ajouter une annonce</label>
-<input type="checkbox" id="my_modal_7" className="modal-toggle" />
-<div className="modal">
-  <div className="modal-box p-0">
-    <AjoutAnnonce refetch={refetch} setRefetch={setRefetch}/>
-    <div className="modal-action">
-      <label htmlFor="my_modal_7" className="btn">Close!</label>
-    </div>
-  </div>
-</div>
+    <div>
+      <label htmlFor="my_modal_7" className="btn bg-[#203374] text-white text-base text-center font-black lg:text-base items-center">Ajouter une annonce</label>
+      <input type="checkbox" id="my_modal_7" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box p-0">
+          <AjoutAnnonce refetch={refetch} setRefetch={setRefetch}/>
+          <div className="modal-action">
+            <label htmlFor="my_modal_7" className="btn">Close!</label>
+          </div>
+        </div>
+      </div>
       <h1 className='text-[#203374] text-xl text-center font-black p-5 lg:text-3xl '> Mes annonces</h1>
       {/* <h1 className='text-lg text-center text-[#203374] mt-5 sm:text-4xl sm:mt-14 py-10 px-20'> Mes annonces </h1> */}
       {data.length ? data.map(element => (

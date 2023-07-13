@@ -26,7 +26,7 @@ function ListUsers({element}) {
             const errorMessage = error && error.request && error.request.responseText ? JSON.parse(error.request?.responseText).message : error.message
             toast.error(errorMessage)
         }
-      }
+    }
 
   return (
     <tr>
