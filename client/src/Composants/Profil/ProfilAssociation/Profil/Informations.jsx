@@ -6,6 +6,8 @@ import { toast } from 'react-toastify'
 import axios from "axios"
 
 function Informations() {
+    
+    // Recuperation du token : 
     const currentUser = localStorage.getItem('Utilisateur')
     const currentUserObject = JSON.parse(currentUser)
     const config = {
@@ -28,9 +30,10 @@ function Informations() {
     const [nomAssoValue, setnomAssoValue] = useState('')
     const [wilayaAssoValue, setwilayaAssoValue] = useState('')
     const [adresseAssoValue, setadresseAssoValue] = useState('')
-    const [numAssoValue, setnumAssoValue] = useState()
+    const [numAssoValue, setnumAssoValue] = useState("")
     const [passwordValue, setpasswordValue] = useState('')
                 
+    
     //Pour afficher l'utilisateur actuel
     const [data, setData] = useState()
     
@@ -42,7 +45,7 @@ function Informations() {
             setnomValue(reponse.data.nom)
             setprenomValue(reponse.data.prenom)
             setsexeValue(reponse.data.sexe)
-            setnaissanceValue(reponse.data.naissance)
+            setnaissanceValue(reponse.data.date_de_naissance)
             setwilayaAssoValue(reponse.data.wilayaAsso)
             setadresseValue(reponse.data.adresse)
             setnumtelValue(reponse.data.numtel)
@@ -51,6 +54,10 @@ function Informations() {
             setnumAssoValue(reponse.data.numAsso)
             setwilayaAssoValue(reponse.data.wilayaAsso)
             setadresseAssoValue(reponse.data.adresseAsso)
+            setnomPharmacieValue(reponse.data.nomPharmacie)
+            setnumPharmacieValue(reponse.data.numPharmacie)
+            setwilayaPharmacieValue(reponse.data.wilayaPharmacie)
+            setadressePharmacieValue(reponse.data.adressePharmacie)
         }
       } catch (error) {
         toast.error(error.response?.data?.message||error.message)

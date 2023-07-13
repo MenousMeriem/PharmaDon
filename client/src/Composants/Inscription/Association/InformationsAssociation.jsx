@@ -10,6 +10,7 @@ function InformationsAssociation() {
     // Si l'utilsateur est déja connecté 
     const navigate = useNavigate()
     const utilisateur = localStorage.getItem('Utilisateur') || null 
+    
     useEffect(() => {
         if (utilisateur) navigate('/Accueil');
     }, []);
@@ -42,7 +43,7 @@ function InformationsAssociation() {
             return toast.warn('Vérifier votre mot de passe!')
         }
         const formData = new FormData()
-        formData.append("image", fichierOne[0])
+            formData.append("image", fichierOne[0])
             formData.append("image", fichierTwo[0])
             const {fichiero, fichiert, ...data} = form
             Object.entries(data).forEach(([key, value]) => {formData.append(key, value)})

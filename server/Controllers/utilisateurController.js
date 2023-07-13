@@ -302,6 +302,14 @@ exports.afficherDetailUsers = expressAsyncHandler(async (req, res) => {
 })
 
 
+// Activer le compte de l'utilisateur par l'admin : 
+exports.activerCompte = expressAsyncHandler(async(req, res) => {
+ const activer = await utilisateurModel.findOneAndUpdate({isLegit: true})
+ res.status(200).json(activer)
+})
+
+
+
 // Suppression d'un utilisateur par l'admin : 
 exports.supprimerUtilisateur = expressAsyncHandler(async (req, res) => {
   try {

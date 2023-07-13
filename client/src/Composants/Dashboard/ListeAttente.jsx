@@ -4,6 +4,8 @@ import {toast} from 'react-toastify'
 
 function ListeAttente() {
 
+    // Récupération du token : 
+    const [loading, setLoading] = useState(true)
     const currentUser = localStorage.getItem('Utilisateur')
     const currentUserObject = JSON.parse(currentUser)
     const config = {
@@ -12,14 +14,52 @@ function ListeAttente() {
         }
     } 
 
+
     const [data, setData] = useState([])
-    const [loading, setLoading] = useState(true)
+    const [nomValue, setnomValue] = useState('')
+    const [prenomValue, setprenomValue] = useState('')
+    const [sexeValue, setsexeValue] = useState('')
+    const [naissanceValue, setnaissanceValue] = useState('')
+    const [wilayaValue, setwilayaValue] = useState('')
+    const [adresseValue, setadresseValue] = useState('')
+    const [numtelValue, setnumtelValue] = useState()
+    const [mailValue, setmailValue] = useState('')
+    // Si c'était une association : 
+    const [nomAssoValue, setnomAssoValue] = useState('')
+    const [wilayaAssoValue, setwilayaAssoValue] = useState('')
+    const [adresseAssoValue, setadresseAssoValue] = useState('')
+    const [numAssoValue, setnumAssoValue] = useState('')
+    // Si c'était une pharmacie : 
+    const [nomPharmacieValue, setnomPharmacieValue] = useState('')
+    const [numPharmacieValue, setnumPharmacieValue] = useState('')
+    const [wilayaPharmacieValue, setwilayaPharmacieValue] = useState('')
+    const [adressePharmacieValue, setadressePharmacieValue] = useState('')
+
 
     const fetchData = async () => {
         try {
             const reponse = await axios.get(`http://localhost:5000/Utilisateur/afficherDetailUsers`, config)
-            // console.log(reponse.data)
-            setData(reponse.data)
+            if  (reponse.data) {
+                    setData(reponse.data)
+                    setnomValue(reponse.data.nom)
+                    setprenomValue(reponse.data.prenom)
+                    setsexeValue(reponse.data.sexe)
+                    setnaissanceValue(reponse.data.date_de_naissance)
+                    setwilayaValue(reponse.data.wilaya)
+                    setadresseValue(reponse.data.adresse)
+                    setnumtelValue(reponse.data.numtel)
+                    setmailValue(reponse.data.mail)
+                    // Si c'était une association : 
+                    setnomAssoValue(reponse.data.nomAsso)
+                    setnumAssoValue(reponse.data.numAsso)
+                    setwilayaAssoValue(reponse.data.wilayaAsso)
+                    setadresseAssoValue(reponse.data.adresseAsso)
+                    // Si c'était une pharmacie :
+                    setnomPharmacieValue(reponse.data.nomPharmacie)
+                    setnumPharmacieValue(reponse.data.numPharmacie)
+                    setwilayaPharmacieValue(reponse.data.wilayaPharmacie)
+                    setadressePharmacieValue(reponse.data.adressePharmacie)
+                }
         } catch (error) {
             toast.error(error.message)
         }finally {
@@ -50,17 +90,28 @@ function ListeAttente() {
                     </tr>    
                 </thead>
                 <tbody className='text-[#203374]'>  
-                    <tr>
-                        <td> Ex: Menous  </td>
-                        <td> Ex: Pharmacie  </td>
+                    {data.map((element, index) => ( 
+                        <tr key={index}>
+
+                        <td>  {element.nom}  </td>
+                        <td> {element.role} </td>
                         <td>
                             <label htmlFor="my_modal_7" className="btn bg-[#203374] text-white text-base text-center font-black lg:text-base items-center">Détail</label>
                             <input type="checkbox" id="my_modal_7" className="modal-toggle" />
                             <div className="modal">
-
-                                <div className="modal-box p-2">
-                                    <h1> Nom   </h1>
-                                    <h1> Prénom </h1>
+                                <div className="modal-box leading-10">
+                                    <h1> Nom : {element.nom}  </h1>
+                                    <h1> Prénom : {element.prenom}</h1>
+                                    <h1> Sexe : {element.sexe} </h1>
+                                    <h1> Date de naissance {element.date_de_naissance.toString().slice(0,10)} </h1>
+                                    <h1> Wilaya : {element.wilaya} </h1>
+                                    <h1> Adresse : {element.adresse} </h1>
+                                    <h1> Téléphone : {element.numtel} </h1>
+                                    <h1> Mail : {element.mail} </h1>
+                                    <h1> Nom de la pharmacie : {element.nomPharmacie} </h1>
+                                    <h1> Numéro de la pharmacie : {element.numPharmacie} </h1>
+                                    <h1> Adresse de la pharmacie : {element.wilayaPharmacie}, {element.adressePharmacie} </h1>
+                                    <h1> </h1>
                                     <div className="modal-action justify-center">
                                         <label htmlFor="my_modal_7" className="btn bg-red-800 border-none">Fermer</label>
                                     </div>
@@ -69,6 +120,7 @@ function ListeAttente() {
                         </td>
                         <td><button className='btn bg-red-700 text-white border-none'> Activer </button></td>
                     </tr>   
+                    ))}
                 </tbody>
             </table>
         </div>            

@@ -15,6 +15,7 @@
     afficherAdmin,
     modifierAdmin,
     afficherDetailUsers,
+    activerCompte,
   } = require("../Controllers/utilisateurController")
 
   const {   
@@ -52,6 +53,7 @@
   .delete("/SupprimerUtilisateur/:id", protectAdmin, supprimerUtilisateur)
   .get('/AfficherAdmin', protectAdmin, afficherAdmin)
   .put("/ModifierAdmin", protectAdmin, modifierAdmin)
+  .put("/ActiverCompte", protectAdmin, activerCompte)
   .get("/AfficherDetailUsers", protectAdmin, afficherDetailUsers)
   
   
