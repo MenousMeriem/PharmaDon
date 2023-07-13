@@ -4,7 +4,6 @@ import Lottie from 'lottie-react'
 import {toast} from 'react-toastify'
 import axios from 'axios'
 import ListUsers from '../../Composants/Dashboard/ListUsers'
-// import { useParams } from 'react-router-dom'
 
 
 function Utilisateurs({fetching, setFetching}) {
@@ -46,14 +45,15 @@ function Utilisateurs({fetching, setFetching}) {
                 <table className="table table-xs w-full">
                     <thead>
                         <tr className=''>
-                            <th className=' bg-slate-400'></th>
-                            <th className='text-white bg-slate-400 text-sm'>Nom</th>
-                            <th className='text-white bg-slate-400 text-sm'>Prenom</th>
-                            <th className='text-white bg-slate-400 text-sm'>Role</th>    
-                            <th className='text-white bg-slate-400 text-sm'>Activer/Desactiver</th>    
-                            <th className='text-white bg-slate-400 text-sm'>Supprimer</th>    
-                        </tr>
-                        
+                            <th className='bg-slate-100 border-t-4 border-b-4'></th>
+                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Nom</th>
+                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Prenom</th>
+                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Nom de l'</th>
+                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Nom de l'</th>
+                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Role</th>    
+                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Activer/Desactiver</th>    
+                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Supprimer</th>    
+                        </tr>    
                     </thead>
                     <tbody className='text-[#203374]'>  
                         {data && data.length > 0 ? data.map(element => (

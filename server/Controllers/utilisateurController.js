@@ -231,7 +231,83 @@ exports.afficherUtilisateur = expressAsyncHandler(async (req,res) => {
   }
 })
 
-//Afficher l'admin 
+
+// Afficher toutes les pharmacies : 
+exports.afficherPharmacie = expressAsyncHandler(async (req, res) => {
+  try { 
+    const Pharmacie = await utilisateurModel.find({role:'Pharmacie'}).select('-mot_de_passe')
+      res.status(202).json(Pharmacie) 
+  } catch (error) {
+    res.status(400)
+    throw new Error(error)
+  }
+})
+
+// Afficher toutes les associations : 
+exports.afficherAssociation = expressAsyncHandler(async (req, res) => {
+  try {
+      const Association = await utilisateurModel.find({role:'Association'}).select('-mot_de_passe')
+      res.status(202).json(Association)
+  } catch (error) {
+    res.status(400)
+    throw new Error(error)
+  }
+})
+
+// Modifier les informations de l utilsateur : 
+exports.modifierUtilisateur = expressAsyncHandler(async (req, res) => {
+  try {
+      const id = req.user._id
+      const role = req.user.role
+      const _id = new Types.ObjectId(id)
+      await utilisateurModel.findOneAndUpdate({_id, role}, req.body)
+      res.status(200).json("Utilisateur modifié !!")
+  } catch (error) {
+    res.status(400)
+      throw new Error(error)
+    }
+})
+
+
+// l'utilisateur désactive son compte :
+exports.autoSupression = expressAsyncHandler(async (req, res) => {
+  try {
+    const id = req.user._id
+    await utilisateurModel.findOneAndUpdate(id, {isActive: false})
+        res.status(202).json("Compte désactivé !")
+    } catch (error) {
+        res.status(400)
+        throw new Error(error)
+  }
+})
+
+
+// Affichage des utilisateurs pour l'admin :
+exports.afficherTsUtilisateurs = expressAsyncHandler(async (req, res) => {
+  try {
+    const user = await utilisateurModel.find({role:{$ne:'Admin'}})
+    res.status(202).json(user)
+  } catch (error) {
+    res.status(400)
+  }
+})
+
+
+// Suppression d'un utilisateur par l'admin : 
+exports.supprimerUtilisateur = expressAsyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params
+    // supprime toutes les annonces de cet utilisateur
+    await utilisateurModel.findByIdAndDelete(id)
+    await annonceModel.deleteMany({idAuteur: id})
+    res.status(202).json("Utilisateur supprimé !! ")
+  } catch (error) {
+    res.status(400)
+    throw new Error(error)
+  }
+})
+
+//Afficher les informations de l'admin 
 exports.afficherAdmin = expressAsyncHandler(async (req,res) => {
   try {
     const id = req.user._id
@@ -256,79 +332,3 @@ exports.modifierAdmin = expressAsyncHandler(async (req, res) => {
       throw new Error(error)
   }
 })
-
-// Afficher toutes les pharmacies : 
-exports.afficherPharmacie = expressAsyncHandler(async (req, res) => {
-  try { 
-      const Pharmacie = await utilisateurModel.find({role:'Pharmacie'}).select('-mot_de_passe')
-      res.status(202).json(Pharmacie) 
-  } catch (error) {
-    res.status(400)
-    throw new Error(error)
-  }
-})
-
-// Afficher toutes les associations : 
-exports.afficherAssociation = expressAsyncHandler(async (req, res) => {
-  try {
-      const Association = await utilisateurModel.find({role:'Association'}).select('-mot_de_passe')
-      res.status(202).json(Association)
-  } catch (error) {
-    res.status(400)
-    throw new Error(error)
-  }
-})
-
-// Modifier un utilsateur : 
-exports.modifierUtilisateur = expressAsyncHandler(async (req, res) => {
-  try {
-      const id = req.user._id
-      const role = req.user.role
-      const _id = new Types.ObjectId(id)
-      await utilisateurModel.findOneAndUpdate({_id, role}, req.body)
-      res.status(200).json("Utilisateur modifié !!")
-  } catch (error) {
-      res.status(400)
-      throw new Error(error)
-  }
-})
-
-
-// l'utilisateur désactive son compte :
-exports.autoSupression = expressAsyncHandler(async (req, res) => {
-  try {
-        const id = req.user._id
-        await utilisateurModel.findOneAndUpdate(id, {isActive: false})
-        res.status(202).json("Compte désactivé !")
-    } catch (error) {
-        res.status(400)
-        throw new Error(error)
-  }
-})
-
-
-// Affichage des utilisateurs pour l'admin :
-exports.afficherTsUtilisateurs = expressAsyncHandler(async (req, res) => {
-  try {
-    const user = await utilisateurModel.find({role:{$ne:'Admin'}})
-     res.status(202).json(user)
-  } catch (error) {
-    res.status(400)
-  }
-})
-
-
-// Suppression d'un utilisateur par l'admin : 
-exports.supprimerUtilisateur = expressAsyncHandler(async (req, res) => {
-  try {
-      const { id } = req.params
-      // supprime toutes les annonces de cet utilisateur
-        await utilisateurModel.findByIdAndDelete(id)
-        await annonceModel.deleteMany({idAuteur: id})
-            res.status(202).json("Utilisateur supprimé !! ")
-    } catch (error) {
-            res.status(400)
-            throw new Error(error)
-  }
-})
-

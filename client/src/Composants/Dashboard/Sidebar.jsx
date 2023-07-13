@@ -22,7 +22,7 @@ function Sidebar() {
                 <li><Link to={'/Dashboard'}> <BsBarChartLineFill/> Statistiques</Link></li>
                 <li><Link to={'/Dashboard/Profil'}> <CgProfile className=''/> Profil</Link></li>
                 <li><Link to={'/Dashboard/Utilisateurs'}> <FaList/> Liste des utilisateurs</Link></li>
-                <li><Link to={'/'}> <IoIosWarning/> Liste des signalements</Link></li>
+                <li><Link to={'/Dashboard/Signalements'}> <IoIosWarning/> Liste des signalements</Link></li>
                 {/* <li><Link to={'/'}>Liste des signalements</Link></li> */}
               </div>
           </ul>

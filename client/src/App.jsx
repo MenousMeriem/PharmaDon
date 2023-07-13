@@ -28,6 +28,7 @@ import LayoutDashboard from "./Composants/Dashboard/LayoutDashboard"
 import Chart from "./Composants/Dashboard/Chart"
 import ProfilAdmin from "./Composants/Dashboard/ProfilAdmin"
 import Utilisateurs from "./Pages/PageDashboard/Utilisateurs"
+import Signalements from './Composants/Dashboard/Signalements'
  
 import { 
           Route, 
@@ -66,7 +67,7 @@ const router = createBrowserRouter (
         <Route index  element={<Chart/>}/>
         <Route path="Profil" element={<ProfilAdmin/>}/>
         <Route path="Utilisateurs" element={<Utilisateurs/>}/>
-
+        <Route path="Signalements" element={<Signalements/>} />
       </Route>
 
       <Route path="/*" element={<NotFound/>}/>
