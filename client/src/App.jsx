@@ -30,6 +30,9 @@ import ProfilAdmin from "./Composants/Dashboard/ProfilAdmin"
 import Utilisateurs from "./Pages/PageDashboard/Utilisateurs"
 import Signalements from './Composants/Dashboard/Signalements'
 import ListeAttente from "./Composants/Dashboard/ListeAttente"
+import Don from "./Pages/PageAccueil/Don"
+import Recuperation from "./Pages/PageAccueil/Recuperation"
+import ProtectAdmin from "./Composants/Dashboard/ProtectAdmin"
  
 import { 
           Route, 
@@ -44,6 +47,7 @@ const router = createBrowserRouter (
   createRoutesFromElements (
     <Route path="/" element={<Layout/>}>
       <Route index element={<Accueil/>}/>
+      <Route path='/Accueil' element={<Accueil/>}/>
       <Route path='/NosServices' element={<NosServices/>}/>
       <Route path="/AProposdeNous" element={<Propos/>}/>
       <Route path="/Connexion" element={<Connexion/>}/> 
@@ -64,14 +68,17 @@ const router = createBrowserRouter (
       <Route path="/PageAssociations" element={<PageAssociations/>}/>
       <Route path="/PageUneAssociation/:id" element={<PageUneAssociation/>}/>
       <Route path="/Medicaments" element={<Medicaments/>}/>
-      <Route path="/Dashboard" element={<LayoutDashboard/>}>
-        <Route index  element={<Chart/>}/>
-        <Route path="Profil" element={<ProfilAdmin/>}/>
-        <Route path="Utilisateurs" element={<Utilisateurs/>}/>
-        <Route path="Signalements" element={<Signalements/>} />
-        <Route path="Attente" element={<ListeAttente/>} />
+      <Route path="/Don" element={<Don/>}/>
+      <Route path="/Recuperation" element={<Recuperation/>}/>
+      <Route element={<ProtectAdmin role={role}/>}>
+        <Route path="/Dashboard" element={<LayoutDashboard/>}>
+          <Route index  element={<Chart/>}/>
+          <Route path="Profil" element={<ProfilAdmin/>}/>
+          <Route path="Utilisateurs" element={<Utilisateurs/>}/>
+          <Route path="Signalements" element={<Signalements/>} />
+          <Route path="Attente" element={<ListeAttente/>} />
+        </Route>
       </Route>
-
       <Route path="/*" element={<NotFound/>}/>
     </Route>
   )
@@ -79,7 +86,6 @@ const router = createBrowserRouter (
 
 
 function App() {
-
   return (
     <React.Fragment>
       <RouterProvider router={router}/>
