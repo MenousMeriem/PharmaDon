@@ -17,7 +17,7 @@ function MedicamentCarte({element}) {
                 <h2 className="text-sm"> Nom de l{element.proprietaire.role === "Pharmacie" ? "a pharmacie" : element.proprietaire.role === "Association" ? "'association" : "u donnateur"} : {element.proprietaire.role === "Pharmacie" ? element.proprietaire.adressePharmacie : element.proprietaire.role === "Association" ? element.proprietaire.adresseAsso : element.proprietaire.adresse } </h2> 
                 <h2 className="text-sm"> Adresse : {element.proprietaire.role === "Pharmacie" ? element.proprietaire.adressePharmacie : element.proprietaire.role === "Association" ? element.proprietaire.adresseAsso : element.proprietaire.adresse } </h2>    
                 <div className="card-actions justify-end">
-                <button className="border-b-2 border-black"> Signaler l'annonce </button>
+                  <button className="border-b-2 border-black"> Signaler l'annonce </button>
                 </div>
             </div>
         </div>
