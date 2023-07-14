@@ -52,7 +52,6 @@ function InformationsPharmacien() {
         try {           
             const reponse = await axios.post('http://localhost:5000/Utilisateur/AjouterUtilisateur', formData)
             if(reponse.data)  {
-                localStorage.setItem('Utilisateur', JSON.stringify(reponse.data));
                 setForm({
                     nom:"", 
                     prenom:"", 
@@ -71,7 +70,7 @@ function InformationsPharmacien() {
                     confirmer_mot_de_passe: ""
                 })
                 toast.success('Compte créer avec succès ') 
-                navigate('/PageProfilPharmacien')
+                navigate('/Connexion')
             }
         } catch (error) {
             console.log(error)

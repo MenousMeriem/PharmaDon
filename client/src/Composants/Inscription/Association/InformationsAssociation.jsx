@@ -11,26 +11,27 @@ function InformationsAssociation() {
     const navigate = useNavigate()
     const utilisateur = localStorage.getItem('Utilisateur') || null 
     
+    // 
     useEffect(() => {
         if (utilisateur) navigate('/Accueil');
     }, []);
 
     const [form, setForm] = useState({
-    nom:"", 
-    prenom:"", 
-    sexe:"Homme", 
-    date_de_naissance:"",
-    wilaya: "",
-    adresse:"",
-    mail:"",
-    numtel:"",
-    nomAsso:"",
-    numAsso:"",
-    wilayaAsso:"",
-    adresseAsso:"",
-    role:"Association",
-    mot_de_passe:"",
-    confirmer_mot_de_passe:""
+        nom:"", 
+        prenom:"", 
+        sexe:"Homme", 
+        date_de_naissance:"",
+        wilaya: "",
+        adresse:"",
+        mail:"",
+        numtel:"",
+        nomAsso:"",
+        numAsso:"",
+        wilayaAsso:"",
+        adresseAsso:"",
+        role:"Association",
+        mot_de_passe:"",
+        confirmer_mot_de_passe:""
     })
 
     const [fichierOne, setFichierOne] = useState('')

@@ -28,10 +28,10 @@ function CarteAnnonce({element}) {
                 <h2 className="text-sm"> Nom du médicament : {element.nomMedicament} </h2> 
             </div>
             {element.categorie ==='Demande' ? (
-            <span className="indicator-item badge badge-primary w-full h-10 bg-[#203374] rounded-md">Demande</span> 
+              <span className="indicator-item badge badge-primary w-full h-10 bg-[#203374] rounded-md">Demande</span> 
             ):( 
-           <span className="indicator-item badge badge-primary w-full h-10 bg-[#219EBC] border-[#219EBC] rounded-md">Don</span> 
-           )}
+              <span className="indicator-item badge badge-primary w-full h-10 bg-[#219EBC] border-[#219EBC] rounded-md">Don</span> 
+            )}
             
         </div>
     </div>

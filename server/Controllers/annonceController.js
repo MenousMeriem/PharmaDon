@@ -1,6 +1,7 @@
 const expressAsyncHandler = require('express-async-handler')
 const annonceModel = require('../Models/annonceModel')
 const medicamentModel = require('../Models/medicamentModel')
+const utilisateurModel = require('../Models/utilisateurModel')
 
 
 //Ajouter une annonce : 
@@ -85,17 +86,19 @@ exports.afficherAnnonce = expressAsyncHandler(async(req,res) => {
       let page = req.query.page
       const recherche = req.query.search
       if(recherche === '' || recherche === undefined){ 
-      const skip = (parseInt(page) -1) * 6
-      const documentCount = await medicamentModel.countDocuments()
-      const pages = Math.ceil(documentCount / 6)
-      const annonce = await medicamentModel.find().skip(skip).limit(6).populate('proprietaire')
-      res.status(201).json({pages,annonce})
+        const skip = (parseInt(page) -1) * 6
+        const documentCount = await medicamentModel.countDocuments()
+        const pages = Math.ceil(documentCount / 6)
+        const annonce = await medicamentModel.find().skip(skip).limit(6).populate('proprietaire')
+        res.status(201).json({pages,annonce})
     } else {
-      const skip = (parseInt(page) -1) * 6
-      const documentCount = await medicamentModel.find({nomMedicament: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).countDocuments()
-      const pages = Math.ceil(documentCount / 6)
-      const annonce = await medicamentModel.find({nomMedicament: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).skip(skip).limit(1).populate('proprietaire')
-      res.status(201).json({pages,annonce})
+        const skip = (parseInt(page) -1) * 6
+        // const documentC = await utilisateurModel.find({wilaya: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).countDocuments()
+        // const documentD = await utilisateurModel.find({role: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).countDocuments()
+        const documentCount = await medicamentModel.find({nomMedicament: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).countDocuments()
+        const pages = Math.ceil(documentCount / 6)
+        const annonce = await medicamentModel.find({nomMedicament: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).skip(skip).limit(1).populate('proprietaire')
+        res.status(201).json({pages,annonce})
     }
   } catch (error) {
       res.status(400)
@@ -133,9 +136,14 @@ exports.afficherAnnoncePharmacien = expressAsyncHandler(async(req,res) => {
 // Afficher les annonces des associations : 
 exports.afficherAnnonceAssociation= expressAsyncHandler(async(req,res) => {
   try {
-     const annonce = await annonceModel.find({idAuteur: req.params.id}).populate('idAuteur idMedicament')
-     const filteredResult = annonce.filter(an => an.idAuteur.role === "Association")
-     res.status(202).json(filteredResult)
+      const {page,id} = req.query
+      const skip = (parseInt(page)- 1) * 6
+      const medicaments = await medicamentModel.find({proprietaire: id}).skip(skip).limit(6)
+      const pages = Math.ceil(await medicamentModel.find({proprietaire: id}).countDocuments() / 6)
+      res.status(202).json({
+        pages, 
+        medicaments
+      })
   } catch (error) {
       res.status(400)
   }

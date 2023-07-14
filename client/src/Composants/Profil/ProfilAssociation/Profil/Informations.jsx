@@ -65,6 +65,7 @@ function Informations() {
         setLoading(false)
       }
     }
+    
     const [modifier, setModifier] = useState(false)
 
     useEffect( () => {

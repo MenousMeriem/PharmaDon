@@ -29,18 +29,29 @@ function ListUsers({element}) {
     }
 
   return (
+    
     <tr>
-        <th>1</th>
+        <th></th>
         <td>{element.nom}</td>
         <td>{element.prenom}</td>
-        <td>{element.nomAsso}</td>
-        <td>{element.nomPharmacie}</td>
         <td>{element.role}</td>
-    {/* <td><button className="btn bg-green-500 text-white border-none">Activer</button></td> */}   
-        <td><button className="btn bg-orange-400 text-white border-none">Désactiver</button></td>
+        {element.role === 'Pharmacie' ? (
+            <React.Fragment>
+                <td>{element.nomPharmacie}</td>
+            </React.Fragment>
+        ) : element.role === 'Association' ? (
+            <React.Fragment>
+                <td>{element.nomAsso}</td>
+            </React.Fragment> 
+        ): ( <td></td> )} 
+        {/* <td><button className="btn bg-green-500 text-white border-none">Activer</button></td> */}   
+        {/* <td><button className="btn bg-orange-400 text-white border-none">Désactiver</button></td> */}
         <td><button className='btn bg-red-700 text-white border-none' onClick={onDelete}> Supprimer </button></td>
     </tr>    
+
+
                 
+   
   )
 }
 
