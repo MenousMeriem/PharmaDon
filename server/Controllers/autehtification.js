@@ -41,6 +41,7 @@ exports.seConnecter = expressAsyncHandler(async (req, res) => {
             if(!utilisateurExiste[0].isActive) {
                 res.status(200).json({isActive: false,_id:utilisateurExiste[0]._id})
             }
+            
         const accessToken = genererToken({
             _id: utilisateurExiste[0]._id,
             role: utilisateurExiste[0].role,

@@ -1,6 +1,6 @@
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/ReactToastify.css'
-import React from "react"
+import React, { useState } from "react"
 import Layout from "./Composants/Layout/Layout"
 import Accueil from "./Pages/PageAccueil/Accueil"
 import NosServices from "./Pages/PageServices/NosServices"
@@ -39,10 +39,13 @@ import {
           createBrowserRouter,
           createRoutesFromElements,
           RouterProvider,
-          Navigate
         } from "react-router-dom"
 
- 
+
+// const [role, setRole] = useState('')
+// const locRole = JSON.parse(localStorage.getItem('role'))
+
+
 const router = createBrowserRouter (
   createRoutesFromElements (
     <Route path="/" element={<Layout/>}>
@@ -70,7 +73,8 @@ const router = createBrowserRouter (
       <Route path="/Medicaments" element={<Medicaments/>}/>
       <Route path="/Don" element={<Don/>}/>
       <Route path="/Recuperation" element={<Recuperation/>}/>
-      <Route element={<ProtectAdmin role={role}/>}>
+      {/* <Route element={<ProtectAdmin role={role}/>}> 
+      </Route> */}
         <Route path="/Dashboard" element={<LayoutDashboard/>}>
           <Route index  element={<Chart/>}/>
           <Route path="Profil" element={<ProfilAdmin/>}/>
@@ -78,7 +82,6 @@ const router = createBrowserRouter (
           <Route path="Signalements" element={<Signalements/>} />
           <Route path="Attente" element={<ListeAttente/>} />
         </Route>
-      </Route>
       <Route path="/*" element={<NotFound/>}/>
     </Route>
   )

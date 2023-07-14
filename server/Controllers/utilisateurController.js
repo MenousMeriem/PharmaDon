@@ -304,17 +304,15 @@ exports.afficherDetailUsers = expressAsyncHandler(async (req, res) => {
 
 // Activer le compte de l'utilisateur par l'admin : 
 exports.activerCompte = expressAsyncHandler(async(req, res) => {
-  // const id = req. recupérer l id de l utilisateur 
   const activer = await utilisateurModel.findOneAndUpdate({isLegit: true})
   res.status(200).json(activer)
 })
 
 
-
 // Suppression d'un utilisateur par l'admin : 
 exports.supprimerUtilisateur = expressAsyncHandler(async (req, res) => {
   try {
-    const { id } = req.params
+    const {id} = req.params
     // supprime toutes les annonces de cet utilisateur
     await utilisateurModel.findByIdAndDelete(id)
     await annonceModel.deleteMany({idAuteur: id})

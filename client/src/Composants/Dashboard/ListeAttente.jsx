@@ -76,10 +76,8 @@ function ListeAttente() {
     const onUpdate  = async (e) => {
         e.preventDefault();
         try {
-            if(user) {
-                await axios.put('http://localhost:5000/Utilisateur/ActiverCompte', config)
-                toast.success('utilisateur Activer!! ')
-            }
+            await axios.put('http://localhost:5000/Utilisateur/ActiverCompte', config)
+            toast.success('utilisateur Activer!! ')
         } catch (error) {
             const errorMessage = error && error.request && error.request.responseText ? JSON.parse(error.request?.responseText).message : error.message
             toast.error(errorMessage)

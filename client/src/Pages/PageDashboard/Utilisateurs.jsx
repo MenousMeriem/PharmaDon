@@ -49,16 +49,8 @@ function Utilisateurs({fetching, setFetching}) {
                             <th className='bg-slate-100 border-t-4 border-b-4'></th>
                             <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Nom</th>
                             <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Prenom</th>
-                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Role</th>    
-                            {'role' === 'Pharmacie' ? (
-                                <React.Fragment>
-                                    <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Nom de la pharmacie</th>
-                                </React.Fragment>
-                            ) : 'role' === 'Association' ? (
-                                <React.Fragment>
-                                    <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Nom l'association </th>
-                                </React.Fragment> 
-                            ): ( <th></th> )} 
+                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Role</th>     
+                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Nom d'...</th>
                             <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Supprimer</th>    
                         </tr>    
                     </thead>
