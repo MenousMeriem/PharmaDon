@@ -1,7 +1,6 @@
 import React from 'react'
 import {toast} from 'react-toastify'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
 
 
 function ListUsers({element}) {
@@ -29,31 +28,25 @@ function ListUsers({element}) {
         }
     }
 
-  return (
     
-    <tr>
-        <th></th>
-        <td>{element.nom}</td>
-        <td>{element.prenom}</td>
-        <td>{element.role}</td>
-        {element.role === 'Pharmacie' ? (
-            <React.Fragment>
-                <td>{element.nomPharmacie}</td>
-            </React.Fragment>
-        ) : element.role === 'Association' ? (
-            <React.Fragment>
-                <td>{element.nomAsso}</td>
-            </React.Fragment> 
-        ): ( <td></td> )} 
-        {/* <td><button className="btn bg-green-500 text-white border-none">Activer</button></td> */}   
-        {/* <td><button className="btn bg-orange-400 text-white border-none">Désactiver</button></td> */}
-        <td><button className='btn bg-red-700 text-white border-none' onClick={onDelete}> Supprimer </button></td>
-    </tr>    
-
-
-                
-   
-  )
+    return (
+        <tr>
+            <th></th>
+            <td>{element.nom}</td>
+            <td>{element.prenom}</td>
+            <td>{element.role}</td>
+            {element.role === 'Pharmacie' ? (
+                <React.Fragment>
+                    <td>{element.nomPharmacie}</td>
+                </React.Fragment>
+                ) : element.role === 'Association' ? (
+                <React.Fragment>
+                    <td>{element.nomAsso}</td>
+                </React.Fragment> 
+                ): ( <td></td> )} 
+            <td><button className='btn bg-red-700 text-white border-none' onClick={onDelete}> Supprimer </button></td>
+        </tr>       
+    )
 }
 
 export default ListUsers

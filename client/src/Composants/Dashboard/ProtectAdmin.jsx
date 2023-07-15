@@ -2,11 +2,14 @@ import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 
 const protectAdmin = (utilisateur) => {
-    const isAdmin = utilisateur?.toLowerCase() === 'Admin' ? true : false
+    const isAdmin = utilisateur?.toLowerCase() === 'admin' ? true : false
 return isAdmin
 }
 
-function ProtectAdmin({role}) {
+
+function ProtectAdmin() {
+    const role = JSON.parse(localStorage.getItem('Utilisateur')).role
+    // console.log(role)
     const isAdmin = protectAdmin(role)
 return isAdmin ? <Outlet/> : <Navigate to="/Connexion"/> 
 }

@@ -30,11 +30,14 @@ function Connexion() {
         try {
             const reponse = await axios.post('http://localhost:5000/Seconnecter/seConnecter', form)
             if(reponse.data && reponse.data.isActive == false) {return navigate('/Reactivation?id='+reponse.data._id)}
-            console.log(reponse.data)
             if(reponse.data) {
                 if((reponse.data.role==='Pharmacie'|| reponse.data.role==='Association') && reponse.data.isLegit===false) return toast.warning("votre compte n'est pas encore activé !")
                 localStorage.setItem('Utilisateur', JSON.stringify(reponse.data))
-                navigate('/Accueil')
+                if(reponse.data.role==='Admin') {
+                    navigate('/Dashboard')
+                }else {
+                    navigate('/Accueil')
+                }
             }
         } catch (error) {
             const errorMessage = error && error.request && error.request.responseText ? JSON.parse(error.request?.responseText).message : error.message

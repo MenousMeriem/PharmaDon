@@ -62,8 +62,6 @@ function Utilisateurs({fetching, setFetching}) {
                 </table>
             </div>
         </div>
-     
-
   )
 }
 
