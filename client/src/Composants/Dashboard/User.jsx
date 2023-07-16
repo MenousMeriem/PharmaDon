@@ -18,7 +18,7 @@ function User({element , setActiver ,activer, config} ) {
   return (
 
     <tr>
-        <td>  {element.nom}  </td>
+        <td> {element.nom}  </td>
         <td> {element.role} </td>
         <td>
             <label htmlFor="my_modal_7" className="btn bg-[#203374] text-white text-base text-center font-black lg:text-base items-center">Détail</label>

@@ -24,8 +24,8 @@ function Sidebar() {
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
           <ul className="menu p-4 w-80 h-full text-base-content">
               {/* Sidebar content here */}
-              <div className="avatar left-14">
-                <div className="w-44 rounded">
+              <div className="avatar left-20">
+                <div className="w-32 rounded">
                   <img src={image}/>
                 </div>
               </div>

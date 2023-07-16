@@ -2,9 +2,9 @@ const mongoose = require('mongoose')
 
 const categorie = Object.freeze(["Demande","Don"])
 const raison = Object.freeze(
-    ["- Je pense que cette annonce pourrait être une tentative de vente illégale de médicaments, ce qui est contraire aux politiques de la plateforme", 
-    " - Cette annonce semble proposer des médicaments contrefaits ou de qualité douteuse, ce qui peut présenter des risques pour la santé des bénéficiaires.", 
-    " - Je crois que cette annonce viole les règles de votre plateforme en proposant des médicaments restreints ou interdits."]) 
+    ["Je pense que cette annonce pourrait être une tentative de vente illégale de médicaments, ce qui est contraire aux politiques de la plateforme", 
+    "Cette annonce semble proposer des médicaments contrefaits ou de qualité douteuse, ce qui peut présenter des risques pour la santé des bénéficiaires.", 
+    "Je crois que cette annonce viole les règles de votre plateforme en proposant des médicaments restreints ou interdits."]) 
 
 const annonceSchema = mongoose.Schema(
     {   
@@ -37,12 +37,7 @@ const annonceSchema = mongoose.Schema(
         signalement: [{
             type: String,
             enum: raison  
-        }], 
-        // nbreSignalement: [{
-        //     type: Number, 
-        // }]
-
-        
+        }],   
     }, 
     {timestamps: true}
 )

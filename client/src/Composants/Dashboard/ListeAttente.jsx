@@ -18,7 +18,6 @@ function ListeAttente() {
         }
     } 
 
-    console.log(currentUserObject.accessToken)
 
     // Affichage des informations de l'utilisateur en attente : 
     const [data, setData] = useState([])
@@ -73,8 +72,6 @@ function ListeAttente() {
         }
     }
 
-    console.log(data)
-
     // Pour activer le compte d'un utilisateur : 
     const [activer, setActiver] = useState(false)
     
@@ -83,8 +80,6 @@ function ListeAttente() {
         fetchData()
     }, [activer])
     
-
-    // console.log(data)
 
   if(loading) return ( <Lottie animationData={animation} /> )
 
@@ -104,7 +99,7 @@ function ListeAttente() {
                     <tbody className='text-[#203374]'>  
                         {data.map((element, index) => ( 
                             <User element={element} setActiver={setActiver} activer={activer} key={element._id} config={config} />
-                    ))}
+                        ))}
                     </tbody>
                 </table>
             </div>            

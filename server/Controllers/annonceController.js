@@ -107,7 +107,6 @@ exports.afficherAnnonce = expressAsyncHandler(async(req,res) => {
 })
 
 
-
 // Afficher les annonces de l'utilisateur courant : 
 exports.afficherAnnonceUserCourant = expressAsyncHandler(async(req,res) => {
   try {
@@ -132,7 +131,6 @@ exports.afficherAnnoncePharmacien = expressAsyncHandler(async(req,res) => {
       medicaments
      })
 })
-
 // Afficher les annonces des associations : 
 exports.afficherAnnonceAssociation= expressAsyncHandler(async(req,res) => {
   try {
@@ -148,8 +146,6 @@ exports.afficherAnnonceAssociation= expressAsyncHandler(async(req,res) => {
       res.status(400)
   }
 })
-
-
 // Afficher les annonces des patients :
 exports.afficherAnnoncePatient = expressAsyncHandler(async(req,res) => {
   try {
@@ -161,28 +157,23 @@ exports.afficherAnnoncePatient = expressAsyncHandler(async(req,res) => {
   }
 })
 
-// Signalement 
+// Signalements :
 exports.signalerAnnonce = expressAsyncHandler(async(req, res) => {
-  try {
     const {id} = req.params
-    const { raison} = req.body
+    const {raison} = req.body
     await annonceModel.findByIdAndUpdate(id,{$push: {signalement: raison}} )
     res.status(200).json(`Annonce [${id}] signaler avec succes`)
-  } catch (error) {
-    res.status(400)
-  }
 })
 
+
 // Affichage des signalements : 
+exports.afficherSignalements = expressAsyncHandler(async(req, res) => {
+  const signalement = await annonceModel.find({signalement: {$ne:[]}})
+  res.status(200).json(signalement)
+})
 
 
-
-
-
-
-
-
-// pagination 
+// Pagination :
 exports.pagination = expressAsyncHandler(async(req, res) => {
   try {
       const {pageActuelle, recherche, wilaya} = req.query
