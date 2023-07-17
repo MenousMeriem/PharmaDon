@@ -9,7 +9,6 @@ return isAdmin
 
 function ProtectAdmin() {
     const role = JSON.parse(localStorage.getItem('Utilisateur')).role
-    // console.log(role)
     const isAdmin = protectAdmin(role)
 return isAdmin ? <Outlet/> : <Navigate to="/Connexion"/> 
 }

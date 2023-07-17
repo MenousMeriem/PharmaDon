@@ -35,11 +35,11 @@ import Recuperation from "./Pages/PageAccueil/Recuperation"
 import ProtectAdmin from "./Composants/Dashboard/ProtectAdmin"
  
 import { 
-          Route, 
-          createBrowserRouter,
-          createRoutesFromElements,
-          RouterProvider,
-        } from "react-router-dom"
+  Route, 
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom"
 
 
 const router = createBrowserRouter (
