@@ -1,6 +1,6 @@
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/ReactToastify.css'
-import React, { useState } from "react"
+import React from "react"
 import Layout from "./Composants/Layout/Layout"
 import Accueil from "./Pages/PageAccueil/Accueil"
 import NosServices from "./Pages/PageServices/NosServices"
@@ -33,6 +33,7 @@ import ListeAttente from "./Composants/Dashboard/ListeAttente"
 import Don from "./Pages/PageAccueil/Don"
 import Recuperation from "./Pages/PageAccueil/Recuperation"
 import ProtectAdmin from "./Composants/Dashboard/ProtectAdmin"
+import ProtectUser from "./Composants/Dashboard/ProtectUser"
  
 import { 
   Route, 
@@ -46,6 +47,7 @@ const router = createBrowserRouter (
   createRoutesFromElements (
     <Route path="/" element={<Layout/>}>
       <Route index element={<Accueil/>}/>
+      {/* <Route element={<ProtectUser/>}></Route> */}
       <Route path='/Accueil' element={<Accueil/>}/>
       <Route path='/NosServices' element={<NosServices/>}/>
       <Route path="/AProposdeNous" element={<Propos/>}/>

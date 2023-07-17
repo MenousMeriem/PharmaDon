@@ -57,7 +57,7 @@ function ReinitialiserMdp() {
                 toast.error(error.reponse?.data?.message || error.message)
             }
         } 
-        if(loading)return <h1 className='font-black text-6xl text-blue-700 text-center mt-32'>Loding...</h1>
+        if(loading)return <h1 className='font-black text-6xl text-blue-700 text-center mt-32'>Loading...</h1>
   return (
     <div>
         <h1 className='text-center text-[#203374] text-lg lg:text-2xl lg:mt-20'> Reinitialisation du mot de passe </h1>

@@ -25,7 +25,7 @@ function Informations() {
     const [naissanceValue, setnaissanceValue] = useState('')
     const [wilayaValue, setwilayaValue] = useState('')
     const [adresseValue, setadresseValue] = useState('')
-    const [numtelValue, setnumtelValue] = useState()
+    const [numtelValue, setnumtelValue] = useState('')
     const [mailValue, setmailValue] = useState('')
     const [nomAssoValue, setnomAssoValue] = useState('')
     const [wilayaAssoValue, setwilayaAssoValue] = useState('')
@@ -54,10 +54,7 @@ function Informations() {
             setnumAssoValue(reponse.data.numAsso)
             setwilayaAssoValue(reponse.data.wilayaAsso)
             setadresseAssoValue(reponse.data.adresseAsso)
-            setnomPharmacieValue(reponse.data.nomPharmacie)
-            setnumPharmacieValue(reponse.data.numPharmacie)
-            setwilayaPharmacieValue(reponse.data.wilayaPharmacie)
-            setadressePharmacieValue(reponse.data.adressePharmacie)
+
         }
       } catch (error) {
         toast.error(error.response?.data?.message||error.message)
