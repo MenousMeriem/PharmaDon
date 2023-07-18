@@ -1,6 +1,7 @@
 import React from 'react'
 import Lottie from "lottie-react"
 import animation from '../../assets/Annimations/112605-medicine-online.json'
+import { Link } from 'react-router-dom'
 
 function PartieUne() {
   return (
@@ -13,7 +14,9 @@ function PartieUne() {
                     Nous regroupons plusieurs pharmacies de confiance, toutes engagées à vous offrir des produits pharmaceutiques de qualité 
                     et des services de santé de premier ordre. Avec notre réseau étendu, nous sommes présents dans plusieurs localités.
                     </p>
-                    <button className="btn text-sm md:text-sm border-none bg-[#203374] hover:bg-[#219EBC] text-white md:float-left lg:float-left">Toutes les pharmacies</button>
+                    <Link to={'/PagePharmacies'}>
+                        <button className="btn text-sm md:text-sm border-none bg-[#203374] hover:bg-[#219EBC] text-white md:float-left lg:float-left">Toutes les pharmacies</button>
+                    </Link>
                 </div>
                 <div>
                     <Lottie className='w-[50] hidden md:block' animationData={animation}/>

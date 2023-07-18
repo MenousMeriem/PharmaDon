@@ -46,12 +46,12 @@ function UnePharmacie({fetching, setFetching}) {
 // console.log(data.medicaments)
   return ( 
     <div>
-        {/* <Breadcrumbs/> */}
+        <Breadcrumbs/>
         {/* <Divider/> */}
         <div className='grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3 '>
           {data.medicaments && data.medicaments.length > 0 ? data.medicaments.map(element => (
               <CarteAnnonce key={element._id} fetching={fetching} setFetching={setFetching} element={element} />
-          )) : <h1> Aucun médicament n'est disponible  </h1> } 
+          )) : <h1 className='text-[#203374] font-black text-2xl p-10'> Aucun médicament n'est disponible  </h1> } 
         </div>
         <div className="join flex justify-center my-8">
            {pages}

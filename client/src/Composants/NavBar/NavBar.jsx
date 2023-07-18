@@ -86,7 +86,9 @@ function NavBar() {
                 </ul>
               </div>
               <div>
+              <Link to={'/Accueil'}>
                 <figure> <img src={img} className='w-20 h-16 hidden lg:block'/> </figure>
+              </Link>
               </div> 
             </div>
 

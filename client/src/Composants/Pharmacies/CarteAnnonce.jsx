@@ -42,8 +42,8 @@ function CarteAnnonce({element}) {
             <div className="card-body m-5">
               <h2 className="text-sm"> Nom du médicament : {element.nomMedicament} </h2> 
             </div>
-            <div className='m-8 '>
-              <label htmlFor="my_modal_7" className="text-[#203374] text-base font-blacK underline">Signaler l'annonce</label>
+            <div className='m-8 flex justify-center'>
+              <label htmlFor="my_modal_7" className="text-red-600 text-base font-blacK underline">Signaler l'annonce</label>
               <input type="checkbox" id="my_modal_7" className="modal-toggle" />
               <div className="modal">
                 <div className="modal-box leading-10">

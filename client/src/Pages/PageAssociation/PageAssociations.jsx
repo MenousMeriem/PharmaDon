@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import BarreRecherche from '../../Composants/BarreRecherche'
 import HeroAssociation from '../../Composants/Associations/HeroAssociation'
 import CarteAssociation from '../../Composants/Associations/CarteAssociation'
 import animation from '../../assets/Annimations/102003-medicine.json'
@@ -30,7 +29,6 @@ function PageAssociations({fetching, setFetching}) {
   return (
     <div>
         <HeroAssociation/>
-        {/* <BarreRecherche/> */}
         {data.length ? data.map(element => (
             <CarteAssociation key={element._id} fetching={fetching} setFetching={setFetching} element={element} />
         )) : <h1 className='text-3xl p-10 text-[#203374]'> Aucune association n'est disponible ! </h1> } 

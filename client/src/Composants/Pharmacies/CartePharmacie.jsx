@@ -11,8 +11,8 @@ function CartePharmacie({element}) {
     useState(element.adressePharmacie)
   
   return ( 
-    <div className='p-4'>
-      <div className='bg-[#0DC4C7] bg-opacity-25 w-full rounded-lg'> 
+    <div className='p-4 last-of-type:mb-8'>
+      <div className='bg-[#0DC4C7] bg-opacity-25 w-full rounded-lg shadow-xl'> 
         <div className="card card-side flex-col md:flex-row lg:flex-row p-3">
           <figure><img className='w-96 rounded-xl p-3' src={image}/></figure>
           <div className="card-body bg-white rounded-lg text-[#203374] text-base m-2">

@@ -44,8 +44,8 @@ function PageUneAssociation({fetching, setFetching}) {
 
     return (
     <div>
-        {/* <Breadcrumbs/> */}
-        <Divider/>
+        <Breadcrumbs/>
+        {/* <Divider/> */}
         <div className='grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3 '>
           {data.medicaments && data.medicaments.length > 0 ? data.medicaments.map(element => (
                 <CarteAnnonce key={element._id} fetching={fetching} setFetching={setFetching} element={element} />

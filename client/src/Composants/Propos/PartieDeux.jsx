@@ -1,6 +1,7 @@
 import React from 'react'
 import Lottie from "lottie-react"
 import animation from '../../assets/Annimations/56120-medical-shield.json'
+import { Link } from 'react-router-dom'
 
 function PartieDeux() {
   return (
@@ -18,7 +19,9 @@ function PartieDeux() {
                     de chaque individu. Nous croyons en l'importance de l'accessibilité, de la compassion et de l'engagement envers 
                     des soins de santé de qualité pour tous.
                     </p>
-                    <button className="btn text-sm md:text-sm border-none bg-[#203374] hover:bg-[#219EBC] text-white md:float-right lg:float-right">Toutes les associations</button>
+                    <Link to={'/PageAssociations'}>
+                        <button className="btn text-sm md:text-sm border-none bg-[#203374] hover:bg-[#219EBC] text-white md:float-right lg:float-right">Toutes les associations</button>
+                    </Link>
                 </div>               
             </div>
         </div>

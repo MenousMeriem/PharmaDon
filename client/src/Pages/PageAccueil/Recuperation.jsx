@@ -5,8 +5,8 @@ function Recuperation() {
   return (
 
     <div>
-      <div className="w-96 h-60 flex justify-center">
-          <div><img src={image} /></div>
+      <div className="w-full h-60 flex justify-center">
+         <img className='' src={image} />
       </div>
       <div className="hero lg:min-h-fit lg:py-20 md:py-10 py-5 bg-white text-[#203374]">
           <div className="hero-content">
@@ -14,7 +14,7 @@ function Recuperation() {
                   <h1 className="text-3xl font-black text-center md:text-justify lg:text-justify">
                       Bienvenue sur notre application de don de médicaments en ligne !
                   </h1>
-                  <p className="lg:py-6 md:py-4 py-4 lg:text-lg text-center md:text-justify lg:text-justify">
+                  <div className="lg:py-6 md:py-4 py-4 lg:text-lg text-center md:text-justify lg:text-justify">
                     <ul className='list-disc list-inside leading-10 mb-3'>
                         <li>
                             Dans notre application de don de médicaments en ligne, nous facilitons non seulement le processus de don, 
@@ -53,7 +53,7 @@ function Recuperation() {
                             contacter.
                         </li>
                     </ul>
-                  </p>
+                  </div>
               </div>
           </div>
       </div>

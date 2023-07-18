@@ -287,7 +287,7 @@ exports.autoSupression = expressAsyncHandler(async (req, res) => {
 // Affichage des utilisateurs pour l'admin :
 exports.afficherTsUtilisateurs = expressAsyncHandler(async (req, res) => {
   try {
-    const user = await utilisateurModel.find({role:{$ne:'Admin'}})
+    const user = await utilisateurModel.find({role:{$ne:'Admin'}, isLegit:true})
     res.status(202).json(user)
   } catch (error) {
     res.status(400)

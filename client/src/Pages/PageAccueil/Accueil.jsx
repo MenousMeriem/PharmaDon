@@ -12,7 +12,6 @@ function Accueil() {
     <div className='relative'>
       {/* <div className="h-20 w-20 fixed bottom-8 right-8 z-50"><BsFillChatDotsFill className="w-2/3 h-2/3 fill-blue-900"/></div> */}
       <Hero/>
-      {/* <BarreRecherche/> */}
       <DescriptionPharmacie/>
       <Divider/>
       <NosServices/>

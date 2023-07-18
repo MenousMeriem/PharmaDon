@@ -14,8 +14,8 @@ function Don() {
                     <h1 className="text-3xl font-black text-center md:text-justify lg:text-justify">
                         Bienvenue sur notre application de don de médicaments en ligne !
                     </h1>
-                    <p className="lg:py-6 md:py-4 py-4 lg:text-lg text-center md:text-justify lg:text-justify">
-                        <h1 className='font-bold underline'>1. Don par le biais d'associations :</h1> 
+                    <h1 className='font-bold underline text-start text-lg mt-5'>1. Don par le biais d'associations :</h1> 
+                    <div className="lg:py-6 md:py-4 py-4 lg:text-lg text-center md:text-justify lg:text-justify">
                         <ul className='list-disc list-inside leading-10 mb-3'>
                             <li>
                                 Nous avons établi des partenariats avec des associations spécialisées dans la collecte et la distribution 
@@ -55,7 +55,7 @@ function Don() {
                                 des préoccupations, n'hésitez pas à nous contacter.
                             </li>
                         </ul>
-                    </p>
+                    </div>
                 </div>
             </div>
         </div>

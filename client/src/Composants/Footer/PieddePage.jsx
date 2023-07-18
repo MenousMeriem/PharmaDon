@@ -6,15 +6,13 @@ function PieddePage() {
   return (
         <footer className="footer p-10 bg-[#219dbc19] text-base-content">
             <div>
-                <figure> 
-                    <Link to={'/Accueil'}><img src={img} className='w-48 h-48' /> </Link> 
-                </figure>
+               <Link to={'/Accueil'}><img src={img} className='w-48 h-48' /> </Link>   
             </div> 
             <div className='text-[#203374]'>
                 <span className="text-lg">Services</span> 
                 <Link to={'/PagePharmacies'} className="link link-hover">Pharmacies</Link> 
                 <Link to={"/PageAssociations"} className="link link-hover">Associations</Link> 
-                <Link className="link link-hover">Médicaments</Link> 
+                <Link to={"/Medicaments"}className="link link-hover">Médicaments</Link> 
                 {/* <Link className="link link-hover">Advertisement</Link> */}
             </div> 
             <div className=' text-[#203374]'>

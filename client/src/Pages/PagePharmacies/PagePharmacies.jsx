@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import HeroPharma from '../../Composants/Pharmacies/HeroPharma'
-import BarreRecherche from '../../Composants/BarreRecherche'
 import CartePharmacie from '../../Composants/Pharmacies/CartePharmacie'
 import {toast} from 'react-toastify'
 import axios from 'axios'
@@ -30,7 +29,6 @@ function PlusieursPharmacies({fetching, setFetching}) {
 
     <div>
         <HeroPharma/>
-        {/* <BarreRecherche/> */}
         {data.length ? data.map(element => (
             <CartePharmacie key={element._id} fetching={fetching} setFetching={setFetching} element={element} />
         )) : <h1 className='text-3xl p-10 text-[#203374]'> y pas </h1> } 

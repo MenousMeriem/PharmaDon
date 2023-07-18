@@ -47,7 +47,6 @@ const router = createBrowserRouter (
   createRoutesFromElements (
     <Route path="/" element={<Layout/>}>
       <Route index element={<Accueil/>}/>
-      {/* <Route element={<ProtectUser/>}></Route> */}
       <Route path='/Accueil' element={<Accueil/>}/>
       <Route path='/NosServices' element={<NosServices/>}/>
       <Route path="/AProposdeNous" element={<Propos/>}/>
@@ -59,11 +58,6 @@ const router = createBrowserRouter (
       <Route path="/InscriptionPharmacien" element={<InscriptionPharmacien/>}/>
       <Route path="/InscriptionAssociation" element={<InscriptionAssociation/>}/>
       <Route path="/InscriptionPatient" element={<InscriptionPatient/>}/>
-      <Route path="/PageMesAnnonces" element={<PageMesAnnonces/>}/> 
-      <Route path="/PageProfilPharmacien" element={<PageProfilPharmacien/>}/>
-      <Route path="/PageProfilAssociation" element={<PageProfilAssociation/>}/>
-      <Route path="/PageProfilAdmin" element={<PageProfilAdmin/>}/>
-      <Route path="/PageProfilPatient" element={<PageProfilPatient/>}/>
       <Route path="/PagePharmacies" element={<PagePharmacies/>}/>
       <Route path="/PageUnePharmacie/:id" element={<PageUnePharmacie/>}/>
       <Route path="/PageAssociations" element={<PageAssociations/>}/>
@@ -71,6 +65,13 @@ const router = createBrowserRouter (
       <Route path="/Medicaments" element={<Medicaments/>}/>
       <Route path="/Don" element={<Don/>}/>
       <Route path="/Recuperation" element={<Recuperation/>}/>
+      <Route element={<ProtectUser/>}>
+        <Route path="/PageMesAnnonces" element={<PageMesAnnonces/>}/> 
+        <Route path="/PageProfilPharmacien" element={<PageProfilPharmacien/>}/>
+        <Route path="/PageProfilAssociation" element={<PageProfilAssociation/>}/>
+        <Route path="/PageProfilAdmin" element={<PageProfilAdmin/>}/>
+        <Route path="/PageProfilPatient" element={<PageProfilPatient/>}/>
+      </Route>
       <Route element={<ProtectAdmin/>}> 
         <Route path="/Dashboard" element={<LayoutDashboard/>}>
           <Route index  element={<Chart/>}/>
