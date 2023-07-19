@@ -31,7 +31,6 @@ function Medicaments({fetching, setFetching}) {
             const reponse = await axios.get(`http://localhost:5000/Annonce/AfficherAnnonce?page=${currentPage}&search=${search}`)
             setData(reponse.data)
             setTotalPages(reponse.data.pages)
-
         } catch (error) {
             toast.error(error.message)            
         }

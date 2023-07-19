@@ -2,7 +2,7 @@ import React from 'react'
 
 function MedicamentCarte({element}) {
   return (
-    <div className='p-10 '>
+    <div className='p-10'>
         <div className="card card-compact bg-base-100 shadow-xl w-80 lg:w-96 lg:h-full text-[#203374]">
             {element.categorie ==='Demande' ? (
               <span className="indicator-item badge badge-primary w-full h-10 bg-[#203374] rounded-md">Demande</span> 

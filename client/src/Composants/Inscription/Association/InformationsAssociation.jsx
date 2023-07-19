@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import wilayas from '../../../assets/Data/Wilaya_Of_Algeria.json'
-import wilayasAsso from '../../../assets/Data/Wilaya_Of_Algeria.json'
 import { toast } from 'react-toastify'
 import axios from "axios"
 
@@ -16,7 +15,7 @@ function InformationsAssociation() {
         if (utilisateur) navigate('/Accueil');
     }, []);
 
-    const [form, setForm] = useState({
+        const [form, setForm] = useState({
         nom:"", 
         prenom:"", 
         sexe:"Homme", 
@@ -174,9 +173,9 @@ function InformationsAssociation() {
                         <label className="label">
                             <span className="label-text text-[#203374]"> Wilaya de l'association*</span>
                         </label>
-                        <select name='wilayaAsso' value={form.wilayaAsso} required onChange={handleOnChange} className="select select-bordered border-2 border-[#0DC4C7] w-full max-w-lg mt-2 ">
+                        <select name='wilaya' value={form.wilaya} required onChange={handleOnChange} className="select select-bordered border-2 border-[#0DC4C7] w-full max-w-lg mt-2 ">
                             <option disabled hidden value=""> Wilaya de l'association </option>
-                            {wilayasAsso.map(w => {
+                            {wilayas.map(w => {
                                 return <option key={w.id} value={w.name}>{w.code} - {w.name}</option>
                             }) }
                         </select> 

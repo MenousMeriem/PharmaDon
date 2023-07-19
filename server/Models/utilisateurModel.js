@@ -116,18 +116,18 @@ const associationSchema = mongoose.Schema(
             type: String, 
             required: true,
         }, 
-        fichierIDPresident: [
+        fichierIDPresident: 
         {
             type:String,
             required: true,
         }
-        ],
-        fichierIDAssociation: [
+        ,
+        fichierIDAssociation: 
         {
             type:String,
             required: true,
         }
-        ], 
+        , 
 
     }
 )
