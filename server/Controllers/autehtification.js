@@ -160,8 +160,8 @@ exports.resetPassword = expressAsyncHandler(async (req, res) => {
     }
     
     res.status(200).json({success: true, message: "Clé de réinitialisation envoyer avec succés!"})
-
 }) 
+
 
 exports.verifierCle = expressAsyncHandler(async (req, res) => {
     const {key} = req.query //get dans route qui n'a pas de body mm delete que post et put 
@@ -169,6 +169,7 @@ exports.verifierCle = expressAsyncHandler(async (req, res) => {
     if (!user) return res.status(200).json({success: false, mail: null})
     res.status(200).json({success: true, mail: user.mail})
 })
+
 
 exports.changePassword = expressAsyncHandler(async (req, res) => {
     const {mdp, mail} = req.body

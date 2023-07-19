@@ -127,7 +127,6 @@ const associationSchema = mongoose.Schema(
             type:String,
             required: true,
         }
-        , 
 
     }
 )

@@ -54,7 +54,7 @@ function NavBar() {
       }
     }
 
-  // const role = JSON.parse(user).role
+  const role = JSON.parse(user).role
   return (
     <div>
         <div className="navbar bg-base-100 p-5">
@@ -101,7 +101,7 @@ function NavBar() {
             </div>
 
             <div className="navbar-end ">
-              {user==='Pharmacie' || user==='Association' || user==='Patient' ? 
+              {role==='Pharmacie' || role==='Association' || role==='Patient' ? 
                 <div className="dropdown dropdown-end">
                   <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">
@@ -120,7 +120,7 @@ function NavBar() {
                   </ul>
                 </div>
 
-                : user==='Admin' ?
+                : role==='Admin' ?
                 <div className="dropdown dropdown-end">
                   <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">

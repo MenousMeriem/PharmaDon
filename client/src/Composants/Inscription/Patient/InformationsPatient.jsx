@@ -6,7 +6,7 @@ import axios from "axios"
 
 function InformationsPatient() {
 
-    const [form, setForm] = useState({ 
+        const [form, setForm] = useState({ 
         nom:"", 
         prenom:"", 
         sexe:"Homme", 
@@ -56,7 +56,7 @@ function InformationsPatient() {
                 confirmer_mot_de_passe:""
             })
             toast.success('Compte créer avec succès ')
-            navigate('/PageProfilPatient')
+            navigate('/Connexion')
             }
         } catch (error) {
             console.log(error)
