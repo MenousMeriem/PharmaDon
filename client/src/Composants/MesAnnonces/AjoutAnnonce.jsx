@@ -57,7 +57,7 @@ function AjoutAnnonce({refetch, setRefetch}) {
     }
 
   return (
-    <div className='h-full  w-full'>        
+    <div className='h-full w-full'>        
         <section className='bg-white mx-auto w-full lg:px-5 '>   
             <form onSubmit={ajouterAnnonce} className="card-body rounded-lg text-[#203374]">
                 <h3>Nom du médicament : </h3>
@@ -86,16 +86,16 @@ function AjoutAnnonce({refetch, setRefetch}) {
                 type="text" name='detail' value={input.detail} onChange={onChange} required></textarea>
                                 
                 <div className='flex items-start justify-between gap-4'>
-                    <button className="btn flex-1 bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none"
-                    type='submit'>
-                        Ajouter une annonce 
-                    </button>  
                     <div className='flex justify-center'>
                         <label htmlFor='ci' >
                             <span className="label-text  text-white btn bg-[#0DC4C7] border-none hover:bg-white hover:text-[#0DC4C7] hover:border-none w-full max-w-lg "> Ajouter photo(s)</span>
                         </label>
-                        <input type="file" id='ci' name='image' onChange={e => setImage(e.target.files)} className="input hidden input-bordered border-[#203374] w-full max-w-lg mt-2" />
+                        <input type="file" id='ci' name='image' onChange={e => setImage(e.target.files)} className="input hidden input-bordered border-[#203374] w-full max-w-lg" />
                     </div>   
+                    <button className="btn flex-1 bg-green-500 text-white border-none"
+                    type='submit'>
+                        Ajouter une annonce 
+                    </button>  
                 </div>      
             </form>
         </section>
