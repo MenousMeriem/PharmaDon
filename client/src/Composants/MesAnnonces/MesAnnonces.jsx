@@ -50,9 +50,11 @@ function MesAnnonces({fetching, setFetching}) {
         </div>
       </div>
       <h1 className='text-[#203374] text-xl text-center font-black p-5 lg:text-3xl lg:mt-10 '> Mes annonces</h1>
-      {data.length ? data.map(element => (
-        <CarteAnnonce key={element._id} fetching={fetching} setFetching={setFetching} element={element} />
-      )) : <h1 className='text-3xl p-10 text-[#203374]'> Aucune annonce n'est disponible ! </h1> }   
+      <div className='grid grid-cols-3 gap-9 p-5'>
+        {data.length ? data.map(element => (
+          <CarteAnnonce key={element._id} fetching={fetching} setFetching={setFetching} element={element} />
+        )) : <h1 className='text-3xl p-10 text-[#203374]'> Aucune annonce n'est disponible ! </h1> }   
+      </div>
     </div>      
   )
 }

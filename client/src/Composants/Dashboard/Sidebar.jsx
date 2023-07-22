@@ -19,24 +19,23 @@ function Sidebar() {
 
 
   return (
-    <div className='bg-[#0dc4c71f]'>
+    <div className='bg-[#219ebc] shadow-gray-600 shadow-xl rounded-r-2xl '>
       <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
-          <ul className="menu p-4 w-80 h-full text-base-content">
+          <ul className="menu p-4 w-80 h-screen text-base-content">
               {/* Sidebar content here */}
               <div className="avatar left-20">
-                <div className="w-32 rounded">
+                <div className="w-28 rounded">
                   <img src={image}/>
                 </div>
               </div>
-              <div className='p-5 mt-6 text-[#203374] font-bold'>
+              <div className='p-5 mt-6 text-white font-bold'>
                 <li><Link to={'/Dashboard'}> <BsBarChartLineFill/> Statistiques</Link></li>
-                <li><Link to={'/Dashboard/Profil'}> <CgProfile className=''/> Profil</Link></li>
+                <li><Link to={'/Dashboard/Profil'}> <CgProfile/> Profil</Link></li>
                 <li><Link to={'/Dashboard/Utilisateurs'}> <FaList/> Liste des utilisateurs</Link></li>
                 <li><Link to={'/Dashboard/Attente'}> <IoMdNotifications/> Liste d'attente</Link></li>
                 <li><Link to={'/Dashboard/Signalements'}> <IoIosWarning/> Liste des signalements</Link></li>
                 <li><Link to={'/Connexion'} onClick={Deconnexion}> <TbLogout/> Deconnexion</Link></li>
-                {/* <li><Link to={'/'}>Liste des signalements</Link></li> */}
               </div>
           </ul>
       </div>

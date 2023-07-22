@@ -43,7 +43,7 @@ function UnePharmacie({fetching, setFetching}) {
     for(let i =1; i<= totalPages; i++) {
         pages.push(<button onClick={handleOnPageChange} className={currentPage === i ? "join-item btn btn-active bg-[#219EBC] border-none":"join-item btn border-none bg-[#203374]"} key={i}>{i}</button>)
     }
-// console.log(data.medicaments)
+console.log(data)
   return ( 
     <div>
         <Breadcrumbs/>

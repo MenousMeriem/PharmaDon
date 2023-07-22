@@ -5,7 +5,6 @@ import { useState } from 'react'
 
 function CarteAnnonce({element}) { 
 
-
   const raisons = Object.freeze(
     ["Je pense que cette annonce pourrait être une tentative de vente illégale de médicaments, ce qui est contraire aux politiques de la plateforme", 
     "Cette annonce semble proposer des médicaments contrefaits ou de qualité douteuse, ce qui peut présenter des risques pour la santé des bénéficiaires.", 
@@ -17,7 +16,7 @@ function CarteAnnonce({element}) {
   const onChange = (e) => {
     setRaison(e.target.value)
   }
-  console.log(raison)
+
 
   const handleOnClick = async() => {
     try {
@@ -28,17 +27,18 @@ function CarteAnnonce({element}) {
     }
   }
 
+
   return (
     <div className='p-10 '>
         <div className="card card-compact bg-base-100 shadow-xl w-80 lg:w-96 lg:h-full text-[#203374]">
             <div className='text-end'>
-              {element.categorie ==='Demande' ? (
+              {element.idAnnonce.categorie ==='Demande' ? (
                 <span className="indicator-item badge badge-primary w-fit h-10 bg-[#203374] rounded-md">Demande</span> 
                 ):( 
                 <span className="indicator-item badge badge-primary w-fit h-10 bg-[#219EBC] border-[#219EBC] rounded-md">Don</span> 
               )}
             </div>
-            <figure><img className='w-60' src={image}/></figure>
+            <figure className='p-5'><img className='w-96 h-96 rounded-xl ' src={element.image ? `http://localhost:5000/images/${element.image.toString()}`: image}/></figure>
             <div className="card-body m-5">
               <h2 className="text-sm"> Nom du médicament : {element.nomMedicament} </h2> 
             </div>
@@ -46,7 +46,7 @@ function CarteAnnonce({element}) {
               <label htmlFor="my_modal_7" className="text-red-600 text-base font-blacK underline">Signaler l'annonce</label>
               <input type="checkbox" id="my_modal_7" className="modal-toggle" />
               <div className="modal">
-                <div className="modal-box leading-10">
+                <div className="modal-box leading-10 p-4">
                   <div className="form-control">
                     <label className="label cursor-pointer" htmlFor='option0'>
                       <input type="radio" name='radio' id='option0' value={raisons[0]} onChange={onChange} />

@@ -58,23 +58,25 @@ function Chart() {
 
   return (
     <div className='w-full'>
-      <h1 className='p-10 text-white fognt-bold text-lg bg-[#203374]'> Statistiques  </h1>
-      <div className='grid grid-cols-3 gap-3 p-3'>
-        <div className="card bg-yellow-700 shadow-xl text-white">
+      
+      <h1 className='p-10 text-[#203374] font-black text-3xl bg-[#e1ecf7] border-[#203374] border-b-4  rounded-b-2xl'> Statistiques  </h1>
+      
+      <div className='grid grid-cols-3 gap-3 p-3 h-44 mt-5'>
+        <div className="card bg-[#084b83] shadow-xl text-white">
           <div className="card-body">
             <h2 className="card-title">Nombre de pharmacies</h2>
             <p>00000000</p>
           </div>
         </div>
-        <div className="card bg-fuchsia-900 shadow-xl text-white">
+        <div className="card bg-[#d65108] shadow-xl text-white">
           <div className="card-body">
             <h2 className="card-title">Nombre d'associations </h2>
             <p>00000000000</p>
           </div>
         </div>
-        <div className="card bg-green-500 shadow-xl text-white">
+        <div className="card bg-[#1f7a8c] shadow-xl text-white">
           <div className="card-body">
-            <h2 className="card-title">Nombre total des utilisateurs</h2>
+            <h2 className="card-title">Nombre total des annonces</h2>
             <p>0000000000000</p>
           </div>
         </div>

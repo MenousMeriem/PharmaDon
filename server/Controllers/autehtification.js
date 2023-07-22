@@ -98,7 +98,7 @@ exports.reactiverController = expressAsyncHandler(async (req,res) => {
         process.env.REFRESH_TOKEN_SECRET
     )
         await refreshTokenModel.create({ utilisateurId: user._id, refreshToken})
-    res.status(200).json({accessToken, refreshToken})
+    res.status(200).json({accessToken, refreshToken, mail: user.mail, role: user.role})
 })
 
 

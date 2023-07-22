@@ -28,7 +28,6 @@ function ListUsers({element}) {
         }
     }
 
-    
     return (
         <tr>
             <th></th>

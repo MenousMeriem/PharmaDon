@@ -30,13 +30,13 @@ function CarteAnnonce({element}) {
     <div className='p-10 '>
         <div className="card card-compact bg-base-100 shadow-xl w-80 lg:w-96 lg:h-full text-[#203374]">
             <div className='text-end'>
-              {element.categorie ==='Demande' ? (
+              {element.idAnnonce.categorie ==='Demande' ? (
                 <span className="indicator-item badge badge-primary w-fit h-10 bg-[#203374] rounded-md">Demande</span> 
                 ):( 
                 <span className="indicator-item badge badge-primary w-fit h-10 bg-[#219EBC] border-[#219EBC] rounded-md">Don</span> 
               )}
-            </div>
-            <figure><img className='w-60' src={image}/></figure>
+            </div> 
+            <figure className='p-5'><img className='w-96 h-96 rounded-xl' src={element.image ? `http://localhost:5000/images/${element.image.toString()}`: image}/></figure>
             <div className="card-body m-5">
               <h2 className="text-sm"> Nom du médicament : {element.nomMedicament} </h2> 
             </div>

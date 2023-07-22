@@ -19,17 +19,17 @@ exports.ajouterAnnonce = expressAsyncHandler (async (req, res) => {
         res.status(400)
         throw new Error("Remplissez vos champs SVP")
       }
-      const med = await medicamentModel.create({nomMedicament, proprietaire: req.user._id, image: req.files.length ? req.folder +"/"+req.files[0].filename : ""})
-        await annonceModel.create({
+      const med = await medicamentModel.create({nomMedicament, proprietaire: req.user._id, image: req.files.length ? req.folder +"/"+req.files[0].filename : ""})  
+      const annonce = await annonceModel.create({
           idAuteur: req.user._id,
           numTel,
           wilaya,
           detail,
           idMedicament: med._id,
           categorie,
-          // image: req.files.length ? req.folder
-          // +"/"+req.files[0].filename : ""
+
         })
+        await medicamentModel.findByIdAndUpdate(med._id, {idAnnonce: annonce._id })
         res.status(201).json('Annonce ajoutée !!')
     } catch (error) {
         res.status(400)
@@ -70,42 +70,6 @@ exports.supprimerAnnonce = expressAsyncHandler(async (req, res) => {
   }
 })
 
-// Supprimer une annonce par l'admin : 
-
-
-
-
-
-
-
-
-
-// Afficher toutes les annonces :
-exports.afficherAnnonce = expressAsyncHandler(async(req,res) => {
-  try {
-      let page = req.query.page
-      const recherche = req.query.search
-      if(recherche === '' || recherche === undefined){ 
-        const skip = (parseInt(page) -1) * 6
-        const documentCount = await medicamentModel.countDocuments()
-        const pages = Math.ceil(documentCount / 6)
-        const annonce = await medicamentModel.find().skip(skip).limit(6).populate('proprietaire')
-        res.status(201).json({pages,annonce})
-    } else {
-        const skip = (parseInt(page) -1) * 6
-        // const documentC = await utilisateurModel.find({wilaya: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).countDocuments()
-        // const documentD = await utilisateurModel.find({role: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).countDocuments()
-        const documentCount = await medicamentModel.find({nomMedicament: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).countDocuments()
-        const pages = Math.ceil(documentCount / 6)
-        const annonce = await medicamentModel.find({nomMedicament: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).skip(skip).limit(1).populate('proprietaire')
-        res.status(201).json({pages,annonce})
-    }
-  } catch (error) {
-      res.status(400)
-      console.log(error)
-  } 
-})
-
 
 // Afficher les annonces de l'utilisateur courant : 
 exports.afficherAnnonceUserCourant = expressAsyncHandler(async(req,res) => {
@@ -124,7 +88,7 @@ exports.afficherAnnonceUserCourant = expressAsyncHandler(async(req,res) => {
 exports.afficherAnnoncePharmacien = expressAsyncHandler(async(req,res) => {
     const {page,id} = req.query
     const skip = (parseInt(page) -1) * 6     
-     const medicaments = await medicamentModel.find({proprietaire: id}).skip(skip).limit(6)
+     const medicaments = await medicamentModel.find({proprietaire: id}).populate('idAnnonce').skip(skip).limit(6)
      const pages = Math.ceil(await medicamentModel.find({proprietaire: id}).countDocuments() / 6)
      res.status(202).json({
       pages,
@@ -168,38 +132,40 @@ exports.signalerAnnonce = expressAsyncHandler(async(req, res) => {
 
 // Affichage des signalements : 
 exports.afficherSignalements = expressAsyncHandler(async(req, res) => {
-  const signalement = await annonceModel.find({signalement: {$ne:[]}})
+  const signalement = await annonceModel.find({signalement: {$ne:[]}}).populate('idMedicament')
   res.status(200).json(signalement)
 })
 
 
-// Pagination :
-exports.pagination = expressAsyncHandler(async(req, res) => {
+// Afficher toutes les annonces :
+exports.afficherAnnonce = expressAsyncHandler(async(req,res) => {
   try {
-      const {pageActuelle, recherche, wilaya} = req.query
-      let pages
-      if(recherche === '' || recherche === undefined){
-        pages = Math.ceil((await annonceModel.countDocuments())/10)
-      } else{
-        pages = Math.ceil((await annonceModel.find(
-          {nomMedicament: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i')}}
-        ).countDocuments())/10)
-      }
-      const skiPage = (pageActuelle - 1) * 10
-      let annonces
-      if(recherche){
-        annonces = await annonceModel.find(
-          {nomMedicament: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i')}}
-     ).skip(skiPage).limit(10)  
-        } else{
-          annonces = await annonceModel.find({}).skip(skiPage).limit(10)
-        }
-      res.status(200).json({
-        pages,
-        annonces
-      })
+      const recherche = req.query.search
+
+      const { page,  } = req.query
+    // //add filter queries
+    // const filter = {}
+    // !!wilaya && (filter["wilaya"] = wilaya)
+    // !!type && (filter["type"] = type)
+
+      if(recherche === '' || recherche === undefined){ 
+        const skip = (parseInt(page) -1) * 6
+        const documentCount = await medicamentModel.find().countDocuments()
+        const pages = Math.ceil(documentCount / 6)
+        const annonce = await medicamentModel.find().skip(skip).limit(6).populate('proprietaire idAnnonce')
+        res.status(201).json({pages,annonce})
+    } else {
+        const skip = (parseInt(page) -1) * 6
+        // const documentC = await utilisateurModel.find({wilaya: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).countDocuments()
+        const documentCount = await medicamentModel.find({nomMedicament: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).countDocuments()
+        const pages = Math.ceil(documentCount / 6)
+        const annonce = await medicamentModel.find({nomMedicament: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).skip(skip).limit(6).populate('proprietaire')
+        res.status(201).json({pages,annonce})
+    }
   } catch (error) {
       res.status(400)
-      throw new Error(error)
-  }
+      console.log(error)
+  } 
 })
+
+

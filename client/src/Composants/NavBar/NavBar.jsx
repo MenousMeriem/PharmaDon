@@ -26,7 +26,7 @@ function NavBar() {
       e.preventDefault();
       try {
         if(user) {
-          await axios.delete('http://localhost:5000/Utilisateur/AutoSuppression/', config)
+          await axios.delete('http://localhost:5000/Utilisateur/AutoSuppression', config)
           navigate('/Connexion')
         }
       } catch (error) {
@@ -54,7 +54,8 @@ function NavBar() {
       }
     }
 
-  const role = JSON.parse(user).role
+  const role = JSON.parse(user) && JSON.parse(user).role
+
   return (
     <div>
         <div className="navbar bg-base-100 p-5">
@@ -100,6 +101,7 @@ function NavBar() {
                 </ul>
             </div>
 
+            {role !== undefined &&
             <div className="navbar-end ">
               {role==='Pharmacie' || role==='Association' || role==='Patient' ? 
                 <div className="dropdown dropdown-end">
@@ -120,7 +122,7 @@ function NavBar() {
                   </ul>
                 </div>
 
-                : role==='Admin' ?
+                : role ==='Admin' ?
                 <div className="dropdown dropdown-end">
                   <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">
@@ -148,7 +150,7 @@ function NavBar() {
                     </ul>
                 </div>
               </>}
-            </div>
+            </div>}
         </div>
     </div>
   )

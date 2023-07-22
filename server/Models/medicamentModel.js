@@ -10,9 +10,14 @@ const medicamenSchema = new Schema({
         required: true,
         ref: "Utilisateur"
     },
+    idAnnonce: {
+        type: SchemaTypes.ObjectId,
+        ref: "Annonce"
+    },
     image: {
         type:String,
     },
+    
 })
 
 module.exports = model("Medicaments",medicamenSchema)

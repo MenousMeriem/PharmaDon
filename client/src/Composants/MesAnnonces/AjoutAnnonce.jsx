@@ -55,7 +55,6 @@ function AjoutAnnonce({refetch, setRefetch}) {
             toast.error(error.response?.data?.message || error.message);
         }
     }
-
   return (
     <div className='h-full w-full'>        
         <section className='bg-white mx-auto w-full lg:px-5 '>   

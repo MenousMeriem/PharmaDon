@@ -7,7 +7,7 @@ const {Types} = require('mongoose')
 const nodemailer = require('nodemailer')
 const annonceModel = require("../Models/annonceModel")
 
-//create gen access token
+//Creation du token : 
 const genAccessToken = ({_id,role}) => {
 return jwt.sign({_id, role}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "100000h"})
 }
@@ -224,9 +224,9 @@ exports.afficherUtilisateur = expressAsyncHandler(async (req,res) => {
   try {
     const id = req.user._id
     const user = await utilisateurModel.findById(id)
-    res.status(200).json(user)
+      res.status(200).json(user)
   } catch (error) {
-    res.status(400)
+      res.status(400)
     throw new Error(error)
   }
 })
@@ -238,7 +238,7 @@ exports.afficherPharmacie = expressAsyncHandler(async (req, res) => {
     const Pharmacie = await utilisateurModel.find({role:'Pharmacie'}).select('-mot_de_passe')
       res.status(202).json(Pharmacie) 
   } catch (error) {
-    res.status(400)
+      res.status(400)
     throw new Error(error)
   }
 })
@@ -275,7 +275,7 @@ exports.modifierUtilisateur = expressAsyncHandler(async (req, res) => {
 exports.autoSupression = expressAsyncHandler(async (req, res) => {
   try {
     const id = req.user._id
-    await utilisateurModel.findOneAndUpdate(id, {isActive: false})
+    await utilisateurModel.findByIdAndUpdate(id, {isActive: false})
         res.status(202).json("Compte désactivé !")
     } catch (error) {
         res.status(400)

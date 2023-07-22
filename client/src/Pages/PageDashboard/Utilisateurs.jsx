@@ -38,20 +38,19 @@ function Utilisateurs({fetching, setFetching}) {
 
     if(loading) return ( <Lottie animationData={animation} /> )
  
- 
     return ( 
         <div className='w-full'>
-            <h1 className='p-10 text-white font-bold text-lg bg-[#203374]'>Liste des utilisateurs </h1>
+            <h1 className='p-10 text-[#203374] font-black text-3xl bg-[#e1ecf7] border-[#203374] border-b-4  rounded-b-2xl'> Liste des utilisateurs  </h1>
             <div className="overflow-x-auto py-5 rounded-none">
                 <table className="table table-xs w-full">
                     <thead>
                         <tr className=''>
-                            <th className='bg-slate-100 border-t-4 border-b-4'></th>
-                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Nom</th>
-                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Prenom</th>
-                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Role</th>     
-                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Nom d'...</th>
-                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Supprimer</th>    
+                            <th className='text-[#203374] font-extrabold bg-[#c0d6df] text-sm'></th>
+                            <th className='text-[#203374] font-extrabold bg-[#c0d6df] text-sm'>Nom</th>
+                            <th className='text-[#203374] font-extrabold bg-[#c0d6df] text-sm'>Prenom</th>
+                            <th className='text-[#203374] font-extrabold bg-[#c0d6df] text-sm'>Role</th>     
+                            <th className='text-[#203374] font-extrabold bg-[#c0d6df] text-sm'>Nom du locale</th>
+                            <th className='text-[#203374] font-extrabold bg-[#c0d6df] text-sm'>Supprimer</th>    
                         </tr>    
                     </thead>
                     <tbody className='text-[#203374]'>  

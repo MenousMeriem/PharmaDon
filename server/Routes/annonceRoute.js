@@ -47,9 +47,9 @@ annonceRoute
     .get('/AfficherAnnoncePharmacien', afficherAnnoncePharmacien)
     .get('/AfficherAnnonceAssociation', afficherAnnonceAssociation)
     .get('/AfficherAnnoncePatient/:id', afficherAnnoncePatient)
-    .get('/pagination',pagination)
     .put('/signalerAnnonce/:id', signalerAnnonce)
     .get('/AfficherSignalements', afficherSignalements)
+    // .get('/pagination',pagination)
 
 
 module.exports = annonceRoute

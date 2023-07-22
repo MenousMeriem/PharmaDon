@@ -20,8 +20,6 @@ function Informations() {
     
     const [data, setData] = useState()
     
-    const [modifier, setModifier] = useState(false)
-    
     const [nomValue, setnomValue] = useState("")
     const [prenomValue, setprenomValue] = useState('')
     const [sexeValue, setsexeValue] = useState("")
@@ -37,7 +35,7 @@ function Informations() {
     // Pour afficher l'utiliasteur actuel : 
     const fetchData = async() => {
         try {
-            const reponse = await axios.get('http://localhost:5000/Utilisateur/afficherUtilisateur/'+currentUser._id, config)
+            const reponse = await axios.get('http://localhost:5000/Utilisateur/afficherUtilisateur/', config)
             if(reponse.data) {
                 setData(reponse.data)
                 setnomValue(reponse.data.nom)
@@ -56,27 +54,25 @@ function Informations() {
         }
     }
 
-    useEffect( () => {
-        fetchData()
-    }, [])
+    const [modifier, setModifier] = useState(false)
 
+    // Modifier les informations d'un utilisateur :
+    const {role} = JSON.parse(localStorage.getItem('Utilisateur'))
+    const obj = {   
+        nom: nomValue,
+        prenom: prenomValue,
+        date_de_naissance: naissanceValue, 
+        sexe: sexeValue,
+        wilaya: wilayaValue,
+        adresse: adresseValue,
+        numtel: numtelValue, 
+        mail: mailValue, 
+        role: role
+    }
 
-    // Pour modifier les informations de l'utilisateur : 
     const handleUpdate = async () => {
         try {
-            await axios.put('http://localhost:5000/Utilisateur/ModifierUtilisateur/'+data._id,
-            {
-                nom: nomValue,
-                prenom: prenomValue,
-                date_de_naissance: naissanceValue, 
-                sexe: sexeValue, 
-                wilaya: wilayaValue, 
-                adresse: adresseValue, 
-                numtel: numtelValue, 
-                mail: mailValue, 
-                mot_de_passe: passwordValue,
-                role: roleValue
-            }, config)
+            await axios.put('http://localhost:5000/Utilisateur/ModifierUtilisateur/' , obj, config)
             window.location.reload()
             toast.success('Informations modifiés ')
         } catch (error) {
@@ -84,6 +80,10 @@ function Informations() {
         }
     } 
     
+    useEffect( () => {
+        fetchData()
+    }, [])
+
     if(loading) return <Lottie className='w-40 h-10' animationData={animation}/>
     
 return (
@@ -185,8 +185,8 @@ return (
                 {modifier ? <button className="btn bg-[#0DC4C7]  border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-lg sm:w-40" 
                 onClick={handleUpdate}> Confirmer </button> : <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-lg sm:w-40"
                 onClick={e=> setModifier(true)}> Modifier </button>}
-                <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-lg sm:w-40" 
-                onClick={e => setModifier(false)}>Annuler</button> 
+                {modifier&&<button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-lg sm:w-40" 
+                onClick={e => setModifier(false)}>Annuler</button> }
             </div>
         </section>
     </div>

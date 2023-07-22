@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import {toast} from 'react-toastify'
-import Lottie from "lottie-react"
-import animation from '../../assets/Annimations/5699-loading-26-paper-plane.json'
 import User from './User'
+import Lottie from "lottie-react"
+import animation from '../../assets/Annimations/animation_lkehv1hn.json'
 
 function ListeAttente() {
 
@@ -75,25 +75,24 @@ function ListeAttente() {
     // Pour activer le compte d'un utilisateur : 
     const [activer, setActiver] = useState(false)
     
-    
     useEffect(() => {
         fetchData()
     }, [activer])
     
 
-  if(loading) return ( <Lottie animationData={animation} /> )
+    if(loading) return ( <Lottie animationData={animation} /> )
 
   return (
         <div className='w-full'>
-            <h1 className='p-10 text-white font-bold text-lg bg-[#203374] '>Liste d'attente </h1>
+            <h1 className='p-10 text-[#203374] font-black text-3xl bg-[#e1ecf7] border-[#203374] border-b-4  rounded-b-2xl'> Liste d'attente  </h1>
             <div className="overflow-x-auto py-5 rounded-none">
                 <table className="table table-xs w-full">
                     <thead>
                         <tr className=''>
-                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Nom de l'utilisateur </th>
-                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'>Role de l'utilisateur </th>   
-                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'> </th>   
-                            <th className='text-[#203374] bg-slate-100 border-t-4 border-b-4 text-sm'> </th>   
+                            <th className='text-[#203374] font-extrabold bg-[#c0d6df] text-sm'>Nom de l'utilisateur </th>
+                            <th className='text-[#203374] font-extrabold bg-[#c0d6df] text-sm'>Role de l'utilisateur </th>   
+                            <th className='text-[#203374] bg-[#c0d6df] text-sm'> </th>   
+                            <th className='text-[#203374] bg-[#c0d6df] text-sm'> </th>   
                         </tr>    
                     </thead>
                     <tbody className='text-[#203374]'>  

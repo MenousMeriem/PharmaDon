@@ -94,10 +94,9 @@ function ProfilAdmin() {
 return (
   
   <div className='w-full'>
-    <h1 className='p-10 text-white font-bold text-lg bg-[#203374] '>Mon profil </h1>
-    
-    <div className='text-[#203374] bg-white border-[#0DC4C7]'>
-          <section className='bg-white mx-auto lg:w-full w-5/6 py-4 lg:px-5 shadow-gray-600 shadow-lg '>   
+    <h1 className='p-10 text-[#203374] font-black text-3xl bg-[#e1ecf7] border-[#203374] border-b-4 rounded-b-2xl'> Profil  </h1>
+    <div className='text-[#203374] shadow-xl  border-[#0DC4C7]'>
+          <section className='bg-[#edf2fb89] mx-auto lg:w-full w-5/6 py-4 lg:px-5 shadow-gray-600 shadow-lg '>   
               <div className='w-full flex border-b border-[#0DC4C7] p-5 '>
                   <div className='flex items-center gap-2'>
                       <label className="label">
@@ -193,8 +192,8 @@ return (
                   {modifier ? <button className="btn bg-[#203374] border-none hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-base sm:w-40" 
                   onClick={handleUpdate}> Confirmer </button> : <button className="btn bg-[#203374] border-none hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-base sm:w-40"
                   onClick={e=> setModifier(true)}> Modifier </button>}
-                  <button className="btn bg-[#203374] border-none hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-base sm:w-40" 
-                  onClick={e => setModifier(false)}>Annuler</button> 
+                  {modifier&&<button className="btn bg-[#203374] border-none hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-base sm:w-40" 
+                  onClick={e => setModifier(false)}>Annuler</button> }
               </div>
           </section>
       </div>

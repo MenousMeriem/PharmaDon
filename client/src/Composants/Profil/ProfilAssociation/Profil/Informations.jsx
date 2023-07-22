@@ -238,11 +238,11 @@ function Informations() {
                 </div>    
             
                 <div className='grid grid-cols-2 justify-center justify-items-center'>
-                    {modifier ? <button className="btn bg-[#0DC4C7]  border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-lg sm:w-40" 
+                    {modifier ? <button className="btn bg-[#203374]  border-none hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-lg sm:w-40" 
                     onClick={handleUpdate}> Confirmer </button> : <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-lg sm:w-40"
                     onClick={()=> setModifier(true)}> Modifier </button>}
-                    <button className="btn bg-[#0DC4C7] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-lg sm:w-40" 
-                    onClick={() => setModifier(false)}>Annuler</button> 
+                    {modifier && <button className="btn bg-[#203374] border-[#0DC4C7] hover:bg-white hover:text-[#0DC4C7] hover:border-none sm:lg:text-lg sm:w-40" 
+                    onClick={() => setModifier(false)}>Annuler</button> }
                 </div>
         </section>
     </div>

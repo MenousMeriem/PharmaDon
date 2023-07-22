@@ -8,6 +8,7 @@ function ReinitialiserMdp() {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(true)
     const [mail, setMail] = useState('')
+    const [role,setRole] = useState('')
     const user = JSON.parse(localStorage.getItem('Utilisateur'))
  
     
@@ -15,11 +16,10 @@ function ReinitialiserMdp() {
         const verifierCle = async (key) => {
             try {
                 const response = await axios.get('http://localhost:5000/Seconnecter/verifierCle?key='+key)
-                if(!response.data.success || user.accessToken) {
+                setMail(response.data.mail)
+                if(!response.data.success || user.accessToken) 
                     navigate('/Connexion')
-                }else {
-                    setMail(response.data.mail)
-                }
+            
             } catch (error) {
                 toast.error(error)
             }finally {
@@ -28,7 +28,6 @@ function ReinitialiserMdp() {
         }
         verifierCle(key)
     }, [])
-
 
         // Pour modifier le mot de passe : 
         const [form, setForm] = useState({
@@ -46,7 +45,7 @@ function ReinitialiserMdp() {
                 if(form.mot_de_passe !== form.confirmer_mot_de_passe) {
                     return toast.warn('Vérifier votre mot de passe!')
                 }
-                await axios.put('http://localhost:5000/Seconnecter/modifierPassword',
+                const response = await axios.put('http://localhost:5000/Seconnecter/modifierPassword',
                 {
                     mdp: form.mot_de_passe,
                     mail

@@ -17,6 +17,7 @@ function Medicaments({fetching, setFetching}) {
     const fetchData = async() => {
         try {
             const reponse = await axios.get(`http://localhost:5000/Annonce/AfficherAnnonce?page=${currentPage}`)
+            console.log(reponse.data)
             setData(reponse.data)
             setTotalPages(reponse.data.pages)
         } catch (error) {
