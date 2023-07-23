@@ -134,19 +134,19 @@ function InformationsPatient() {
                     </div> 
                 </div>
 
-                <div className='sm:grid sm:grid-cols-2 '>
-                    <div className=''>
+                <div className='sm:grid sm:grid-cols-2 gap-2'>
+                    <div>
                         <label className="label">
                             <span className="label-text text-[#203374] mt-5"> Mot de passe*</span>
                         </label>
-                        <input type="password" name='mot_de_passe' value={form.mot_de_passe} onChange={handleOnChange} required placeholder="Votre mot de passe " className="input input-bordered border-[#203374] w-full max-w-lg" />
+                        <input type="password" name='mot_de_passe' value={form.mot_de_passe} onChange={handleOnChange} required placeholder="Votre mot de passe " className="input input-bordered border-[#203374] w-full max-w-lg mt-2" />
                     </div>
                     <div>
                         <label className="label">
-                            <span className="label-text text-[#203374]"> Confirmer votre mot de passe*</span>
+                            <span className="label-text text-[#203374] mt-5"> Confirmer le mot de passe*</span>
                         </label>
-                        <input type="password" name='confirmer_mot_de_passe' onChange={handleOnChange} placeholder='Confirmer mot de passe...' required className="input input-bordered border-[#203374] w-full max-w-lg" />
-                    </div>    
+                        <input type="password" name='confirmer_mot_de_passe' value={form.confirmer_mot_de_passe} onChange={handleOnChange} required placeholder="Confirmer votre mot de passe " className="input input-bordered border-[#203374] w-full max-w-lg mt-2" />
+                    </div>
                 </div>   
                 <div className='sm:grid sm:grid-cols-2 '>
                     <h3 className='sm:mt-12 mt-5'> Les champs * sont obligatoires </h3>

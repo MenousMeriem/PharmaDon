@@ -15,6 +15,7 @@ function User({element , setActiver ,activer, config} ) {
             toast.error(errorMessage)
         }
     }
+
   return (
 
     <tr>
@@ -44,10 +45,25 @@ function User({element , setActiver ,activer, config} ) {
                             <h1> Nom de l'association : {element.nomAsso} </h1>
                             <h1> Numéro de l'association : {element.numAsso} </h1>
                             <h1> Adresse de l'association : {element.wilayaAsso}, {element.adresseAsso} </h1>
-
                         </React.Fragment> 
                     ): ( <td></td> )}
-                    <a href={"http://localhost:5000/images"+element.fichierIDPharmacie}> fichier</a> 
+                    <div className='grid justify-items-center'>
+                    {element.role === 'Pharmacie' ? (
+                        <React.Fragment>
+                            <div>
+                                <a className='btn btn-info mr-2' href={"http://localhost:5000/images/"+element.fichierIDPharmacie.toString().split('\\').slice(-2).join('/')} target='_blank'> fichier</a> 
+                                <a className='btn btn-info' href={"http://localhost:5000/images/"+element.fichierIDPharmacien.toString().split('\\').slice(-2).join('/')} target='_blank'> fichier</a> 
+                            </div>
+                        </React.Fragment>
+                    ): element.role === 'Association' ? (
+                        <React.Fragment>
+                            <div>
+                                <a className='btn btn-info' href={"http://localhost:5000/images/"+element.fichierIDPresident.toString().split('\\').slice(-2).join('/')} target='_blank'> fichier</a> 
+                                <a className='btn btn-info' href={"http://localhost:5000/images/"+element.fichierIDAssociation.toString().split('\\').slice(-2).join('/')} target='_blank'> fichier</a> 
+                            </div>
+                        </React.Fragment>
+                    ) : ( <td></td> )}
+                    </div>
                     <div className="modal-action justify-center">
                         <label htmlFor="my_modal_7" className="btn bg-red-800 border-none">Fermer</label>
                     </div>

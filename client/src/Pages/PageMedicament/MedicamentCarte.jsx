@@ -16,6 +16,7 @@ function MedicamentCarte({element}) {
     setRaison(e.target.value)
   }
 
+  console.log(element)
   
   const handleOnClick = async() => {
     try {
@@ -35,7 +36,7 @@ function MedicamentCarte({element}) {
             )}
             <figure className='p-5'><img className='w-96 h-96 rounded-lg' src={`http://localhost:5000/images/${element.image}`}/></figure>
             <div className="card-body m-5">
-                {element.proprietaire.role === "Pharmacie" ?  <h2 className="text-lg font-bold btn bg-[#219EBC] border-none"> Pharmacie </h2> : element.proprietaire.role === "Association" ? <h2 className="text-lg font-bold btn bg-[#203374] border-none">Association </h2>: <h2 className="text-lg font-bold btn bg-teal-400 border-none">Patient </h2>}  
+              {element.proprietaire.role === "Pharmacie" ?  <h2 className="text-lg font-bold btn bg-[#219EBC] border-none"> Pharmacie </h2> : element.proprietaire.role === "Association" ? <h2 className="text-lg font-bold btn bg-[#203374] border-none">Association </h2>: <h2 className="text-lg font-bold btn bg-teal-400 border-none">Patient </h2>}  
                 <h2 className="text-sm"> Nom du médicament : {element.nomMedicament} </h2> 
                 <h2 className="text-sm"> Numéro de téléphone : {element.proprietaire.role === "Pharmacie" ? element.proprietaire.numPharmacie : element.proprietaire.role === "Association" ? element.proprietaire.numAsso : element.proprietaire.numtel } </h2> 
                 <h2 className="text-sm"> Nom de l{element.proprietaire.role === "Pharmacie" ? "a pharmacie" : element.proprietaire.role === "Association" ? "'association" : "donnateur"} : {element.proprietaire.role === "Pharmacie" ? element.proprietaire.nomPharmacie : element.proprietaire.role === "Association" ? element.proprietaire.nomAsso : (element.proprietaire.nom && element.proprietaire.prenom) } </h2> 

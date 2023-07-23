@@ -17,6 +17,7 @@ function AjoutAnnonce({refetch, setRefetch}) {
 
     const [input, setInput] = useState ({
         nomMedicament: "",
+        adresse: '',
         wilaya: "",
         numTel: "", 
         categorie:"",
@@ -44,6 +45,7 @@ function AjoutAnnonce({refetch, setRefetch}) {
             if(reponse.data)  {
                 setInput({
                     nomMedicament: "",
+                    adresse: '',
                     wilaya: "",
                     numTel: "", 
                     categorie:"",
@@ -66,6 +68,7 @@ function AjoutAnnonce({refetch, setRefetch}) {
                 <input type="tel" className="input input-bordered border-[#203374]" placeholder='Numéro de téléphone ' name='numTel' value={input.numTel} onChange={onChange} required/> 
                 
                 <h3> Adresse : </h3> 
+                <input type="text" className="input input-bordered border-[#203374]" placeholder='Adresse ' name='adresse' value={input.adresse} onChange={onChange} required/> 
                 <select  name='wilaya' value={input.wilaya} onChange={onChange} required className="select select-bordered border-2 border-[#0DC4C7] w-full max-w-lg mt-2 ">
                     <option disabled hidden> Votre wilaya </option>
                     {wilaya.map(w => {

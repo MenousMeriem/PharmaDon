@@ -5,27 +5,27 @@ import { useState } from 'react'
 
 
 function CarteAnnonce({element}) {
-  const raisons = Object.freeze(
-    ["Je pense que cette annonce pourrait être une tentative de vente illégale de médicaments, ce qui est contraire aux politiques de la plateforme", 
-    "Cette annonce semble proposer des médicaments contrefaits ou de qualité douteuse, ce qui peut présenter des risques pour la santé des bénéficiaires.", 
-    "Je crois que cette annonce viole les règles de votre plateforme en proposant des médicaments restreints ou interdits."]) 
 
+    const raisons = Object.freeze(
+      ["Je pense que cette annonce pourrait être une tentative de vente illégale de médicaments, ce qui est contraire aux politiques de la plateforme", 
+      "Cette annonce semble proposer des médicaments contrefaits ou de qualité douteuse, ce qui peut présenter des risques pour la santé des bénéficiaires.", 
+      "Je crois que cette annonce viole les règles de votre plateforme en proposant des médicaments restreints ou interdits."]) 
 
-  const [raison, setRaison] = useState('')
+    const [raison, setRaison] = useState('')
 
-  const onChange = (e) => {
-    setRaison(e.target.value)
-  }
-  console.log(raison)
-
-  const handleOnClick = async() => {
-    try {
-      await axios.put('http://localhost:5000/Annonce/signalerAnnonce/'+element._id, {raison})
-        toast.success('Publication signalée')
-    } catch (error) {
-        toast.error(error.response?.data?.message || error.message)
+    const onChange = (e) => {
+      setRaison(e.target.value)
     }
-  }
+
+    const handleOnClick = async() => {
+      try {
+        await axios.put('http://localhost:5000/Annonce/signalerAnnonce/'+element._id, {raison})
+          toast.success('Publication signalée')
+      } catch (error) {
+          toast.error(error.response?.data?.message || error.message)
+      }
+    }
+    
   return (
     <div className='p-10 '>
         <div className="card card-compact bg-base-100 shadow-xl w-80 lg:w-96 lg:h-full text-[#203374]">

@@ -7,7 +7,6 @@ function CarteAnnonce({element}) {
 
   // Modifications des informations : 
   const [nomMedicamentValue, setnomMedicamentValue] = useState(element.idMedicament[0].nomMedicament)
-  const [adresseValue, setadresseValue] = useState(element.adresse)
   const [wilayaValue, setwilayaValue] = useState(element.wilaya)
   const [numTelValue, setnumTelValue] = useState(element.numTel)
   const [detailValue, setdetailValue] = useState(element.detail)
@@ -29,7 +28,6 @@ function CarteAnnonce({element}) {
             idMedicament: element.idMedicament[0]._id,  
             nomMedicament: nomMedicamentValue,
             wilaya: wilayaValue,
-            adresse: adresseValue,
             numTel: numTelValue, 
             detail: detailValue,
         }, config)
@@ -56,19 +54,19 @@ function CarteAnnonce({element}) {
     
       <div className='p-5'>
           <div className="card w-96 bg-base-100 shadow-xl p-5">
-            <figure className='rounded-xl'><img className='w-96 h-96 p-3 ' src={element.idMedicament[0].image ? `http://localhost:5000/images/${element.idMedicament[0].image.toString()}`: defualtImage}/></figure>
-            <div className="card-body bg-[#219EBC] text-[#203374] rounded-lg">
-              <h6 className=''>Nom du médicament : </h6>
-              {modifier ? <input type="text" className="input input-bordered border-[#203374] h-10" 
+            <figure className='rounded-xl'><img className='w-96 h-96 p-3' src={element.idMedicament[0].image ? `http://localhost:5000/images/${element.idMedicament[0].image.toString()}`: defualtImage}/></figure>
+            <div className="card-body bg-[#219EBC] rounded-lg overflow-y-auto h-64 text-white">
+              <h1 className='font-black'>Nom du médicament : </h1>
+              {modifier ? <input type="text" className="input input-bordered border-[#203374] text-[#203374]" 
               value={nomMedicamentValue} onChange={e => setnomMedicamentValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'> {nomMedicamentValue} </h3>} 
-              <h6>Numéro de téléphone : </h6>
-              {modifier ? <input type="tel" className="input input-bordered border-[#203374] h-10" 
-              value={numTelValue} onChange={e => setnumTelValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'>{element.numTel} </h3>} 
-              <h3> Adresse : </h3>
-              {modifier ? <input type="text" className="input input-bordered border-[#203374] h-10" 
-              value={adresseValue} onChange={e => setadresseValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'>{element.adresse}</h3>} 
-              <h3 className='w-fit text-justify'> Détail de l'annonce : </h3>
-              {modifier ? <input type="text" className="input input-bordered border-[#203374] h-10" 
+              <h1 className='font-black'>Numéro de téléphone : </h1>
+              {modifier ? <input type="tel" className="input input-bordered border-[#203374] text-[#203374] " 
+              value={numTelValue} onChange={e => setnumTelValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light '>{element.numTel} </h3>} 
+              <h1 className='font-black'> Adresse : </h1>
+              {modifier ? <input type="text" className="input input-bordered border-[#203374] text-[#203374]" 
+              value={wilayaValue} onChange={e => setwilayaValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light '>{element.wilaya}</h3>} 
+              <h1 className='font-black'> Détail de l'annonce : </h1>
+              {modifier ? <input type="text" className="input input-bordered border-[#203374] text-[#203374] " 
               value={detailValue} onChange={e => setdetailValue(e.target.value)} /> : <h3 className='lg:tracking-widest lg:font-light'> {element.detail} </h3>} 
             </div>
             <div className="card-actions justify-center lg:mt-5">

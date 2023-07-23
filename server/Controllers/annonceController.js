@@ -125,11 +125,9 @@ exports.afficherAnnoncePatient = expressAsyncHandler(async(req,res) => {
 exports.signalerAnnonce = expressAsyncHandler(async(req, res) => {
     const {id} = req.params
     const {raison} = req.body
-    // console.log(raison)
-    await annonceModel.findByIdAndUpdate(id,{$push: {signalement: raison}} )
+    const annonce  = await annonceModel.findOneAndUpdate({idMedicament: id},{$push: {signalement: raison}} )
     res.status(200).json(`Annonce [${id}] signaler avec succes`)
 })
-
 
 // Affichage des signalements : 
 exports.afficherSignalements = expressAsyncHandler(async(req, res) => {
@@ -142,22 +140,16 @@ exports.afficherSignalements = expressAsyncHandler(async(req, res) => {
 exports.afficherAnnonce = expressAsyncHandler(async(req,res) => {
   try {
       const recherche = req.query.search
-
       const { page,  } = req.query
-    // //add filter queries
-    // const filter = {}
-    // !!wilaya && (filter["wilaya"] = wilaya)
-    // !!type && (filter["type"] = type)
 
       if(recherche === '' || recherche === undefined){ 
-        const skip = (parseInt(page) -1) * 6
-        const documentCount = await medicamentModel.find().countDocuments()
-        const pages = Math.ceil(documentCount / 6)
-        const annonce = await medicamentModel.find().skip(skip).limit(6).populate('proprietaire idAnnonce')
-        res.status(201).json({pages,annonce})
+          const skip = (parseInt(page) -1) * 6
+          const documentCount = await medicamentModel.find().countDocuments()
+          const pages = Math.ceil(documentCount / 6)
+          const annonce = await medicamentModel.find().skip(skip).limit(6).populate('proprietaire idAnnonce')
+          res.status(201).json({pages,annonce})
     } else {
         const skip = (parseInt(page) -1) * 6
-        // const documentC = await utilisateurModel.find({wilaya: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).countDocuments()
         const documentCount = await medicamentModel.find({nomMedicament: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).countDocuments()
         const pages = Math.ceil(documentCount / 6)
         const annonce = await medicamentModel.find({nomMedicament: {$regex: new RegExp(recherche.toString().toLowerCase(), 'i') }}).skip(skip).limit(6).populate('proprietaire')
