@@ -17,10 +17,8 @@ function CarteAnnonce({element}) {
       setRaison(e.target.value)
     } 
 
-
   const handleOnClick = async() => {
     try {
-      console.log(raison, element._id)
       await axios.put('http://localhost:5000/Annonce/signalerAnnonce/'+element._id, {raison})
         toast.success('Publication signalée')
     } catch (error) {
@@ -33,7 +31,7 @@ function CarteAnnonce({element}) {
     <div className='p-10 '>
         <div className="card card-compact bg-base-100 shadow-xl w-80 lg:w-96 lg:h-full text-[#203374]">
             <div className='text-end'>
-              {element.idAnnonce.categorie ==='Demande' ? (
+              {element.idAnnonce?.categorie  ==='Demande' ? (
                 <span className="indicator-item badge badge-primary w-fit h-10 bg-[#203374] rounded-md">Demande</span> 
                 ):( 
                 <span className="indicator-item badge badge-primary w-fit h-10 bg-[#219EBC] border-[#219EBC] rounded-md">Don</span> 
@@ -44,8 +42,8 @@ function CarteAnnonce({element}) {
               <h2 className="text-sm"> Nom du médicament : {element.nomMedicament} </h2> 
             </div>
             <div className='m-8 flex justify-center'>
-              <label htmlFor="my_modal_7" className="text-red-600 text-base font-blacK underline">Signaler l'annonce</label>
-              <input type="checkbox" id="my_modal_7" className="modal-toggle" />
+              <label htmlFor={`my_modal_${element._id}`} className="text-red-600 text-base font-blacK underline">Signaler l'annonce</label>
+              <input type="checkbox" id={`my_modal_${element._id}`} className="modal-toggle" />
               <div className="modal">
                 <div className="modal-box leading-10 p-4">
                   <div className="form-control">
@@ -68,7 +66,7 @@ function CarteAnnonce({element}) {
                   </div>         
                   <div className="modal-action justify-center">
                     <label onClick={handleOnClick} className="btn bg-green-400 border-none">Signaler</label>
-                    <label htmlFor="my_modal_7" className="btn bg-red-800 border-none">Fermer</label>
+                    <label htmlFor={`my_modal_${element._id}`} className="btn bg-red-800 border-none">Fermer</label>
                   </div>
                 </div>
               </div>

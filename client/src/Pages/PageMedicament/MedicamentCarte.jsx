@@ -16,7 +16,6 @@ function MedicamentCarte({element}) {
     setRaison(e.target.value)
   }
 
-  console.log(element)
   
   const handleOnClick = async() => {
     try {
@@ -26,6 +25,7 @@ function MedicamentCarte({element}) {
         toast.error(error.response?.data?.message || error.message)
     }
   }
+  console.log(element.idAnnonce.categorie)
   return (
     <div className='p-10'>
         <div className="card card-compact bg-base-100 shadow-xl w-80 lg:w-96 lg:h-full text-[#203374]">

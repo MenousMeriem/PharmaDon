@@ -317,10 +317,10 @@ exports.supprimerUtilisateur = expressAsyncHandler(async (req, res) => {
     // supprime toutes les annonces de cet utilisateur
     await utilisateurModel.findByIdAndDelete(id)
     await annonceModel.deleteMany({idAuteur: id})
-    res.status(202).json("Utilisateur supprimé !! ")
+      res.status(202).json("Utilisateur supprimé !! ")
   } catch (error) {
-    res.status(400)
-    throw new Error(error)
+      res.status(400)
+      throw new Error(error)
   }
 })
 

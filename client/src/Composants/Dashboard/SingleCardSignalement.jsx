@@ -1,7 +1,7 @@
 import React from 'react'
 
 function SingleCardSignalement({element}) {
-  
+
   const raisonOne = "Je pense que cette annonce pourrait être une tentative de vente illégale de médicaments, ce qui est contraire aux politiques de la plateforme"
   const filter = element.signalement.filter(el => el === raisonOne)
   const raisonOneCount = filter.length
@@ -24,28 +24,27 @@ function SingleCardSignalement({element}) {
         <span className='text-xl text-white'>Nombre de signalements</span>
         {element.signalement.length} 
       </div>
-      <label htmlFor="my_modal_7" className="btn bg-[#203374] text-white text-base text-center font-black lg:text-base items-center">Détail</label>
-        <input type="checkbox" id="my_modal_7" className="modal-toggle" />
+      <label htmlFor={`my_modal_${element._id}`} className="btn bg-[#203374] text-white text-base text-center font-black lg:text-base items-center">Détail</label>
+        <input type="checkbox" id={`my_modal_${element._id}`} className="modal-toggle" />
         <div className="modal">
           <div className="modal-box text-gray-800 border-4">
             <div className="">
               <table className="">
                 <thead className=''> 
-                  <tr className=''>
+                  <tr>
                     <th>Signalement</th>
                     <th>Nombre de fois</th>
                   </tr>
                 </thead>
-                  <tbody className=''>
-                    {raisonOneCount > 0 &&<tr><td>{raisonOne}</td><td>{raisonOneCount}</td></tr>}
-                    {raisonTwoCount > 0 &&<tr><td>{raisonTwo}</td><td>{raisonTwoCount}</td></tr>}
-                    {raisonThreeCount > 0 &&<tr><td>{raisonThree}</td><td>{raisonThreeCount}</td></tr>}
+                  <tbody>
+                    {raisonOneCount > 0 &&<tr><td className='p-5'>1- {raisonOne}</td><td className='px-10'>{raisonOneCount}</td></tr>}
+                    {raisonTwoCount > 0 &&<tr><td className='p-5'>2- {raisonTwo}</td><td className='px-10'>{raisonTwoCount}</td></tr>}
+                    {raisonThreeCount > 0 &&<tr><td className='p-5'>3- {raisonThree}</td><td className='px-10'>{raisonThreeCount}</td></tr>}
                   </tbody>
               </table>
             </div>
-
             <div className="modal-action justify-center">
-              <label htmlFor="my_modal_7" className="btn bg-red-800 border-none">Fermer</label>
+              <label htmlFor={`my_modal_${element._id}`} className="btn bg-red-800 border-none">Fermer</label>
             </div>
           </div>
         </div>

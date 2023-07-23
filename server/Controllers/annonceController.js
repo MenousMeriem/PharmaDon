@@ -144,7 +144,7 @@ exports.afficherAnnonce = expressAsyncHandler(async(req,res) => {
 
       if(recherche === '' || recherche === undefined){ 
           const skip = (parseInt(page) -1) * 6
-          const documentCount = await medicamentModel.find().countDocuments()
+          const documentCount = await medicamentModel.countDocuments()
           const pages = Math.ceil(documentCount / 6)
           const annonce = await medicamentModel.find().skip(skip).limit(6).populate('proprietaire idAnnonce')
           res.status(201).json({pages,annonce})

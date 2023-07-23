@@ -6,13 +6,13 @@ import SingleCardSignalement from './SingleCardSignalement'
 function Signalements() {
 
   // Recupération du token : 
-  const currentUser = localStorage.getItem('Utilisateur')
-  const currentUserObject = JSON.parse(currentUser)
-  const config = {
-    Headers: {
-      Authorization : `Barrer ${currentUserObject.accessToken}`
+    const currentUser = localStorage.getItem('Utilisateur')
+    const currentUserObject = JSON.parse(currentUser)
+    const config = {
+      Headers: {
+        Authorization : `Barrer ${currentUserObject.accessToken}`
+      }
     }
-  }
 
   // Affichage des signalements : 
     const [loading,setLoading] = useState(false)

@@ -43,18 +43,16 @@ function Medicaments({fetching, setFetching}) {
         fetchData() 
     }, [currentPage])
 
-    if(loading) return ( <Lottie animationData={animation} /> )
     
     const pages = []
-
     const handleOnPageChange = (e) => {
         setCurrentPage(e.target.textContent)
     }
     
-    // console.log(data)
     for(let i =1; i<= totalPages; i++) {
         pages.push(<button onClick={handleOnPageChange} className={currentPage === i ? "join-item btn btn-active bg-[#219EBC] border-none":"join-item btn border-none bg-[#203374]"} key={i}>{i}</button>)
     }
+    if(loading) return ( <Lottie animationData={animation} /> )
   return (
     <div>
         <BarreRecherche search={search} setSearch={setSearch} searchData={searchData}/>
