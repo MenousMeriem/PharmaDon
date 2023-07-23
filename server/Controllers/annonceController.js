@@ -125,6 +125,7 @@ exports.afficherAnnoncePatient = expressAsyncHandler(async(req,res) => {
 exports.signalerAnnonce = expressAsyncHandler(async(req, res) => {
     const {id} = req.params
     const {raison} = req.body
+    // console.log(raison)
     await annonceModel.findByIdAndUpdate(id,{$push: {signalement: raison}} )
     res.status(200).json(`Annonce [${id}] signaler avec succes`)
 })

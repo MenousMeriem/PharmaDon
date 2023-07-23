@@ -13,13 +13,14 @@ function CarteAnnonce({element}) {
 
   const [raison, setRaison] = useState('')
 
-  const onChange = (e) => {
-    setRaison(e.target.value)
-  }
+    const onChange = (e) => {
+      setRaison(e.target.value)
+    } 
 
 
   const handleOnClick = async() => {
     try {
+      console.log(raison, element._id)
       await axios.put('http://localhost:5000/Annonce/signalerAnnonce/'+element._id, {raison})
         toast.success('Publication signalée')
     } catch (error) {
@@ -38,7 +39,7 @@ function CarteAnnonce({element}) {
                 <span className="indicator-item badge badge-primary w-fit h-10 bg-[#219EBC] border-[#219EBC] rounded-md">Don</span> 
               )}
             </div>
-            <figure className='p-5'><img className='w-96 h-96 rounded-xl ' src={element.image ? `http://localhost:5000/images/${element.image.toString()}`: image}/></figure>
+            <figure className='p-5'><img className='w-96 h-96 rounded-xl' src={element.image ? `http://localhost:5000/images/${element.image.toString()}`: image}/></figure>
             <div className="card-body m-5">
               <h2 className="text-sm"> Nom du médicament : {element.nomMedicament} </h2> 
             </div>
